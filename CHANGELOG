@@ -1,0 +1,48 @@
+retroarch-configs changelog
+
+2026-04-04  Ryan Musante
+
+	Tagged as v1.0
+
+	* Initial release: 9 per-core override sets for Apple TV 4K
+	* Split previously commented core options from .cfg files into
+	  separate .opt files; RetroArch loads core options only from
+	  .opt files — commented values in .cfg were never applied
+	* Tier 1 (Flawless) cores: Beetle PCE Fast, FinalBurn Neo,
+	  Genesis Plus GX, Mesen, mGBA, Snes9x — all run runahead=1
+	* Tier 2 (Good) cores: Mupen64Plus-Next, PCSX-ReARMed,
+	  melonDS DS — no JIT on tvOS; runahead disabled or tuned
+	* config/Beetle PCE Fast: 2 frontend keys, 2 core options
+	  (CD image cache, sprite limit removal)
+	* config/FinalBurn Neo: 2 frontend keys, no .opt file
+	  (defaults sufficient; rewind conflicts with runahead #16374)
+	* config/Genesis Plus GX: 2 frontend keys, 5 core options
+	  (Nuked YM2612, low-pass filter, sprite limit, per-game BRAM)
+	* config/Mesen: 3 frontend keys, 4 core options
+	  (sprite limit, medium overclock, DMC pop reduction);
+	  integer overscale=1 for 224p at 4K
+	* config/mGBA: 2 frontend keys, 3 core options
+	  (GBA color correction, smart interframe blending, low-pass)
+	* config/Snes9x: 3 frontend keys, 2 core options
+	  (sprite flicker reduction, light overclock);
+	  integer overscale=1 for 224p at 4K
+	* config/Mupen64Plus-Next: 6 frontend keys, 11 core options
+	  (cached_interpreter, HLE RSP, GLideN64, frame duping,
+	  threaded renderer, async color copy, no LOD emulation);
+	  video_threaded=true, audio_latency=64
+	* config/PCSX-ReARMed: 5 frontend keys, 7 core options
+	  (DRC disabled, frame duping, auto frameskip at 33%,
+	  synchronous GPU threading, async CD, PSX clock=57);
+	  run_ahead_frames=0, video_threaded=true, audio_latency=48
+	* config/melonDS DS: 6 frontend keys, 4 core options
+	  (threaded renderer, JIT disabled, direct boot, top screen);
+	  key prefix verified as melonds_ from JesseTG/melonds-ds
+	  constants.hpp (not melondsds_); run_ahead_frames=0,
+	  video_threaded=true, audio_latency=48
+	* All .cfg files contain only RetroArch frontend keys
+	* All .opt files contain only core-prefixed option keys
+	* Cross-checked: every original commented core option
+	  accounted for in corresponding .opt file
+	* README.md: Supported cores table, file structure, override
+	  key reference, installation, per-game override examples,
+	  core option key verification sources
