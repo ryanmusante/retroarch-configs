@@ -1,6 +1,5 @@
 retroarch-configs changelog
 
-
 2026-04-05  Ryan Musante
 
 - Tagged as v1.6
@@ -10,10 +9,8 @@ retroarch-configs changelog
 - Mupen64Plus-Next: EnableLODEmulation False→True.
 - melonDS DS: add screen_gap = 0.
 - README: update key counts and tier definitions.
-
 - Tagged as v1.5
 - README: add "(global = false)" to video_threaded column.
-
 - Tagged as v1.1 – v1.4
 - Add per-core CRT shader assignments.
 - Add audio_resampler_quality = 2 to Tier 2 cores.
