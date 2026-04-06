@@ -8,6 +8,8 @@ Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for the Apple TV
 
 Override files contain only keys that differ from the global config. Core option files contain only non-default libretro core settings. Both follow the libretro override hierarchy: global → core → content directory → per-game.
 
+[changelog](CHANGELOG.md)
+
 ## Supported Cores
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
