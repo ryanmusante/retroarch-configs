@@ -1,0 +1,7 @@
+# Mesen — Core Options
+# Paired with: config/Mesen/Mesen.cfg
+
+mesen_nospritelimit = "On"
+mesen_overclock = "Medium"
+mesen_overclock_type = "Before NMI"
+mesen_reduce_dmc_popping = "On"

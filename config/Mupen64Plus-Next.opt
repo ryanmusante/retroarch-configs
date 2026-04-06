@@ -1,0 +1,16 @@
+# Mupen64Plus-Next — Core Options
+# Paired with: config/Mupen64Plus-Next/Mupen64Plus-Next.cfg
+
+mupen64plus-cpucore = "cached_interpreter"
+mupen64plus-rsp-plugin = "HLE"
+mupen64plus-rdp-plugin = "GLideN64"
+mupen64plus-43screensize = "320x240"
+mupen64plus-ThreadedRenderer = "True"
+mupen64plus-EnableCopyColorToRDRAM = "Async"
+mupen64plus-EnableCopyColorFromRDRAM = "Off"
+mupen64plus-EnableCopyDepthToRDRAM = "Software"
+mupen64plus-txFilterMode = "None"
+mupen64plus-FrameDuping = "True"
+# True for visual correctness; LOD is GPU-side, costs nothing at 320×240 on A15.
+# Per-game "False" only if measurable performance impact.
+mupen64plus-EnableLODEmulation = "True"

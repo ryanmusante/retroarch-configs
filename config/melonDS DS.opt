@@ -1,0 +1,9 @@
+# melonDS DS — Core Options
+# Paired with: config/melonDS DS/melonDS DS.cfg
+# Key prefix: melonds_ (verified from JesseTG/melonds-ds constants.hpp)
+
+melonds_threaded_renderer = "enabled"
+melonds_jit_enable = "disabled"
+melonds_boot_mode = "direct"
+melonds_screen_layout1 = "top"
+melonds_screen_gap = "0"
