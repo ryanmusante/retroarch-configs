@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.4-blue)
+![version](https://img.shields.io/badge/version-1.6-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -12,17 +12,17 @@ Override files contain only keys that differ from the global config. Core option
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 1 | 2 | crt-easymode | |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 1 | — | crt-easymode | Defaults sufficient; rewind conflicts with runahead (#16374) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 2 | 5 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p |
-| Mesen | NES | 1 (Flawless) | 2 | 4 | crt-easymode | Integer overscale for 224p at 4K |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 1 | 3 | crt-easymode | |
-| Snes9x | SNES | 1 (Flawless) | 2 | 2 | crt-easymode | Integer overscale for 224p at 4K |
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 3 | 2 | crt-easymode | Integer overscale for 240p at 4K |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 2 | — | crt-easymode | Defaults sufficient; rewind conflicts with runahead (#16374) |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 3 | 5 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p |
+| Mesen | NES | 1 (Flawless) | 3 | 4 | crt-easymode | Integer overscale for 224p at 4K |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K |
+| Snes9x | SNES | 1 (Flawless) | 3 | 2 | crt-easymode | Integer overscale for 224p at 4K |
 | Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; run-ahead disabled by default |
 | PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 7 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
-| melonDS DS | Nintendo DS | 2 (Good) | 7 | 4 | None | Software renderer; top-screen only; shaders disabled |
+| melonDS DS | Nintendo DS | 2 (Good) | 7 | 5 | None | Software renderer; top-screen only; shaders disabled |
 
-**Tier definitions:** Tier 1 cores run flawlessly with runahead on the Apple TV 4K. Tier 2 cores require tuning (disabled JIT, relaxed latency) and may need per-game overrides for heavier titles.
+**Tier definitions:** Tier 1 cores run flawlessly with 2-frame preemptive latency reduction on the Apple TV 4K. Tier 2 cores require tuning (disabled JIT, relaxed latency) and may need per-game overrides for heavier titles.
 
 ## File Structure
 
@@ -75,13 +75,13 @@ Keys used across `.cfg` files and their purpose.
 
 | Key | Values Used | Purpose |
 |-----|-------------|---------|
-| `run_ahead_frames` | `0` | Latency reduction disabled for heavy cores without JIT |
+| `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame preemptive for reduced input lag; Tier 2: disabled (0) without JIT |
 | `preemptive_frames_enable` | `false` | Disabled for interpreter-bound cores (N64, PS1, DS) |
 | `video_frame_delay_auto` | `false` | Disabled for cores incompatible with auto frame delay |
-| `video_threaded` | `true` | Threaded video for interpreter-bound cores |
+| `video_threaded` | `true` | Threaded video for interpreter-bound cores (global = false) |
 | `audio_latency` | `48`, `64` | Relaxed latency for interpreter-bound cores |
 | `audio_resampler_quality` | `2` | Lower resampler for Tier 2 cores (global = 3) |
-| `video_scale_integer_scaling` | `1` | Overscale for 224p content (NES, SNES, Genesis) at 4K |
+| `video_scale_integer_scaling` | `1` | Overscale for 224p/240p content (NES, SNES, Genesis, PCE, GBA) at 4K |
 | `video_shader` | path | Per-core CRT shader preset assignment |
 | `video_shader_enable` | `false` | Disable shaders where CRT is unsuitable (NDS) |
 
