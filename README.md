@@ -2,13 +2,26 @@
 
 ![version](https://img.shields.io/badge/version-1.6-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
-![license](https://img.shields.io/badge/license-MIT-yellow)
+![license](https://img.shields.io/badge/license-MIT-green)
 
 Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for the Apple TV 4K. Designed as a companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
 
 Override files contain only keys that differ from the global config. Core option files contain only non-default libretro core settings. Both follow the libretro override hierarchy: global → core → content directory → per-game.
 
 [changelog](CHANGELOG.md)
+
+## Table of Contents
+
+- [Supported Cores](#supported-cores)
+- [File Structure](#file-structure)
+- [File Separation](#file-separation)
+- [Frontend Override Keys](#frontend-override-keys)
+- [CRT Shaders](#crt-shaders)
+- [Installation](#installation)
+- [Per-Game Overrides](#per-game-overrides)
+- [Core Option Key Verification](#core-option-key-verification)
+- [Related](#related)
+- [License](#license)
 
 ## Supported Cores
 
