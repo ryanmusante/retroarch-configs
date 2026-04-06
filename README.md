@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.3-blue)
+![version](https://img.shields.io/badge/version-1.4-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -14,7 +14,7 @@ Override files contain only keys that differ from the global config. Core option
 |------|---------|------|-------------|-------------|------------|-------|
 | Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 1 | 2 | crt-easymode | |
 | FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 1 | — | crt-easymode | Defaults sufficient; rewind conflicts with runahead (#16374) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 1 | 5 | crt-easymode | Nuked YM2612 for accurate FM synthesis |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 2 | 5 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p |
 | Mesen | NES | 1 (Flawless) | 2 | 4 | crt-easymode | Integer overscale for 224p at 4K |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 1 | 3 | crt-easymode | |
 | Snes9x | SNES | 1 (Flawless) | 2 | 2 | crt-easymode | Integer overscale for 224p at 4K |
@@ -81,7 +81,7 @@ Keys used across `.cfg` files and their purpose.
 | `video_threaded` | `true` | Threaded video for interpreter-bound cores |
 | `audio_latency` | `48`, `64` | Relaxed latency for interpreter-bound cores |
 | `audio_resampler_quality` | `2` | Lower resampler for Tier 2 cores (global = 3) |
-| `video_scale_integer_scaling` | `1` | Overscale for 224p content (NES, SNES) at 4K |
+| `video_scale_integer_scaling` | `1` | Overscale for 224p content (NES, SNES, Genesis) at 4K |
 | `video_shader` | path | Per-core CRT shader preset assignment |
 | `video_shader_enable` | `false` | Disable shaders where CRT is unsuitable (NDS) |
 
