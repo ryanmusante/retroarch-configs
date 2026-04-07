@@ -7,7 +7,7 @@
 # DRC disabled: tvOS forbids JIT (W^X). Rationale in paired .cfg L3-4.
 pcsx_rearmed_drc = "disabled"
 pcsx_rearmed_duping_enable = "enabled"
-pcsx_rearmed_frameskip = "Off"
+pcsx_rearmed_frameskip_type = "disabled"
 pcsx_rearmed_frameskip_threshold = "30"
 pcsx_rearmed_gpu_thread_rendering = "sync"
 pcsx_rearmed_async_cd = "async"
