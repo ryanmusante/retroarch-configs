@@ -1,8 +1,10 @@
 # Genesis Plus GX — Core Options
 # Paired with: config/Genesis Plus GX/Genesis Plus GX.cfg
 
-genesis_plus_gx_ym2612 = "Nuked (YM2612)"
-genesis_plus_gx_audio_filter = "Low-Pass"
+# Nuked YM2612: cycle-accurate FM synthesis (~3× CPU cost vs MAME core).
+# A15 has ample headroom for 16-bit cores; accuracy preferred over speed.
+genesis_plus_gx_ym2612 = "nuked (ym2612)"
+genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"
 genesis_plus_gx_no_sprite_limit = "enabled"
 genesis_plus_gx_bram = "per game"

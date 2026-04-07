@@ -1,7 +1,7 @@
 # Mesen — Core Options
 # Paired with: config/Mesen/Mesen.cfg
+# Overclock intentionally NOT set globally. See README "Overclocking" for
+# per-game examples (Battletoads, Probotector/Contra Force, Recca).
 
-mesen_nospritelimit = "On"
-mesen_overclock = "Medium"
-mesen_overclock_type = "Before NMI"
-mesen_reduce_dmc_popping = "On"
+mesen_nospritelimit = "enabled"
+mesen_reduce_dmc_popping = "enabled"

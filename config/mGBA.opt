@@ -2,5 +2,5 @@
 # Paired with: config/mGBA/mGBA.cfg
 
 mgba_color_correction = "Game Boy Advance"
-mgba_interframe_blending = "Smart"
-mgba_audio_low_pass_filter = "ON"
+mgba_interframe_blending = "mix_smart"
+mgba_audio_low_pass_filter = "enabled"
