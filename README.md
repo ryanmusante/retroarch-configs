@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.8-blue)
+![version](https://img.shields.io/badge/version-1.8.1-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 

@@ -2,6 +2,12 @@ retroarch-configs changelog
 
 2026-04-06  Ryan Musante
 
+- v1.8.1: PCSX-ReARMed.opt rename pcsx_rearmed_frameskip → pcsx_rearmed_frameskip_type;
+  value "Off" → "disabled" (mainline notaz/pcsx_rearmed renamed the option;
+  legacy key/value silently ignored by current core).
+
+2026-04-06  Ryan Musante
+
 - v1.8: archive ships flat in config/; README documents nested
   config/<core>/<core>.cfg target layout.
 - v1.8: Mesen.opt remove mesen_overclock, mesen_overclock_type;
