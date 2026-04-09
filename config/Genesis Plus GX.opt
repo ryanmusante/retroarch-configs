@@ -7,4 +7,8 @@ genesis_plus_gx_ym2612 = "nuked (ym2612)"
 genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"
 genesis_plus_gx_no_sprite_limit = "enabled"
-genesis_plus_gx_bram = "per game"
+# Per-game BRAM isolation for Sega CD. Upstream splits this into two keys
+# (libretro/Genesis-Plus-GX libretro_core_options.h:165,179); the older
+# combined "genesis_plus_gx_bram" does not exist and is silently ignored.
+genesis_plus_gx_system_bram = "per game"
+genesis_plus_gx_cart_bram = "per game"

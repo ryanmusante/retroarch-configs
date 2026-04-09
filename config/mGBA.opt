@@ -1,5 +1,6 @@
 # mGBA — Core Options
 # Paired with: config/mGBA/mGBA.cfg
+# mgba_color_correction is GBA-only; GB/GBC content in this core ignores it.
 
 mgba_color_correction = "Game Boy Advance"
 mgba_interframe_blending = "mix_smart"

@@ -6,9 +6,9 @@
 
 # DRC disabled: tvOS forbids JIT (W^X). Rationale in paired .cfg L3-4.
 pcsx_rearmed_drc = "disabled"
-pcsx_rearmed_duping_enable = "enabled"
+# Frameskip disabled globally; per-game "auto" or "auto_threshold" for CD-ROM FMV.
+# When using auto_threshold, also set pcsx_rearmed_frameskip_threshold (valid
+# values 15-80 in steps; see upstream libretro_core_options.h).
 pcsx_rearmed_frameskip_type = "disabled"
-pcsx_rearmed_frameskip_threshold = "30"
 pcsx_rearmed_gpu_thread_rendering = "sync"
-pcsx_rearmed_async_cd = "async"
 pcsx_rearmed_psxclock = "57"
