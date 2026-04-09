@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.8.1-blue)
+![version](https://img.shields.io/badge/version-1.9-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -30,12 +30,12 @@ Override files contain only keys that differ from the global config. Core option
 |------|---------|------|-------------|-------------|------------|-------|
 | Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 3 | 2 | crt-easymode | Integer overscale for 240p at 4K |
 | FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 2 | — | crt-easymode | Defaults sufficient; rewind conflicts with runahead (#16374) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 3 | 5 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 3 | 6 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p; per-game BRAM isolation for Sega CD |
 | Mesen | NES | 1 (Flawless) | 3 | 2 | crt-easymode | Integer overscale for 224p at 4K |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K |
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode | Integer overscale for 224p at 4K |
 | Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; run-ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 7 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
 | melonDS DS | Nintendo DS | 3 (Compromised) | 7 | 5 | None | Software 1×; top-screen only; no touchscreen on tvOS — touch-required titles unplayable |
 
 **Tier definitions:**
@@ -184,14 +184,24 @@ pcsx_rearmed_psxclock = "50"
 
 ## Core Option Key Verification
 
-Core option keys were verified against upstream sources where possible.
+All core option keys in `.opt` files are verified against upstream sources. Every key listed below was grep-verified to exist in the linked source at release time.
 
-| Core | Key Source |
-|------|-----------|
-| melonDS DS | `JesseTG/melonds-ds` `constants.hpp` — prefix `melonds_` (not `melondsds_`) |
-| Mupen64Plus-Next | libretro core options — prefix `mupen64plus-` |
-| PCSX-ReARMed | libretro core options — prefix `pcsx_rearmed_` |
-| All others | Standard libretro naming conventions |
+| Core | Upstream Source | Prefix |
+|------|-----------------|--------|
+| Beetle PCE Fast | `libretro/beetle-pce-fast-libretro/libretro_core_options.h` | `pce_fast_` |
+| FinalBurn Neo | No `.opt` file — defaults sufficient | `fbneo_` |
+| Genesis Plus GX | `libretro/Genesis-Plus-GX/libretro/libretro_core_options.h` | `genesis_plus_gx_` |
+| Mesen | `libretro/Mesen/Libretro/libretro_core_options.h` | `mesen_` |
+| mGBA | `libretro/mgba/src/platform/libretro/libretro_core_options.h` | `mgba_` |
+| Mupen64Plus-Next | `libretro/mupen64plus-libretro-nx/libretro/libretro_core_options.h` (CORE_NAME = `mupen64plus`, per `custom/mupen64plus-next_common.h`) | `mupen64plus-` |
+| PCSX-ReARMed | `libretro/pcsx_rearmed/frontend/libretro.c` + `libretro_core_options.h` | `pcsx_rearmed_` |
+| Snes9x | `libretro/snes9x/libretro/libretro_core_options.h` | `snes9x_` |
+| melonDS DS | `JesseTG/melonds-ds/src/libretro/config/constants.hpp` | `melonds_` (not `melondsds_`) |
+
+**Keys that do NOT exist in upstream and are silently ignored** (removed in v1.9 — see CHANGELOG):
+- `genesis_plus_gx_bram` — real keys are split: `genesis_plus_gx_system_bram` and `genesis_plus_gx_cart_bram`
+- `pcsx_rearmed_duping_enable` — no such option; frame duping is automatic in PCSX-ReARMed
+- `pcsx_rearmed_async_cd` — no such option; CD async is now internal (`cdrom-async.h`). User-facing knob is `pcsx_rearmed_cd_readahead`
 
 Upstream issue references (verified 2026-04-06): libretro/RetroArch#14201, #18300, #16374.
 

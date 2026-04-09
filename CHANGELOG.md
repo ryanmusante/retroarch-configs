@@ -1,5 +1,29 @@
 retroarch-configs changelog
 
+2026-04-09  Ryan Musante
+
+- v1.9: Genesis Plus GX.opt — replace genesis_plus_gx_bram (not a real key;
+  silently ignored → per-game Sega CD BRAM isolation never took effect)
+  with the upstream-correct pair genesis_plus_gx_system_bram and
+  genesis_plus_gx_cart_bram (libretro/Genesis-Plus-GX
+  libretro_core_options.h:165,179). CRIT fix.
+- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_duping_enable
+  (no such core option; frame duping is automatic) and pcsx_rearmed_async_cd
+  (no such core option; CD async is now internal to cdrom-async.h).
+  Both were silently ignored. CRIT fix.
+- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_frameskip_threshold = "30";
+  dead config because frameskip_type = "disabled" (threshold only consulted
+  when type = "auto_threshold"). Threshold guidance moved to per-game comment.
+- v1.9: mGBA.opt — document that mgba_color_correction is GBA-only
+  (GB/GBC content ignores the setting).
+- v1.9: Mupen64Plus-Next.cfg — rewrite header comment so that
+  video_frame_delay_auto = "false" is framed as the mitigation for #14201
+  rather than implying a standalone bug; rewind #18300 wording tightened.
+- v1.9: README Supported Cores table — Genesis Plus GX .opt key count
+  5 → 6; PCSX-ReARMed .opt key count 7 → 4. Key Verification section
+  expanded with explicit upstream source paths and the list of silently
+  ignored keys removed in this release.
+
 2026-04-06  Ryan Musante
 
 - v1.8.1: PCSX-ReARMed.opt rename pcsx_rearmed_frameskip → pcsx_rearmed_frameskip_type;
