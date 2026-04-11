@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.9-blue)
+![version](https://img.shields.io/badge/version-1.9.1-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -45,13 +45,40 @@ Override files contain only keys that differ from the global config. Core option
 
 ## File Structure
 
+The ZIP itself ships the files flat under `config/`. That matches the archive contents.
+
 ```
 config/
+├── Beetle PCE Fast.cfg
+├── Beetle PCE Fast.opt
+├── FinalBurn Neo.cfg
+├── Genesis Plus GX.cfg
+├── Genesis Plus GX.opt
+├── Mesen.cfg
+├── Mesen.opt
+├── mGBA.cfg
+├── mGBA.opt
+├── melonDS DS.cfg
+├── melonDS DS.opt
+├── Mupen64Plus-Next.cfg
+├── Mupen64Plus-Next.opt
+├── PCSX-ReARMed.cfg
+├── PCSX-ReARMed.opt
+├── Snes9x.cfg
+└── Snes9x.opt
+```
+
+**17 files** — 9 `.cfg` (frontend overrides) + 8 `.opt` (core options).
+
+For RetroArch auto-loading on Apple TV, place them under `Config/config/<core>/` on the device:
+
+```
+Config/config/
 ├── Beetle PCE Fast/
-│   ├── Beetle PCE Fast.cfg     # RetroArch frontend overrides
-│   └── Beetle PCE Fast.opt     # Core options
+│   ├── Beetle PCE Fast.cfg
+│   └── Beetle PCE Fast.opt
 ├── FinalBurn Neo/
-│   └── FinalBurn Neo.cfg       # No .opt — defaults sufficient
+│   └── FinalBurn Neo.cfg
 ├── Genesis Plus GX/
 │   ├── Genesis Plus GX.cfg
 │   └── Genesis Plus GX.opt
@@ -75,7 +102,7 @@ config/
     └── Snes9x.opt
 ```
 
-**17 files** — 9 `.cfg` (frontend overrides) + 8 `.opt` (core options).
+README.md is the authoritative layout reference. The `.cfg` and `.opt` files intentionally omit layout/path notes.
 
 ## File Separation
 
@@ -83,8 +110,8 @@ RetroArch loads overrides and core options from separate files with distinct pur
 
 | File | Path | Contents | Set via |
 |------|------|----------|---------|
-| `<core>.cfg` | `config/<core>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | `config/<core>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
+| `<core>.cfg` | Archive: `config/`  ·  Device: `Config/config/<core>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
+| `<core>.opt` | Archive: `config/`  ·  Device: `Config/config/<core>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
 
 Mixing the two in a single file causes silent failures — RetroArch ignores core option keys in `.cfg` files and vice versa.
 
@@ -118,9 +145,9 @@ Shader paths use the `:/shaders_slang/crt/` prefix for tvOS. If shaders fail to 
 
 ## Installation
 
-> **Note:** This archive ships all `.cfg` and `.opt` files flat in `config/` for convenient manual placement. Before they will auto-load, move each pair into its own `config/<core>/` subdirectory matching the structure shown above.
+> **Note:** The ZIP ships all `.cfg` and `.opt` files flat in `config/`. That is intentional. README.md is the authoritative source for the target on-device layout.
 
-Upload the resulting `config/` directory tree to your RetroArch config path. On Apple TV, this is accessible via the web interface or WebDAV at the `config/` directory root.
+On Apple TV, create `Config/config/<core>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch.
 
 The override hierarchy applies automatically — no manual loading required. After uploading, launch a game with any configured core and verify via Quick Menu → Information that the override is active.
 

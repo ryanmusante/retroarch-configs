@@ -1,5 +1,11 @@
 retroarch-configs changelog
 
+2026-04-11  Ryan Musante
+
+- v1.9.1: sync README, changelog, and shipped config files after layout cleanup.
+- v1.9.1: `.cfg` / `.opt` headers no longer carry path, override, or pairing notes; README is now the sole layout reference.
+- v1.9.1: README File Structure / File Separation / Installation sections now distinguish ZIP layout (`config/`) from on-device auto-load layout (`Config/config/<core>/`).
+
 2026-04-09  Ryan Musante
 
 - v1.9: Genesis Plus GX.opt — replace genesis_plus_gx_bram (not a real key;
