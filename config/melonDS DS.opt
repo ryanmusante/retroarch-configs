@@ -1,5 +1,4 @@
 # melonDS DS — Core Options
-# Paired with: config/melonDS DS/melonDS DS.cfg
 # Key prefix: melonds_ (verified from JesseTG/melonds-ds constants.hpp)
 
 melonds_threaded_renderer = "enabled"

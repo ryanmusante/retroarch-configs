@@ -1,5 +1,4 @@
 # Snes9x — Core Options
-# Paired with: config/Snes9x/Snes9x.cfg
 # Overclock intentionally NOT set globally. See README "Overclocking" for
 # per-game examples (snes9x_overclock_cycles for CPU, snes9x_overclock for SuperFX).
 

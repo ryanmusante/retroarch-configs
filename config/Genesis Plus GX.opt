@@ -1,5 +1,4 @@
 # Genesis Plus GX — Core Options
-# Paired with: config/Genesis Plus GX/Genesis Plus GX.cfg
 
 # Nuked YM2612: cycle-accurate FM synthesis (~3× CPU cost vs MAME core).
 # A15 has ample headroom for 16-bit cores; accuracy preferred over speed.

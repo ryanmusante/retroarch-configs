@@ -1,5 +1,4 @@
 # Mupen64Plus-Next — Core Options
-# Paired with: config/Mupen64Plus-Next/Mupen64Plus-Next.cfg
 
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-rsp-plugin = "HLE"
