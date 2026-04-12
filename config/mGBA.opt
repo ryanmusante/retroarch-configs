@@ -1,4 +1,5 @@
 # GBA color correction; GB/GBC passthrough
 mgba_color_correction = "Game Boy Advance"
-mgba_interframe_blending = "mix_smart"
+# mix (from mix_smart): GPU cost relief on A15 fillrate at 4K integer scale
+mgba_interframe_blending = "mix"
 mgba_audio_low_pass_filter = "enabled"

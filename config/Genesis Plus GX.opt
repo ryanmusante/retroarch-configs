@@ -1,4 +1,4 @@
-# MAME YM2612; 3-5× lighter than Nuked; A15 thermal-safe
+# MAME YM2612; 3-5x lighter than Nuked; A15 thermal-safe
 genesis_plus_gx_ym2612 = "mame (ym2612)"
 genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"

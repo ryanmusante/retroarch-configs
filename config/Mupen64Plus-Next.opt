@@ -1,16 +1,10 @@
-# Angrylion software RDP + cxd4 RSP
+# Angrylion software RDP + cxd4 RSP (no JIT tvOS stack)
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
-# 320×240 native 4:3 framebuffer; no internal upscale
+# 320x240 native 4:3 framebuffer; no internal upscale
 mupen64plus-43screensize = "320x240"
 # ThreadedRenderer is HW-RDP-only; false for Angrylion
 mupen64plus-ThreadedRenderer = "False"
-mupen64plus-EnableCopyColorToRDRAM = "Async"
-mupen64plus-EnableCopyColorFromRDRAM = "Off"
-mupen64plus-EnableCopyDepthToRDRAM = "Off"
-mupen64plus-txFilterMode = "None"
 mupen64plus-FrameDuping = "True"
-# LOD on; GPU-side free at 320×240 on A15
-mupen64plus-EnableLODEmulation = "True"
