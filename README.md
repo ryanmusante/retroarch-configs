@@ -70,10 +70,10 @@ config/
 
 **17 files** — 9 `.cfg` (frontend overrides) + 8 `.opt` (core options).
 
-For RetroArch auto-loading on Apple TV, place them under `Config/<core>/` on the device:
+For RetroArch auto-loading on Apple TV, place them under `config/<core>/` on the device:
 
 ```
-Config/
+config/
 ├── Beetle PCE Fast/
 │   ├── Beetle PCE Fast.cfg
 │   └── Beetle PCE Fast.opt
@@ -110,8 +110,8 @@ RetroArch loads overrides and core options from separate files with distinct pur
 
 | File | Path | Contents | Set via |
 |------|------|----------|---------|
-| `<core>.cfg` | Archive: `config/`  ·  Device: `Config/<core>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | Archive: `config/`  ·  Device: `Config/<core>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
+| `<core>.cfg` | Archive: `config/`  ·  Device: `config/<core>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
+| `<core>.opt` | Archive: `config/`  ·  Device: `config/<core>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
 
 Mixing the two in a single file causes silent failures — RetroArch ignores core option keys in `.cfg` files and vice versa.
 
@@ -147,7 +147,7 @@ Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load
 
 > **Note:** The ZIP ships all `.cfg` and `.opt` files flat in `config/`. That is intentional. README.md is the authoritative source for the target on-device layout.
 
-On Apple TV, create `Config/<core>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch.
+On Apple TV, create `config/<core>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch.
 
 The override hierarchy applies automatically — no manual loading required. After uploading, launch a game with any configured core and verify via Quick Menu → Information that the override is active.
 
@@ -159,7 +159,7 @@ Overclock keys are intentionally not set in any core-level `.opt` file. They are
 
 `mesen_overclock` reduces slowdown in CPU-bound NES titles. Use `Before NMI (Recommended)` insertion point — it is the safest and avoids breaking timing.
 
-`Config/Mesen/Battletoads (USA).opt`:
+`config/Mesen/Battletoads (USA).opt`:
 ```
 mesen_overclock = "Medium"
 mesen_overclock_type = "Before NMI (Recommended)"
@@ -171,7 +171,7 @@ Known beneficiaries: Battletoads, Probotector / Contra Force, Recca. Valid `mese
 
 `snes9x_overclock_cycles` reduces SNES main-CPU slowdown. Valid values: `disabled`, `light`, `compatible`, `max`.
 
-`Config/Snes9x/Gradius III (USA).opt`:
+`config/Snes9x/Gradius III (USA).opt`:
 ```
 snes9x_overclock_cycles = "light"
 ```
@@ -180,30 +180,30 @@ snes9x_overclock_cycles = "light"
 
 `snes9x_overclock` is the SuperFX coprocessor frequency multiplier. Valid values: `50%` through `500%` in 10% steps; default `100%`. Used for Star Fox, Yoshi's Island, Doom, Stunt Race FX.
 
-`Config/Snes9x/Star Fox (USA).opt`:
+`config/Snes9x/Star Fox (USA).opt`:
 ```
 snes9x_overclock = "200%"
 ```
 
-`Config/Snes9x/Star Fox (USA).cfg`:
+`config/Snes9x/Star Fox (USA).cfg`:
 ```
 run_ahead_frames = "1"
 ```
 
 ## Per-Game Overrides
 
-For titles that need individual tuning, create per-game files in the same `Config/<core>/` directory.
+For titles that need individual tuning, create per-game files in the same `config/<core>/` directory.
 
 **Example — enabling runahead for Super Mario 64:**
 
-`Config/Mupen64Plus-Next/Super Mario 64 (USA).cfg`:
+`config/Mupen64Plus-Next/Super Mario 64 (USA).cfg`:
 ```
 run_ahead_frames = "1"
 ```
 
 **Example — lowering PSX clock for Vagrant Story:**
 
-`Config/PCSX-ReARMed/Vagrant Story (USA).opt`:
+`config/PCSX-ReARMed/Vagrant Story (USA).opt`:
 ```
 pcsx_rearmed_psxclock = "50"
 ```
