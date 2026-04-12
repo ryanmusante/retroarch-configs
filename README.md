@@ -114,7 +114,7 @@ Keys used across `.cfg` files and their purpose.
 
 | Key | Values Used | Purpose |
 |-----|-------------|---------|
-| `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame run-ahead for reduced input lag; Tier 2/3: disabled (0) without JIT |
+| `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame run-ahead for reduced input lag; Tier 2: disabled (0) without JIT |
 | `preemptive_frames_enable` | `false` | Disabled for interpreter-bound cores (N64, PS1) |
 | `video_frame_delay_auto` | `false` | Disabled for cores incompatible with auto frame delay |
 | `video_threaded` | `true` | Threaded video for interpreter-bound cores (global = false) |

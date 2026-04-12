@@ -64,7 +64,7 @@ retroarch-configs changelog
 - v1.7: Mesen.opt overclock = Medium / Before NMI rationale
   (Battletoads/Probotector/Recca).
 - v1.7: Genesis Plus GX.opt Nuked YM2612 ~3× CPU cost note.
-- v1.7: Tier 2/3 .cfg per-core audio_latency rationale
+- v1.7: Tier 2 .cfg per-core audio_latency rationale
   (64 ms N64, 48 ms PS1).
 
 2026-04-05  Ryan Musante
