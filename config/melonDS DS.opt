@@ -1,9 +1,0 @@
-# melonDS DS — Core Options
-# Key prefix: melonds_ (verified from JesseTG/melonds-ds constants.hpp)
-
-melonds_threaded_renderer = "enabled"
-# JIT disabled: tvOS forbids JIT (W^X). Same constraint as PCSX-ReARMed/Mupen.
-melonds_jit_enable = "disabled"
-melonds_boot_mode = "direct"
-melonds_screen_layout1 = "top"
-melonds_screen_gap = "0"
