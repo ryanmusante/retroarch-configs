@@ -28,14 +28,14 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 240p at 4K; Run-Ahead enabled per-core |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 3 | — | crt-easymode | Defaults sufficient; rewind conflicts with runahead (#16374); Run-Ahead enabled per-core |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p; per-game BRAM isolation for Sega CD; Run-Ahead enabled per-core |
-| Mesen | NES | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 224p at 4K; Run-Ahead enabled per-core |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K; Run-Ahead enabled per-core |
-| Snes9x | SNES | 1 (Flawless) | 4 | 1 | crt-easymode | Integer overscale for 224p at 4K; Run-Ahead enabled per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; Angrylion + CXD4; run-ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 240p at 4K; Run Ahead enabled per-core |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 3 | — | crt-easymode | Defaults sufficient; rewind conflicts with Run Ahead (#16374); Run Ahead enabled per-core |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p; per-game BRAM isolation for Sega CD; Run Ahead enabled per-core |
+| Mesen | NES | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K; Run Ahead enabled per-core |
+| Snes9x | SNES | 1 (Flawless) | 4 | 1 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; Angrylion + CXD4; Run Ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; Run Ahead disabled by default |
 
 **Tier definitions:**
 - **Tier 1 (Flawless)** — runs at full speed with per-core `run_ahead_enabled = "true"` and `run_ahead_frames = "2"` on the Apple TV 4K.
@@ -117,16 +117,14 @@ Keys used across `.cfg` files and their purpose.
 | Key | Values Used | Purpose |
 |-----|-------------|---------|
 | `run_ahead_enabled` | `true`, `false` | Tier 1: enabled per-core where validated; Tier 2: disabled by default |
-| `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame run-ahead for reduced input lag once enabled per-core; Tier 2: disabled (0) without JIT |
+| `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame Run Ahead for reduced input lag once enabled per-core; Tier 2: disabled (0) without JIT |
 | `preemptive_frames_enable` | `false` | Disabled for interpreter-bound cores (N64, PS1) |
 | `video_frame_delay_auto` | `false` | Disabled for cores incompatible with auto frame delay |
-| `video_threaded` | `true` | Threaded video for interpreter-bound cores (global = false) |
-
-`PCSX-ReARMed.cfg` keeps `video_threaded = "true"` as a core-specific fallback for interpreter performance. If you observe pacing issues on your hardware, test `video_threaded = "false"` for that core only; the package does not apply that change by default.
+| `video_threaded` | `true` | Threaded video for interpreter-bound cores (global = false). `PCSX-ReARMed.cfg` keeps `video_threaded = "true"` as a core-specific fallback for interpreter performance; if you observe pacing issues on your hardware, test `video_threaded = "false"` for that core only. The package does not apply that change by default. |
 | `audio_latency` | `48`, `64` | Per-core: 64 ms for N64 (heavier interpreter), 48 ms for PS1 (minimum stable) |
 | `audio_resampler_quality` | `2` | Lower resampler for Tier 2 cores (global = 3) |
 | `video_scale_integer_scaling` | `1` | Overscale for 224p/240p content (NES, SNES, Genesis, PCE, GBA) at 4K |
-| `video_shader` | path | Per-core CRT shader preset assignment |
+| `video_shader` | `path` | Per-core CRT shader preset assignment |
 
 ## CRT Shaders
 
@@ -149,7 +147,7 @@ Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load
 
 > **Note:** The ZIP ships all `.cfg` and `.opt` files flat in `config/`. That is intentional. README.md is the authoritative source for archive layout and target on-device placement; global frontend defaults come from the companion `retroarch.cfg` repository.
 
-On Apple TV, create `config/<core_name>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch. Tier 1 `.cfg` files now enable Run-Ahead explicitly per core; the companion global `retroarch.cfg` remains conservative and does not enable it globally.
+On Apple TV, create `config/<core_name>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch. Tier 1 `.cfg` files now enable Run Ahead explicitly per core; the companion global `retroarch.cfg` remains conservative and does not enable it globally.
 
 The override hierarchy applies automatically — no manual loading required. After uploading, launch a game with any configured core and verify via Quick Menu → Information that the override is active.
 
@@ -196,7 +194,7 @@ run_ahead_frames = "1"
 
 For titles that need individual tuning, create per-game files in the same `config/<core_name>/` directory.
 
-**Example — enabling runahead for Super Mario 64:**
+**Example — enabling Run Ahead for Super Mario 64:**
 
 `config/Mupen64Plus-Next/Super Mario 64 (USA).cfg`:
 ```
