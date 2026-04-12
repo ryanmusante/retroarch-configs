@@ -66,7 +66,7 @@ config/
 
 **15 files** — 8 `.cfg` (frontend overrides) + 7 `.opt` (core options).
 
-For RetroArch auto-loading on Apple TV, place them under `config/<core>/` on the device:
+For RetroArch auto-loading on Apple TV, place them under `config/<core_name>/` on the device:
 
 ```
 config/
@@ -95,7 +95,7 @@ config/
     └── Snes9x.opt
 ```
 
-README.md is the authoritative layout reference. The `.cfg` and `.opt` files intentionally omit layout/path notes.
+README.md is the authoritative reference for archive layout and on-device per-core placement. Global frontend defaults come from the companion retroarch-appletv4k repository. The `.cfg` and `.opt` files intentionally omit layout/path notes.
 
 ## File Separation
 
@@ -103,8 +103,8 @@ RetroArch loads overrides and core options from separate files with distinct pur
 
 | File | Path | Contents | Set via |
 |------|------|----------|---------|
-| `<core>.cfg` | Archive: `config/`  ·  Device: `config/<core>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | Archive: `config/`  ·  Device: `config/<core>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
+| `<core>.cfg` | Archive: `config/`  ·  Device: `config/<core_name>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
+| `<core>.opt` | Archive: `config/`  ·  Device: `config/<core_name>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
 
 Mixing the two in a single file causes silent failures — RetroArch ignores core option keys in `.cfg` files and vice versa.
 
@@ -142,9 +142,9 @@ Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load
 
 ## Installation
 
-> **Note:** The ZIP ships all `.cfg` and `.opt` files flat in `config/`. That is intentional. README.md is the authoritative source for the target on-device layout.
+> **Note:** The ZIP ships all `.cfg` and `.opt` files flat in `config/`. That is intentional. README.md is the authoritative source for archive layout and target on-device placement; global frontend defaults come from the companion `retroarch.cfg` repository.
 
-On Apple TV, create `config/<core>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch.
+On Apple TV, create `config/<core_name>/` directories, then move each matching `.cfg` / `.opt` pair into its core-named directory before launch.
 
 The override hierarchy applies automatically — no manual loading required. After uploading, launch a game with any configured core and verify via Quick Menu → Information that the override is active.
 
@@ -189,7 +189,7 @@ run_ahead_frames = "1"
 
 ## Per-Game Overrides
 
-For titles that need individual tuning, create per-game files in the same `config/<core>/` directory.
+For titles that need individual tuning, create per-game files in the same `config/<core_name>/` directory.
 
 **Example — enabling runahead for Super Mario 64:**
 
