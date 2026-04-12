@@ -4,7 +4,7 @@ retroarch-configs changelog
 
 - v1.9.1: sync README, changelog, and shipped config files after layout cleanup.
 - v1.9.1: `.cfg` / `.opt` headers no longer carry path, override, or pairing notes; README is now the sole layout reference.
-- v1.9.1: README File Structure / File Separation / Installation sections now distinguish ZIP layout (`config/`) from on-device auto-load layout (`Config/config/<core>/`).
+- v1.9.1: README File Structure / File Separation / Installation sections now distinguish ZIP layout (`config/`) from on-device auto-load layout (`Config/<core>/`).
 
 2026-04-09  Ryan Musante
 
@@ -39,7 +39,7 @@ retroarch-configs changelog
 2026-04-06  Ryan Musante
 
 - v1.8: archive ships flat in config/; README documents nested
-  config/<core>/<core>.cfg target layout.
+  Config/<core>/ target layout.
 - v1.8: Mesen.opt remove mesen_overclock, mesen_overclock_type;
   Snes9x.opt remove snes9x_overclock_cycles (now per-game-only,
   documented in README "Overclocking").
