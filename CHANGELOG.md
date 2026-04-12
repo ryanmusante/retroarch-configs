@@ -2,6 +2,14 @@ retroarch-configs changelog
 
 2026-04-11  Ryan Musante
 
+- v1.10: Mupen64Plus-Next.opt set `mupen64plus-rsp-plugin = "cxd4"`
+  for the Angrylion software-rendered profile.
+- v1.10: Mupen64Plus-Next.opt set `mupen64plus-ThreadedRenderer = "False"`
+  because that option is for the hardware RDP path, not Angrylion.
+- v1.10: README add explicit Angrylion + CXD4 note for Mupen64Plus-Next.
+
+2026-04-11  Ryan Musante
+
 - v1.9.1: sync README, changelog, and shipped config files after layout cleanup.
 - v1.9.1: `.cfg` / `.opt` headers no longer carry path, override, or pairing notes; README is now the sole layout reference.
 - v1.9.1: README File Structure / File Separation / Installation sections now distinguish ZIP layout (`config/`) from on-device auto-load layout (`config/<core>/`).

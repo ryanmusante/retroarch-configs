@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.9.1-blue)
+![version](https://img.shields.io/badge/version-1.10-blue)
 ![cores](https://img.shields.io/badge/cores-9-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -34,7 +34,7 @@ Override files contain only keys that differ from the global config. Core option
 | Mesen | NES | 1 (Flawless) | 3 | 2 | crt-easymode | Integer overscale for 224p at 4K |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K |
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode | Integer overscale for 224p at 4K |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; run-ahead disabled by default |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; Angrylion + CXD4; run-ahead disabled by default |
 | PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
 
 **Tier definitions:**
@@ -133,6 +133,12 @@ Each shipped core has a CRT shader assigned based on available GPU headroom on t
 | 2 (Good) | `zfast_crt.slangp` | Minimal | Mupen64Plus-Next, PCSX-ReARMed |
 
 Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load, verify the path matches your installation or apply shaders manually via Quick Menu → Shaders → Load Preset → Save Core Preset.
+
+### Mupen64Plus-Next notes
+
+- `mupen64plus-rdp-plugin = "angrylion"` keeps Nintendo 64 on the software renderer.
+- `mupen64plus-rsp-plugin = "cxd4"` matches the software-rendered Angrylion setup.
+- `mupen64plus-ThreadedRenderer = "False"` stays off because that core option applies to the hardware RDP path, not Angrylion.
 
 ## Installation
 
