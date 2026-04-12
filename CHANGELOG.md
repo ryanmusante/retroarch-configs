@@ -1,5 +1,10 @@
 2026-04-12  Ryan Musante
 
+- v1.27: DEDUPE — remove 3 Tier 2 `.cfg` keys that duplicated global `retroarch.cfg` values and had no override effect. `Mupen64Plus-Next.cfg`: drop `audio_latency="64"` (matches global) and `audio_resampler_quality="2"` (matches global); key count 4 → 2. `PCSX-ReARMed.cfg`: drop `audio_resampler_quality="2"` (matches global); key count 4 → 3. PCSX `audio_latency="48"` retained — genuinely differs from global 64 and is the correct lighter-interpreter value. Both Tier 2 `video_threaded="false"` keys retained as explicit #14978 crash-defense anchors (identical to global but kept for forensic clarity if global ever drifts).
+- v1.27: README core summary table — Mupen64Plus-Next `.cfg` keys 4 → 2, PCSX-ReARMed `.cfg` keys 4 → 3. PCSX row note expanded to call out audio_latency=48 as intentional lighter-than-N64 baseline.
+
+2026-04-12  Ryan Musante
+
 - v1.26: AUDIT — REV 2 audit pass against libretro/RetroArch master source. Applied 21 findings across all 15 per-core files.
 - v1.26: `Mupen64Plus-Next.opt` — remove 5 dead GLideN64-only keys (`EnableCopyColorToRDRAM`, `EnableCopyColorFromRDRAM`, `EnableCopyDepthToRDRAM`, `txFilterMode`, `EnableLODEmulation`) that are silently ignored when `rdp-plugin=angrylion`. Dead config verified against mupen64plus-libretro-nx source. Key count 12 → 7.
 - v1.26: `Mupen64Plus-Next.cfg` — remove 3 keys that duplicated global defaults (`run_ahead_frames=0`, `preemptive_frames_enable=false`, `video_frame_delay_auto=false`). Flip `video_threaded` true → false to match the global tvOS Metal crash #14978 defense. Key count 7 → 4.

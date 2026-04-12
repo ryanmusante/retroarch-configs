@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.26-blue)
+![version](https://img.shields.io/badge/version-1.27-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -34,8 +34,8 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 | Mesen | NES | 1 (Flawless) | 3 | 2 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; interframe_blending=mix (thermal/fillrate relief); Run Ahead enabled per-core |
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 4 | 7 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion software RDP + CXD4 RSP; Player 1 Rumble Pak; native 320×240 framebuffer; video_threaded=false (#14978 defense); Run Ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 4 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; video_threaded=false (#14978 defense); Run Ahead disabled by default |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 2 | 7 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion software RDP + CXD4 RSP; Player 1 Rumble Pak; native 320×240 framebuffer; video_threaded=false (#14978 defense); Run Ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 3 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; video_threaded=false (#14978 defense); audio_latency=48 (lighter than N64); Run Ahead disabled by default |
 
 ## File Structure
 
