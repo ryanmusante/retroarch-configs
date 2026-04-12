@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.14-blue)
+![version](https://img.shields.io/badge/version-1.19-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -22,6 +22,7 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 - [Per-Game Overrides](#per-game-overrides)
 - [Core Option Key Verification](#core-option-key-verification)
 - [Related](#related)
+- [Versioning](#versioning)
 - [License](#license)
 
 ## Supported Cores
@@ -124,7 +125,6 @@ Keys used across `.cfg` files and their purpose.
 | `audio_latency` | `48`, `64` | Per-core: 64 ms for N64 (heavier interpreter), 48 ms for PS1 (minimum stable) |
 | `audio_resampler_quality` | `2` | Lower resampler for Tier 2 cores (global = 3) |
 | `video_scale_integer_scaling` | `1` | Overscale for 224p/240p content (NES, SNES, Genesis, PCE, GBA) at 4K |
-| `video_shader` | `path` | Per-core CRT shader preset assignment |
 
 ## CRT Shaders
 
@@ -135,7 +135,7 @@ Each shipped core has a CRT shader assigned based on available GPU headroom on t
 | 1 (Flawless) | `crt-easymode.slangp` | Low | Beetle PCE Fast, FinalBurn Neo, Genesis Plus GX, Mesen, mGBA, Snes9x |
 | 2 (Good) | `zfast_crt.slangp` | Minimal | Mupen64Plus-Next, PCSX-ReARMed |
 
-Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load, verify the path matches your installation or apply shaders manually via Quick Menu → Shaders → Load Preset → Save Core Preset.
+Shader presets are no longer assigned per core in this pack — RetroArch's defaults apply (no shader unless one is loaded globally or via Quick Menu → Shaders → Load Preset → Save Core Preset). To restore CRT shaders, apply them manually per core after first launch.
 
 ### Mupen64Plus-Next notes
 
@@ -235,6 +235,10 @@ Upstream issue references (verified 2026-04-06): libretro/RetroArch#14201, #1830
 ## Related
 
 - [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k) — Global `retroarch.cfg` and Apple TV 4K setup guide
+
+## Versioning
+
+This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on incompatible structural changes (filesystem layout, breaking config schema, removed features). `MINOR` increments on every release — additive changes, key additions/removals, documentation syncs, and conservative defaults adjustments. Each release ships with a matching `CHANGELOG.md` entry in kernel.org `date<TAB>name` style.
 
 ## License
 

@@ -1,5 +1,32 @@
 2026-04-12  Ryan Musante
 
+- v1.19: `Mupen64Plus-Next.opt` — add `mupen64plus-pak1 = "rumble"` (Player 1 Pak: Rumble Pak); valid value verified against upstream `libretro_core_options.h`. Trade-off: removes Controller Pak (memory pak) for player 1 — games that save to controller pak (Mario Kart 64 ghost data, F-Zero X tracks, OoT player notes) can no longer write.
+- v1.19: full audit of all 7 `.opt` files against upstream libretro core option headers — every key in every `.opt` file confirmed valid (Mesen 2, Snes9x 1, mGBA 3, Genesis Plus GX 6, Beetle PCE Fast 2, PCSX-ReARMed 4, Mupen64Plus-Next 12 keys post-rumble).
+- v1.19: full audit of all 8 per-core `.cfg` files against `libretro/RetroArch/configuration.c` — every frontend override key confirmed valid; no defects found.
+
+2026-04-12  Ryan Musante
+
+- v1.18: README — add missing `Versioning` entry to Table of Contents (added in v1.17 but never linked from TOC).
+- v1.18: no changes to `.cfg`, `.opt`, or other README content.
+
+2026-04-12  Ryan Musante
+
+- v1.17: README — add Versioning section above License documenting the `vMAJOR.MINOR` scheme and kernel.org-style CHANGELOG convention.
+- v1.17: no changes to `.cfg`, `.opt`, or other README content.
+
+2026-04-12  Ryan Musante
+
+- v1.16: CHANGELOG normalize — strip orphan `retroarch-configs changelog` mid-file header; standardize all entries to kernel.org canonical (date header followed by blank line followed by bullets); unwrap continuation-wrapped bullets; collapse stray multi-blank gaps.
+- v1.16: no changes to `.cfg`, `.opt`, or README content; CHANGELOG-only sync.
+
+2026-04-12  Ryan Musante
+
+- v1.15: remove `video_shader` key from all 8 per-core `.cfg` files; CRT shader presets are no longer assigned per core, RetroArch's default applies.
+- v1.15: README — drop the `video_shader` row from the cfg key table; rewrite the shader-path note to document the new default behavior and the manual restore path via Quick Menu → Shaders.
+- v1.15: no changes to `.opt` core options; no changes to other `.cfg` keys.
+
+2026-04-12  Ryan Musante
+
 - v1.14: sync README archive-count language to the shipped ZIP contents (8 `.cfg` + 7 `.opt` + `config/.gitkeep` = 16 files).
 - v1.14: clarify that the README file list covers the functional override files, while the ZIP also contains `config/.gitkeep`.
 
@@ -9,22 +36,19 @@
 - v1.13: sync `README.md`, `CHANGELOG.md`, and Tier 1 `.cfg` key counts with the new per-core Run-Ahead activation model.
 - v1.13: document `PCSX-ReARMed.cfg` threaded video as an intentional core-specific fallback and not a blanket recommendation.
 
-retroarch-configs changelog
-
 2026-04-11  Ryan Musante
+
 - v1.12: sync README, CHANGELOG, and shipped archive contents after the final documentation pass.
 - v1.12: keep the ZIP flat under `config/`, and document manual on-device placement under `config/<core_name>/` for RetroArch auto-loading.
 - v1.12: remove blank and whitespace-only lines from all shipped `.cfg` and `.opt` files without changing any keys or values.
 - v1.12: README now states that shipped filenames and directory examples mirror the archive exactly.
 
 2026-04-11  Ryan Musante
+
 - v1.11: sync README badge and file counts to shipped 8 `.cfg` + 7 `.opt` set
 
-
-- v1.10: Mupen64Plus-Next.opt set `mupen64plus-rsp-plugin = "cxd4"`
-  for the Angrylion software-rendered profile.
-- v1.10: Mupen64Plus-Next.opt set `mupen64plus-ThreadedRenderer = "False"`
-  because that option is for the hardware RDP path, not Angrylion.
+- v1.10: Mupen64Plus-Next.opt set `mupen64plus-rsp-plugin = "cxd4"` for the Angrylion software-rendered profile.
+- v1.10: Mupen64Plus-Next.opt set `mupen64plus-ThreadedRenderer = "False"` because that option is for the hardware RDP path, not Angrylion.
 - v1.10: README add explicit Angrylion + CXD4 note for Mupen64Plus-Next.
 
 2026-04-11  Ryan Musante
@@ -35,64 +59,35 @@ retroarch-configs changelog
 
 2026-04-09  Ryan Musante
 
-- v1.9: Genesis Plus GX.opt — replace genesis_plus_gx_bram (not a real key;
-  silently ignored → per-game Sega CD BRAM isolation never took effect)
-  with the upstream-correct pair genesis_plus_gx_system_bram and
-  genesis_plus_gx_cart_bram (libretro/Genesis-Plus-GX
-  libretro_core_options.h:165,179). CRIT fix.
-- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_duping_enable
-  (no such core option; frame duping is automatic) and pcsx_rearmed_async_cd
-  (no such core option; CD async is now internal to cdrom-async.h).
-  Both were silently ignored. CRIT fix.
-- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_frameskip_threshold = "30";
-  dead config because frameskip_type = "disabled" (threshold only consulted
-  when type = "auto_threshold"). Threshold guidance moved to per-game comment.
-- v1.9: mGBA.opt — document that mgba_color_correction is GBA-only
-  (GB/GBC content ignores the setting).
-- v1.9: Mupen64Plus-Next.cfg — rewrite header comment so that
-  video_frame_delay_auto = "false" is framed as the mitigation for #14201
-  rather than implying a standalone bug; rewind #18300 wording tightened.
-- v1.9: README Supported Cores table — Genesis Plus GX .opt key count
-  5 → 6; PCSX-ReARMed .opt key count 7 → 4. Key Verification section
-  expanded with explicit upstream source paths and the list of silently
-  ignored keys removed in this release.
+- v1.9: Genesis Plus GX.opt — replace genesis_plus_gx_bram (not a real key; silently ignored → per-game Sega CD BRAM isolation never took effect) with the upstream-correct pair genesis_plus_gx_system_bram and genesis_plus_gx_cart_bram (libretro/Genesis-Plus-GX libretro_core_options.h:165,179). CRIT fix.
+- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_duping_enable (no such core option; frame duping is automatic) and pcsx_rearmed_async_cd (no such core option; CD async is now internal to cdrom-async.h). Both were silently ignored. CRIT fix.
+- v1.9: PCSX-ReARMed.opt — remove pcsx_rearmed_frameskip_threshold = "30"; dead config because frameskip_type = "disabled" (threshold only consulted when type = "auto_threshold"). Threshold guidance moved to per-game comment.
+- v1.9: mGBA.opt — document that mgba_color_correction is GBA-only (GB/GBC content ignores the setting).
+- v1.9: Mupen64Plus-Next.cfg — rewrite header comment so that video_frame_delay_auto = "false" is framed as the mitigation for #14201 rather than implying a standalone bug; rewind #18300 wording tightened.
+- v1.9: README Supported Cores table — Genesis Plus GX .opt key count 5 → 6; PCSX-ReARMed .opt key count 7 → 4. Key Verification section expanded with explicit upstream source paths and the list of silently ignored keys removed in this release.
 
 2026-04-06  Ryan Musante
 
-- v1.8.1: PCSX-ReARMed.opt rename pcsx_rearmed_frameskip → pcsx_rearmed_frameskip_type;
-  value "Off" → "disabled" (mainline notaz/pcsx_rearmed renamed the option;
-  legacy key/value silently ignored by current core).
+- v1.8.1: PCSX-ReARMed.opt rename pcsx_rearmed_frameskip → pcsx_rearmed_frameskip_type; value "Off" → "disabled" (mainline notaz/pcsx_rearmed renamed the option; legacy key/value silently ignored by current core).
 
 2026-04-06  Ryan Musante
 
-- v1.8: archive ships flat in config/; README documents nested
-  config/<core>/ target layout.
-- v1.8: Mesen.opt remove mesen_overclock, mesen_overclock_type;
-  Snes9x.opt remove snes9x_overclock_cycles (now per-game-only,
-  documented in README "Overclocking").
-- v1.8: PCSX-ReARMed.opt gpu_thread_rendering "Synchronous" → "sync";
-  async_cd "enabled" → "async".
-- v1.8: Mesen.opt nospritelimit "On" → "enabled";
-  reduce_dmc_popping "On" → "enabled".
+- v1.8: archive ships flat in config/; README documents nested config/<core>/ target layout.
+- v1.8: Mesen.opt remove mesen_overclock, mesen_overclock_type; Snes9x.opt remove snes9x_overclock_cycles (now per-game-only, documented in README "Overclocking").
+- v1.8: PCSX-ReARMed.opt gpu_thread_rendering "Synchronous" → "sync"; async_cd "enabled" → "async".
+- v1.8: Mesen.opt nospritelimit "On" → "enabled"; reduce_dmc_popping "On" → "enabled".
 - v1.8: Snes9x.opt overclock_cycles "Light" → "light".
-- v1.8: Genesis Plus GX.opt ym2612 "Nuked (YM2612)" → "nuked (ym2612)"
-  (case-sensitive strcmp; capitalised form silently fell back to MAME);
-  audio_filter "Low-Pass" → "low-pass".
-- v1.8: mGBA.opt interframe_blending "Smart" → "mix_smart";
-  audio_low_pass_filter "ON" → "enabled".
+- v1.8: Genesis Plus GX.opt ym2612 "Nuked (YM2612)" → "nuked (ym2612)" (case-sensitive strcmp; capitalised form silently fell back to MAME); audio_filter "Low-Pass" → "low-pass".
+- v1.8: mGBA.opt interframe_blending "Smart" → "mix_smart"; audio_low_pass_filter "ON" → "enabled".
 - v1.8: README per-game example snes9x_overclock "200" → "200%".
-- v1.8: replace "preemptive" with "run-ahead" in 9 locations
-  (README + 7 per-core .cfg comments).
+- v1.8: replace "preemptive" with "run-ahead" in 9 locations (README + 7 per-core .cfg comments).
 - v1.7: Snes9x.cfg snes9x_overclock documented as per-game-only.
 - v1.7: PCSX-ReARMed.opt psxclock safe range (50–57) documented.
-- v1.7: Mupen64Plus-Next.cfg, FinalBurn Neo.cfg re-verify upstream refs
-  (libretro/RetroArch#14201, #18300, #16374).
+- v1.7: Mupen64Plus-Next.cfg, FinalBurn Neo.cfg re-verify upstream refs (libretro/RetroArch#14201, #18300, #16374).
 - v1.7: Mupen64Plus-Next.opt rationale for 43screensize = 320x240.
-- v1.7: Mesen.opt overclock = Medium / Before NMI rationale
-  (Battletoads/Probotector/Recca).
+- v1.7: Mesen.opt overclock = Medium / Before NMI rationale (Battletoads/Probotector/Recca).
 - v1.7: Genesis Plus GX.opt Nuked YM2612 ~3× CPU cost note.
-- v1.7: Tier 2 .cfg per-core audio_latency rationale
-  (64 ms N64, 48 ms PS1).
+- v1.7: Tier 2 .cfg per-core audio_latency rationale (64 ms N64, 48 ms PS1).
 
 2026-04-05  Ryan Musante
 
@@ -101,16 +96,8 @@ retroarch-configs changelog
 - v1.6: PCSX-ReARMed frameskip Auto → Off, threshold 33 → 30.
 - v1.6: Mupen64Plus-Next EnableLODEmulation False → True.
 - v1.5: README "(global = false)" added to video_threaded column.
-- v1.1–v1.4: per-core CRT shader assignments;
-  audio_resampler_quality = 2 added to Tier 2 cores;
-  Genesis Plus GX integer overscale for 224p;
-  Beetle PCE Fast disable cdimagecache (tvOS RAM constraint);
-  remove redundant keys matching global;
-  fix Mupen64Plus-Next run_ahead_frames 1 → 0;
-  add video_frame_delay_auto = false to PCSX-ReARMed.
+- v1.1–v1.4: per-core CRT shader assignments; audio_resampler_quality = 2 added to Tier 2 cores; Genesis Plus GX integer overscale for 224p; Beetle PCE Fast disable cdimagecache (tvOS RAM constraint); remove redundant keys matching global; fix Mupen64Plus-Next run_ahead_frames 1 → 0; add video_frame_delay_auto = false to PCSX-ReARMed.
 
 2026-04-04  Ryan Musante
 
-- v1.0: initial release — 9 per-core override sets (17 files);
-  Tier 1: 6 cores with runahead from global;
-  Tier 2: 3 cores without JIT, threaded video enabled.
+- v1.0: initial release — 9 per-core override sets (17 files); Tier 1: 6 cores with runahead from global; Tier 2: 3 cores without JIT, threaded video enabled.
