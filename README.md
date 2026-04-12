@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.19-blue)
+![version](https://img.shields.io/badge/version-1.21-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -29,14 +29,14 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 240p at 4K; Run Ahead enabled per-core |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 3 | — | crt-easymode | Defaults sufficient; rewind conflicts with Run Ahead (#16374); Run Ahead enabled per-core |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode | Nuked YM2612 for accurate FM synthesis; integer overscale for 224p; per-game BRAM isolation for Sega CD; Run Ahead enabled per-core |
-| Mesen | NES | 1 (Flawless) | 4 | 2 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 3 | crt-easymode | Integer overscale for GBA 240×160 at 4K; Run Ahead enabled per-core |
-| Snes9x | SNES | 1 (Flawless) | 4 | 1 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; Angrylion + CXD4; Run Ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; Run Ahead disabled by default |
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 3 | 2 | user-applied | Integer overscale for 240p at 4K; Run Ahead enabled per-core |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 2 | — | user-applied | Defaults sufficient; rewind conflicts with Run Ahead (#16374); Run Ahead enabled per-core |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 3 | 6 | user-applied | MAME YM2612 (thermal-safe baseline; switch to Nuked per-game for audiophile titles); integer overscale for 224p; per-game BRAM isolation for Sega CD; Run Ahead enabled per-core |
+| Mesen | NES | 1 (Flawless) | 3 | 2 | user-applied | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | user-applied | Integer overscale for GBA 240×160 at 4K; Run Ahead enabled per-core |
+| Snes9x | SNES | 1 (Flawless) | 3 | 1 | user-applied | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 6 | 12 | user-applied | No JIT on tvOS; cached interpreter; Angrylion + CXD4; Player 1 Rumble Pak; CopyDepthToRDRAM Off (per-game Software for OoT/MM/Conker/Body Harvest); Run Ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 6 | 4 | user-applied | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; Run Ahead disabled by default | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; Run Ahead disabled by default |
 
 **Tier definitions:**
 - **Tier 1 (Flawless)** — runs at full speed with per-core `run_ahead_enabled = "true"` and `run_ahead_frames = "2"` on the Apple TV 4K.

@@ -1,5 +1,22 @@
 2026-04-12  Ryan Musante
 
+- v1.21: README — sync core summary table to actual file contents. Stale references corrected: Tier 1 `.cfg` key counts 4→3 and Tier 2 `.cfg` counts 7→6 (the dropped key was `video_shader`, removed in v1.15 but never reflected in the table); FinalBurn Neo `.cfg` 3→2 (same reason); Mupen64Plus-Next `.opt` 11→12 (Player 1 Rumble Pak added in v1.19).
+- v1.21: README — Genesis Plus GX row note updated from "Nuked YM2612 for accurate FM synthesis" to "MAME YM2612 (thermal-safe baseline; switch to Nuked per-game for audiophile titles)" matching v1.20 perf fix.
+- v1.21: README — Mupen64Plus-Next row note expanded to document Player 1 Rumble Pak default and `CopyDepthToRDRAM = Off` baseline plus the per-game `Software` exceptions (OoT/MM/Conker/Body Harvest).
+- v1.21: README — PCSX-ReARMed row note expanded to document `psxclock = 100` native baseline and async GPU threading.
+- v1.21: README — CRT Shader column entries changed from `crt-easymode` / `zfast_crt` (no longer pre-assigned) to `user-applied` matching the v1.15 removal of per-core `video_shader` keys.
+- v1.21: no `.cfg` or `.opt` content changes; documentation-only sync.
+
+2026-04-12  Ryan Musante
+
+- v1.20: PERF — `Genesis Plus GX.opt` set `genesis_plus_gx_ym2612 = "mame (ym2612)"` (was `nuked (ym2612)`). Nuked YM2612 is cycle-accurate but ~3-5x the CPU cost of MAME and was the largest single CPU sink in the GPGX core under Run-Ahead 2 + CRT shader on the passively-cooled A15. MAME is the appropriate baseline for Apple TV's thermal envelope; restore Nuked per-game for audiophile titles if desired.
+- v1.20: PERF — `Mupen64Plus-Next.opt` set `mupen64plus-EnableCopyDepthToRDRAM = "Off"` (was `Software`). Software depth copy under Angrylion software RDP is one of the most expensive Mupen operations and was leaving ~10-20% headroom on the table for an N64 core that is already CPU-bound on Tier 2. Re-enable per-game (`Software`) for the small set that needs it: Zelda OoT/MM (lens of truth), Body Harvest, Conker's Bad Fur Day (fog).
+- v1.20: COMPAT — `PCSX-ReARMed.opt` set `pcsx_rearmed_psxclock = "100"` (was `57`). The previous global `57` underclock was below the safe-compatibility floor (~80) and broke timing in many titles (audio cracks, gameplay slowdown, missed event triggers). New baseline is native speed; per-game underclock to 75 or 50 for demanding 3D titles like Tony Hawk, Spyro 2/3, Tekken 3.
+- v1.20: PERF — `PCSX-ReARMed.opt` set `pcsx_rearmed_gpu_thread_rendering = "async"` (was `sync`). Async threaded GPU is faster on multi-core ARM with negligible visual cost; sync provided no benefit on A15.
+- v1.20: Mupen64Plus-Next continues to use Angrylion software RDP + cxd4 RSP — accuracy-over-speed pick documented in v2.39 is intentionally retained.
+
+2026-04-12  Ryan Musante
+
 - v1.19: `Mupen64Plus-Next.opt` — add `mupen64plus-pak1 = "rumble"` (Player 1 Pak: Rumble Pak); valid value verified against upstream `libretro_core_options.h`. Trade-off: removes Controller Pak (memory pak) for player 1 — games that save to controller pak (Mario Kart 64 ghost data, F-Zero X tracks, OoT player notes) can no longer write.
 - v1.19: full audit of all 7 `.opt` files against upstream libretro core option headers — every key in every `.opt` file confirmed valid (Mesen 2, Snes9x 1, mGBA 3, Genesis Plus GX 6, Beetle PCE Fast 2, PCSX-ReARMed 4, Mupen64Plus-Next 12 keys post-rumble).
 - v1.19: full audit of all 8 per-core `.cfg` files against `libretro/RetroArch/configuration.c` — every frontend override key confirmed valid; no defects found.
