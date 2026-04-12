@@ -1,5 +1,4 @@
-# Genesis Plus GX — Core Options
-# mame ym2612 default 3-5x lighter than nuked thermal-safe a15
+# Genesis Plus GX — Core Options mame ym2612 default 3-5x lighter than nuked thermal-safe a15
 genesis_plus_gx_ym2612 = "mame (ym2612)"
 genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"
