@@ -1,6 +1,12 @@
 retroarch-configs changelog
 
 2026-04-11  Ryan Musante
+- v1.12: sync README, CHANGELOG, and shipped archive contents after the final documentation pass.
+- v1.12: keep the ZIP flat under `config/`, and document manual on-device placement under `config/<core_name>/` for RetroArch auto-loading.
+- v1.12: remove blank and whitespace-only lines from all shipped `.cfg` and `.opt` files without changing any keys or values.
+- v1.12: README now states that shipped filenames and directory examples mirror the archive exactly.
+
+2026-04-11  Ryan Musante
 - v1.11: sync README badge and file counts to shipped 8 `.cfg` + 7 `.opt` set
 
 

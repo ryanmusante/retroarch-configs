@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.11-blue)
+![version](https://img.shields.io/badge/version-1.12-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -96,6 +96,8 @@ config/
 ```
 
 README.md is the authoritative reference for archive layout and on-device per-core placement. Global frontend defaults come from the companion retroarch-appletv4k repository. The `.cfg` and `.opt` files intentionally omit layout/path notes.
+
+Shipped filenames and directory examples in this README mirror the archive exactly. After upload, place each file into its matching `config/<core_name>/` directory on the Apple TV for automatic loading.
 
 ## File Separation
 
