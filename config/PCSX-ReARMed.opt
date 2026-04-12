@@ -1,6 +1,6 @@
-# pcsx-rearmed core options native psxclock 100 underclock per-game only
+# psxclock 100 native; underclock per-game only
 pcsx_rearmed_drc = "disabled"
-# frameskip globally per-game threshold cd-rom fmv when using threshold also
+# frameskip per-game only (CD-ROM FMV threshold mode)
 pcsx_rearmed_frameskip_type = "disabled"
 pcsx_rearmed_gpu_thread_rendering = "async"
 pcsx_rearmed_psxclock = "100"

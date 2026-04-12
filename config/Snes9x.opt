@@ -1,2 +1,2 @@
-# snes9x core options overclock intentionally not set globally see readme
+# overclock per-game only; see README
 snes9x_reduce_sprite_flicker = "enabled"

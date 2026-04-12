@@ -1,8 +1,8 @@
-# Genesis Plus GX — Core Options mame ym2612 default 3-5x lighter than nuked thermal-safe a15
+# MAME YM2612; 3-5× lighter than Nuked; A15 thermal-safe
 genesis_plus_gx_ym2612 = "mame (ym2612)"
 genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"
 genesis_plus_gx_no_sprite_limit = "enabled"
-# per-game bram isolation sega cd upstream splits two keys libretro/genesis-plus-gx
+# Sega CD BRAM per-game; upstream splits system+cart keys
 genesis_plus_gx_system_bram = "per game"
 genesis_plus_gx_cart_bram = "per game"

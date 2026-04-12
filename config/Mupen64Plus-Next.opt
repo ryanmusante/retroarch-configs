@@ -1,16 +1,16 @@
-# mupen64plus-next core options angrylion software rdp pair cxd4 rsp better
+# Angrylion software RDP + cxd4 RSP
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
-# 320 240 native n64 4 3 framebuffer resolution internal upscaling
+# 320×240 native 4:3 framebuffer; no internal upscale
 mupen64plus-43screensize = "320x240"
-# threadedrenderer applies hardware rdp path only keep false angrylion
+# ThreadedRenderer is HW-RDP-only; false for Angrylion
 mupen64plus-ThreadedRenderer = "False"
 mupen64plus-EnableCopyColorToRDRAM = "Async"
 mupen64plus-EnableCopyColorFromRDRAM = "Off"
 mupen64plus-EnableCopyDepthToRDRAM = "Off"
 mupen64plus-txFilterMode = "None"
 mupen64plus-FrameDuping = "True"
-# true visual correctness lod gpu-side costs nothing 320 240 a15
+# LOD on; GPU-side free at 320×240 on A15
 mupen64plus-EnableLODEmulation = "True"
