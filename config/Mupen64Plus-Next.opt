@@ -1,5 +1,6 @@
 # mupen64plus-next core options angrylion software rdp pair cxd4 rsp better
 mupen64plus-cpucore = "cached_interpreter"
+mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
 # 320 240 native n64 4 3 framebuffer resolution internal upscaling
