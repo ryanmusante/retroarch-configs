@@ -1,12 +1,7 @@
-# PCSX-ReARMed — Core Options
-# pcsx_rearmed_psxclock: default 57 (~85% native). Safe range 50–57 on A15.
-#   Lower to 50 per-game for demanding titles. Values >57 risk audio/timing
-#   instability under interpreter and are not recommended.
+# PCSX-ReARMed — Core Options pcsx_rearmed_psxclock: default 57 (~85% native). Safe range 50–57 on A15. Lower to 50 per-game for demanding titles. Values >57 risk audio/timing instability under interpreter and are not recommended.
 
 pcsx_rearmed_drc = "disabled"
-# Frameskip disabled globally; per-game "auto" or "auto_threshold" for CD-ROM FMV.
-# When using auto_threshold, also set pcsx_rearmed_frameskip_threshold (valid
-# values 15-80 in steps; see upstream libretro_core_options.h).
+# Frameskip disabled globally; per-game "auto" or "auto_threshold" for CD-ROM FMV. When using auto_threshold, also set pcsx_rearmed_frameskip_threshold (valid values 15-80 in steps; see upstream libretro_core_options.h).
 pcsx_rearmed_frameskip_type = "disabled"
 pcsx_rearmed_gpu_thread_rendering = "sync"
 pcsx_rearmed_psxclock = "57"

@@ -1,6 +1,4 @@
-# Mesen — Core Options
-# Overclock intentionally NOT set globally. See README "Overclocking" for
-# per-game examples (Battletoads, Probotector/Contra Force, Recca).
+# Mesen — Core Options; Overclock intentionally NOT set globally. See README "Overclocking" for per-game examples (Battletoads, Probotector/Contra Force, Recca).
 
 mesen_nospritelimit = "enabled"
 mesen_reduce_dmc_popping = "enabled"
