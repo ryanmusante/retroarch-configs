@@ -1,12 +1,12 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.10-blue)
-![cores](https://img.shields.io/badge/cores-9-green)
+![version](https://img.shields.io/badge/version-1.11-blue)
+![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
-Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for the Apple TV 4K. Designed as a companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
+Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K. Companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
 
-Override files contain only keys that differ from the global config. Core option files contain only non-default libretro core settings. Both follow the libretro override hierarchy: global → core → content directory → per-game.
+Overrides keep only non-global frontend keys. `.opt` files keep only non-default core settings.
 
 [changelog](CHANGELOG.md)
 
@@ -64,7 +64,7 @@ config/
 └── Snes9x.opt
 ```
 
-**17 files** — 9 `.cfg` (frontend overrides) + 8 `.opt` (core options).
+**15 files** — 8 `.cfg` (frontend overrides) + 7 `.opt` (core options).
 
 For RetroArch auto-loading on Apple TV, place them under `config/<core>/` on the device:
 

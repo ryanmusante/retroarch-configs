@@ -1,6 +1,8 @@
 retroarch-configs changelog
 
 2026-04-11  Ryan Musante
+- v1.11: sync README badge and file counts to shipped 8 `.cfg` + 7 `.opt` set
+
 
 - v1.10: Mupen64Plus-Next.opt set `mupen64plus-rsp-plugin = "cxd4"`
   for the Angrylion software-rendered profile.
