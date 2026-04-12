@@ -56,18 +56,16 @@ retroarch-configs changelog
 - v1.8: README per-game example snes9x_overclock "200" → "200%".
 - v1.8: replace "preemptive" with "run-ahead" in 9 locations
   (README + 7 per-core .cfg comments).
-- v1.7: melonDS DS Tier 2 → Tier 3 (Compromised) — no touchscreen on tvOS.
 - v1.7: Snes9x.cfg snes9x_overclock documented as per-game-only.
 - v1.7: PCSX-ReARMed.opt psxclock safe range (50–57) documented.
 - v1.7: Mupen64Plus-Next.cfg, FinalBurn Neo.cfg re-verify upstream refs
   (libretro/RetroArch#14201, #18300, #16374).
 - v1.7: Mupen64Plus-Next.opt rationale for 43screensize = 320x240.
-- v1.7: melonDS DS.opt jit_enable cross-reference to .cfg.
 - v1.7: Mesen.opt overclock = Medium / Before NMI rationale
   (Battletoads/Probotector/Recca).
 - v1.7: Genesis Plus GX.opt Nuked YM2612 ~3× CPU cost note.
 - v1.7: Tier 2/3 .cfg per-core audio_latency rationale
-  (64 ms N64, 48 ms PS1/DS).
+  (64 ms N64, 48 ms PS1).
 
 2026-04-05  Ryan Musante
 
@@ -75,7 +73,6 @@ retroarch-configs changelog
 - v1.6: Beetle PCE Fast, mGBA add integer overscale at 4K.
 - v1.6: PCSX-ReARMed frameskip Auto → Off, threshold 33 → 30.
 - v1.6: Mupen64Plus-Next EnableLODEmulation False → True.
-- v1.6: melonDS DS add screen_gap = 0.
 - v1.5: README "(global = false)" added to video_threaded column.
 - v1.1–v1.4: per-core CRT shader assignments;
   audio_resampler_quality = 2 added to Tier 2 cores;

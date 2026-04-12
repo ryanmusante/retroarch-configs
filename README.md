@@ -36,12 +36,10 @@ Override files contain only keys that differ from the global config. Core option
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode | Integer overscale for 224p at 4K |
 | Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 11 | zfast_crt | No JIT on tvOS; cached interpreter; run-ahead disabled by default |
 | PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; run-ahead disabled by default |
-| melonDS DS | Nintendo DS | 3 (Compromised) | 7 | 5 | None | Software 1×; top-screen only; no touchscreen on tvOS — touch-required titles unplayable |
 
 **Tier definitions:**
 - **Tier 1 (Flawless)** — runs at full speed with 2-frame run-ahead latency reduction on the Apple TV 4K.
 - **Tier 2 (Good)** — requires tuning (disabled JIT, relaxed latency) and may need per-game overrides for heavier titles.
-- **Tier 3 (Compromised)** — playable with significant limitations (missing input methods, low-resolution renderers, or partial compatibility). Listed for completeness; expect a degraded experience.
 
 ## File Structure
 
@@ -58,8 +56,6 @@ config/
 ├── Mesen.opt
 ├── mGBA.cfg
 ├── mGBA.opt
-├── melonDS DS.cfg
-├── melonDS DS.opt
 ├── Mupen64Plus-Next.cfg
 ├── Mupen64Plus-Next.opt
 ├── PCSX-ReARMed.cfg
@@ -88,9 +84,6 @@ config/
 ├── mGBA/
 │   ├── mGBA.cfg
 │   └── mGBA.opt
-├── melonDS DS/
-│   ├── melonDS DS.cfg
-│   └── melonDS DS.opt
 ├── Mupen64Plus-Next/
 │   ├── Mupen64Plus-Next.cfg
 │   └── Mupen64Plus-Next.opt
@@ -122,24 +115,22 @@ Keys used across `.cfg` files and their purpose.
 | Key | Values Used | Purpose |
 |-----|-------------|---------|
 | `run_ahead_frames` | `0`, `2` | Tier 1: 2-frame run-ahead for reduced input lag; Tier 2/3: disabled (0) without JIT |
-| `preemptive_frames_enable` | `false` | Disabled for interpreter-bound cores (N64, PS1, DS) |
+| `preemptive_frames_enable` | `false` | Disabled for interpreter-bound cores (N64, PS1) |
 | `video_frame_delay_auto` | `false` | Disabled for cores incompatible with auto frame delay |
 | `video_threaded` | `true` | Threaded video for interpreter-bound cores (global = false) |
-| `audio_latency` | `48`, `64` | Per-core: 64 ms for N64 (heavier interpreter), 48 ms for PS1/DS (minimum stable) |
-| `audio_resampler_quality` | `2` | Lower resampler for Tier 2/3 cores (global = 3) |
+| `audio_latency` | `48`, `64` | Per-core: 64 ms for N64 (heavier interpreter), 48 ms for PS1 (minimum stable) |
+| `audio_resampler_quality` | `2` | Lower resampler for Tier 2 cores (global = 3) |
 | `video_scale_integer_scaling` | `1` | Overscale for 224p/240p content (NES, SNES, Genesis, PCE, GBA) at 4K |
 | `video_shader` | path | Per-core CRT shader preset assignment |
-| `video_shader_enable` | `false` | Disable shaders where CRT is unsuitable (NDS) |
 
 ## CRT Shaders
 
-Each core has a CRT shader assigned based on available GPU headroom on the passively-cooled A15. Only scanline-only shaders are used to avoid conflicts with the global `video_scale_integer = true` setting. Geometry shaders (crt-geom, crt-hyllian) require `video_scale_integer = false` per-core and are not assigned by default.
+Each shipped core has a CRT shader assigned based on available GPU headroom on the passively-cooled A15. Only scanline-only shaders are used to avoid conflicts with the global `video_scale_integer = true` setting. Geometry shaders (crt-geom, crt-hyllian) require `video_scale_integer = false` per-core and are not assigned by default.
 
 | Tier | Shader | GPU Cost | Cores |
 |------|--------|----------|-------|
 | 1 (Flawless) | `crt-easymode.slangp` | Low | Beetle PCE Fast, FinalBurn Neo, Genesis Plus GX, Mesen, mGBA, Snes9x |
 | 2 (Good) | `zfast_crt.slangp` | Minimal | Mupen64Plus-Next, PCSX-ReARMed |
-| 3 (Compromised) | None | — | melonDS DS (CRT unsuitable for NDS pixel art at 256×192) |
 
 Shader paths use the `shaders_slang/crt/` path for tvOS. If shaders fail to load, verify the path matches your installation or apply shaders manually via Quick Menu → Shaders → Load Preset → Save Core Preset.
 
@@ -223,7 +214,6 @@ All core option keys in `.opt` files are verified against upstream sources. Ever
 | Mupen64Plus-Next | `libretro/mupen64plus-libretro-nx/libretro/libretro_core_options.h` (CORE_NAME = `mupen64plus`, per `custom/mupen64plus-next_common.h`) | `mupen64plus-` |
 | PCSX-ReARMed | `libretro/pcsx_rearmed/frontend/libretro.c` + `libretro_core_options.h` | `pcsx_rearmed_` |
 | Snes9x | `libretro/snes9x/libretro/libretro_core_options.h` | `snes9x_` |
-| melonDS DS | `JesseTG/melonds-ds/src/libretro/config/constants.hpp` | `melonds_` (not `melondsds_`) |
 
 **Keys that do NOT exist in upstream and are silently ignored** (removed in v1.9 — see CHANGELOG):
 - `genesis_plus_gx_bram` — real keys are split: `genesis_plus_gx_system_bram` and `genesis_plus_gx_cart_bram`
