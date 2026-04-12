@@ -2,7 +2,7 @@
 
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-rsp-plugin = "HLE"
-mupen64plus-rdp-plugin = "GLideN64"
+mupen64plus-rdp-plugin = "angrylion"
 # 320×240: native N64 4:3 framebuffer resolution. Internal upscaling on
 # A15 (no JIT) is too costly; 1× preserves CPU/GPU headroom for stable 60 fps.
 mupen64plus-43screensize = "320x240"
