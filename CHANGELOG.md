@@ -1,3 +1,14 @@
+2026-04-12  Ryan Musante
+
+- v1.14: sync README archive-count language to the shipped ZIP contents (8 `.cfg` + 7 `.opt` + `config/.gitkeep` = 16 files).
+- v1.14: clarify that the README file list covers the functional override files, while the ZIP also contains `config/.gitkeep`.
+
+2026-04-12  Ryan Musante
+
+- v1.13: enable Run-Ahead explicitly in all Tier 1 core override `.cfg` files (`run_ahead_enabled = "true"`, `run_ahead_frames = "2"`) so the shipped Apple TV baseline and companion overrides stay consistent.
+- v1.13: sync `README.md`, `CHANGELOG.md`, and Tier 1 `.cfg` key counts with the new per-core Run-Ahead activation model.
+- v1.13: document `PCSX-ReARMed.cfg` threaded video as an intentional core-specific fallback and not a blanket recommendation.
+
 retroarch-configs changelog
 
 2026-04-11  Ryan Musante
