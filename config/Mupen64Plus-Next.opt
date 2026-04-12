@@ -9,7 +9,7 @@ mupen64plus-43screensize = "320x240"
 mupen64plus-ThreadedRenderer = "False"
 mupen64plus-EnableCopyColorToRDRAM = "Async"
 mupen64plus-EnableCopyColorFromRDRAM = "Off"
-mupen64plus-EnableCopyDepthToRDRAM = "Software"
+mupen64plus-EnableCopyDepthToRDRAM = "Off"
 mupen64plus-txFilterMode = "None"
 mupen64plus-FrameDuping = "True"
 # true visual correctness lod gpu-side costs nothing 320 240 a15
