@@ -1,4 +1,4 @@
-# mGBA — Core Options mgba_color_correction is GBA-only; GB/GBC content in this core ignores it.
+# mgba core options mgba color correction gba-only gb/gbc content in
 mgba_color_correction = "Game Boy Advance"
 mgba_interframe_blending = "mix_smart"
 mgba_audio_low_pass_filter = "enabled"

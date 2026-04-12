@@ -1,15 +1,15 @@
-# Mupen64Plus-Next — Core Options; Angrylion is a software RDP. Pair it with the CXD4 RSP for better LLE-style compatibility.
+# mupen64plus-next core options angrylion software rdp pair cxd4 rsp better
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
-# 320×240: native N64 4:3 framebuffer resolution. Internal upscaling on tvOS A15 without JIT is not viable for software Angrylion.
+# 320 240 native n64 4 3 framebuffer resolution internal upscaling
 mupen64plus-43screensize = "320x240"
-# ThreadedRenderer applies to the hardware RDP path only; keep False with Angrylion.
+# threadedrenderer applies hardware rdp path only keep false angrylion
 mupen64plus-ThreadedRenderer = "False"
 mupen64plus-EnableCopyColorToRDRAM = "Async"
 mupen64plus-EnableCopyColorFromRDRAM = "Off"
 mupen64plus-EnableCopyDepthToRDRAM = "Software"
 mupen64plus-txFilterMode = "None"
 mupen64plus-FrameDuping = "True"
-# True for visual correctness; LOD is GPU-side, costs nothing at 320×240 on A15. Per-game "False" only if measurable performance impact.
+# true visual correctness lod gpu-side costs nothing 320 240 a15
 mupen64plus-EnableLODEmulation = "True"

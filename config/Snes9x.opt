@@ -1,2 +1,2 @@
-# Snes9x — Core Options; Overclock intentionally NOT set globally. See README "Overclocking" for per-game examples (snes9x_overclock_cycles for CPU, snes9x_overclock for SuperFX).
+# snes9x core options overclock intentionally not set globally see readme
 snes9x_reduce_sprite_flicker = "enabled"

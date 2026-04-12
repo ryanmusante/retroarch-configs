@@ -1,4 +1,4 @@
 # Beetle PCE Fast — Core Options
-# Disabled: loads entire CD into RAM (200–700 MB). Apple TV has 4 GB total; risks tvOS cache purge. Re-enable per-game for heavy seek titles (Rondo of Blood).
+# loads entire cd ram 200 700 mb apple tv has
 pce_fast_cdimagecache = "disabled"
 pce_fast_nospritelimit = "enabled"
