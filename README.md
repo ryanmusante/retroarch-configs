@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.25-blue)
+![version](https://img.shields.io/badge/version-1.26-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -28,14 +28,14 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 3 | 2 | crt-easymode (global) | Integer overscale for 240p at 4K; Run Ahead enabled per-core |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 2 | — | crt-easymode (global) | Defaults sufficient; rewind conflicts with Run Ahead (#16374); Run Ahead enabled per-core |
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 3 | 2 | crt-easymode (global) | Integer overscale for 240p at 4K; Run Ahead enabled per-core (1 frame; CDROM seek determinism) |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 3 | — | crt-easymode (global) | Integer overscale for 224p-304p at 4K; rewind conflicts with Run Ahead (#16374); Run Ahead enabled per-core |
 | Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 3 | 6 | crt-easymode (global) | MAME YM2612 (thermal-safe baseline; switch to Nuked per-game for audiophile titles); integer overscale for 224p; per-game BRAM isolation for Sega CD; Run Ahead enabled per-core |
 | Mesen | NES | 1 (Flawless) | 3 | 2 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; Run Ahead enabled per-core |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; interframe_blending=mix (thermal/fillrate relief); Run Ahead enabled per-core |
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 12 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion + CXD4; Player 1 Rumble Pak; CopyDepthToRDRAM Off (per-game Software for OoT/MM/Conker/Body Harvest); Run Ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; Run Ahead disabled by default | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; Run Ahead disabled by default |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 4 | 7 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion software RDP + CXD4 RSP; Player 1 Rumble Pak; native 320×240 framebuffer; video_threaded=false (#14978 defense); Run Ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 4 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; video_threaded=false (#14978 defense); Run Ahead disabled by default |
 
 ## File Structure
 
@@ -131,3 +131,44 @@ This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on 
 ## License
 
 [MIT](LICENSE)
+
+## Manual Install: Per-Core Override Path
+
+RetroArch loads per-core overrides only from a specific directory under the RetroArch config root — **not** from this repo's `config/` folder. You must manually copy files into place after cloning.
+
+### Apple TV / tvOS
+
+RetroArch config root on tvOS: `Documents/RetroArch/config/` inside the app's sandboxed container.
+
+For each core, create a directory named exactly after the core (spaces included) and place both the `.cfg` and `.opt` files inside:
+
+```
+Documents/RetroArch/config/
+├── Beetle PCE Fast/
+│   ├── Beetle PCE Fast.cfg
+│   └── Beetle PCE Fast.opt
+├── FinalBurn Neo/
+│   └── FinalBurn Neo.cfg
+├── Genesis Plus GX/
+│   ├── Genesis Plus GX.cfg
+│   └── Genesis Plus GX.opt
+├── Mesen/
+│   ├── Mesen.cfg
+│   └── Mesen.opt
+├── Mupen64Plus-Next/
+│   ├── Mupen64Plus-Next.cfg
+│   └── Mupen64Plus-Next.opt
+├── PCSX-ReARMed/
+│   ├── PCSX-ReARMed.cfg
+│   └── PCSX-ReARMed.opt
+├── Snes9x/
+│   ├── Snes9x.cfg
+│   └── Snes9x.opt
+└── mGBA/
+    ├── mGBA.cfg
+    └── mGBA.opt
+```
+
+**Verify overrides loaded:** RetroArch menu → Quick Menu → Overrides → the core-override entry should be populated after loading content. If empty, the path is wrong.
+
+If overrides are not installed, the global `run_ahead_enabled = "false"` in `retroarch.cfg` wins and Tier 1 run-ahead will not activate.

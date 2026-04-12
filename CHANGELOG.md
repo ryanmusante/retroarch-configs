@@ -1,5 +1,18 @@
 2026-04-12  Ryan Musante
 
+- v1.26: AUDIT — REV 2 audit pass against libretro/RetroArch master source. Applied 21 findings across all 15 per-core files.
+- v1.26: `Mupen64Plus-Next.opt` — remove 5 dead GLideN64-only keys (`EnableCopyColorToRDRAM`, `EnableCopyColorFromRDRAM`, `EnableCopyDepthToRDRAM`, `txFilterMode`, `EnableLODEmulation`) that are silently ignored when `rdp-plugin=angrylion`. Dead config verified against mupen64plus-libretro-nx source. Key count 12 → 7.
+- v1.26: `Mupen64Plus-Next.cfg` — remove 3 keys that duplicated global defaults (`run_ahead_frames=0`, `preemptive_frames_enable=false`, `video_frame_delay_auto=false`). Flip `video_threaded` true → false to match the global tvOS Metal crash #14978 defense. Key count 7 → 4.
+- v1.26: `PCSX-ReARMed.cfg` — same duplicate-default cleanup and `video_threaded` true → false. Key count 7 → 4.
+- v1.26: `FinalBurn Neo.cfg` — add `video_scale_integer_scaling="1"` (was the only Tier 1 core missing it; FBN outputs 224p-304p benefit from integer scale at 4K). Key count 2 → 3.
+- v1.26: `Beetle PCE Fast.cfg` — drop `run_ahead_frames` 2 → 1. Beetle PCE Fast CDROM seek state is not fully deterministic under second-instance-disabled run-ahead; 1 frame is the safe ceiling.
+- v1.26: `mGBA.opt` — change `mgba_interframe_blending` from `mix_smart` to `mix`. mix_smart adds shader-stage GPU cost on top of 4K integer overscale under A15 fillrate contention.
+- v1.26: `Snes9x.cfg`, `Mesen.cfg` — remove orphan "scanline shader; integer-overscale-safe" comments that had no associated `video_shader` key (stale from v1.15 per-core shader removal).
+- v1.26: README core summary table refreshed to match new key counts and behavior. Companion retroarch-appletv4k v2.60 ships the global-side fixes (audio_rate_control_delta, autosave_interval, savestate_max_keep, menu_throttle_framerate removal, comment repositioning).
+- v1.26: README — add "Manual Install: Per-Core Override Path" section with full tvOS directory tree, verification step, and warning that without correct install path the global `run_ahead_enabled=false` wins and Tier 1 run-ahead is inert.
+
+2026-04-12  Ryan Musante
+
 - v1.25: STYLE — shorten every comment in all 15 per-core `.cfg` and `.opt` files without removing any. Total 22 comments tightened, 1164 bytes saved. Every comment preserved, meaning intact, just less boilerplate prose.
 
 2026-04-12  Ryan Musante
