@@ -1,5 +1,9 @@
 2026-04-12  Ryan Musante
 
+- v1.22: STYLE — collapse multiline comment runs in all per-core `.cfg` and `.opt` files to single-line comments. Affected files: Beetle PCE Fast.cfg (4→2), Beetle PCE Fast.opt (2→1), FinalBurn Neo.cfg (3→1), Genesis Plus GX.cfg (4→2), Genesis Plus GX.opt (3→2), Mesen.cfg (4→3), Snes9x.cfg (4→3), mGBA.cfg (4→2). No key or value changes; comment content preserved and joined with single spaces.
+
+2026-04-12  Ryan Musante
+
 - v1.21: README — sync core summary table to actual file contents. Stale references corrected: Tier 1 `.cfg` key counts 4→3 and Tier 2 `.cfg` counts 7→6 (the dropped key was `video_shader`, removed in v1.15 but never reflected in the table); FinalBurn Neo `.cfg` 3→2 (same reason); Mupen64Plus-Next `.opt` 11→12 (Player 1 Rumble Pak added in v1.19).
 - v1.21: README — Genesis Plus GX row note updated from "Nuked YM2612 for accurate FM synthesis" to "MAME YM2612 (thermal-safe baseline; switch to Nuked per-game for audiophile titles)" matching v1.20 perf fix.
 - v1.21: README — Mupen64Plus-Next row note expanded to document Player 1 Rumble Pak default and `CopyDepthToRDRAM = Off` baseline plus the per-game `Software` exceptions (OoT/MM/Conker/Body Harvest).
