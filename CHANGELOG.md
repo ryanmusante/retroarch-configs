@@ -1,5 +1,10 @@
 2026-04-12  Ryan Musante
 
+- v1.23: Tier 2 `.cfg` files — add explicit `video_shader = "shaders_slang/crt/zfast_crt.slangp"` to both `Mupen64Plus-Next.cfg` and `PCSX-ReARMed.cfg` as per-core overrides of the new global crt-easymode default in the companion retroarch-appletv4k v2.55. zfast_crt is the cheapest CRT preset and is the only scanline shader that fits the GPU budget alongside Angrylion software RDP (N64) or the PSX interpreter. Removes pre-existing orphan "CRT shader: minimal GPU cost" comment that had no associated key.
+- v1.23: README core summary table — update CRT Shader column from "user-applied" to `crt-easymode (global)` for Tier 1 (6 rows) and `zfast_crt (override)` for Tier 2 (2 rows); bump Tier 2 `.cfg` key counts 6 → 7 to reflect the added video_shader key.
+
+2026-04-12  Ryan Musante
+
 - v1.22: STYLE — collapse multiline comment runs in all per-core `.cfg` and `.opt` files to single-line comments. Affected files: Beetle PCE Fast.cfg (4→2), Beetle PCE Fast.opt (2→1), FinalBurn Neo.cfg (3→1), Genesis Plus GX.cfg (4→2), Genesis Plus GX.opt (3→2), Mesen.cfg (4→3), Snes9x.cfg (4→3), mGBA.cfg (4→2). No key or value changes; comment content preserved and joined with single spaces.
 
 2026-04-12  Ryan Musante
