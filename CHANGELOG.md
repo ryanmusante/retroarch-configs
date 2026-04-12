@@ -1,5 +1,14 @@
 2026-04-12  Ryan Musante
 
+- v1.25: STYLE — shorten every comment in all 15 per-core `.cfg` and `.opt` files without removing any. Total 22 comments tightened, 1164 bytes saved. Every comment preserved, meaning intact, just less boilerplate prose.
+
+2026-04-12  Ryan Musante
+
+- v1.24: README trim — remove redundant "Tier definitions" bullet list after the core summary table (B1; table already has a Tier column); replace the second ASCII diagram showing on-device `config/<core_name>/` layout with a cross-reference to `retroarch-appletv4k/README.md` §4 (B2); drop redundant "16 files" file-count line (B3); rewrite stale `## CRT Shaders` section to document the v1.23 global crt-easymode + Tier 2 zfast_crt override model in one paragraph (B6); compress `## Overclocking` from per-core subsections to a single paragraph (B7); drop duplicate per-game override example, keep one (B8); drop entire `## Core Option Key Verification` section — audit detail belongs in CHANGELOG not README (B9). TOC updated.
+- v1.24: 12385 → 7827 bytes (37% size reduction), zero loss of actionable content.
+
+2026-04-12  Ryan Musante
+
 - v1.23: Tier 2 `.cfg` files — add explicit `video_shader = "shaders_slang/crt/zfast_crt.slangp"` to both `Mupen64Plus-Next.cfg` and `PCSX-ReARMed.cfg` as per-core overrides of the new global crt-easymode default in the companion retroarch-appletv4k v2.55. zfast_crt is the cheapest CRT preset and is the only scanline shader that fits the GPU budget alongside Angrylion software RDP (N64) or the PSX interpreter. Removes pre-existing orphan "CRT shader: minimal GPU cost" comment that had no associated key.
 - v1.23: README core summary table — update CRT Shader column from "user-applied" to `crt-easymode (global)` for Tier 1 (6 rows) and `zfast_crt (override)` for Tier 2 (2 rows); bump Tier 2 `.cfg` key counts 6 → 7 to reflect the added video_shader key.
 

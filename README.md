@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.23-blue)
+![version](https://img.shields.io/badge/version-1.25-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -20,7 +20,6 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 - [Installation](#installation)
 - [Overclocking](#overclocking)
 - [Per-Game Overrides](#per-game-overrides)
-- [Core Option Key Verification](#core-option-key-verification)
 - [Related](#related)
 - [Versioning](#versioning)
 - [License](#license)
@@ -37,10 +36,6 @@ Overrides keep only non-global frontend keys. `.opt` files keep only non-default
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
 | Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 7 | 12 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion + CXD4; Player 1 Rumble Pak; CopyDepthToRDRAM Off (per-game Software for OoT/MM/Conker/Body Harvest); Run Ahead disabled by default |
 | PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; Run Ahead disabled by default | 2 (Good) | 7 | 4 | zfast_crt | No JIT on tvOS; Run Ahead disabled by default |
-
-**Tier definitions:**
-- **Tier 1 (Flawless)** — runs at full speed with per-core `run_ahead_enabled = "true"` and `run_ahead_frames = "2"` on the Apple TV 4K.
-- **Tier 2 (Good)** — requires tuning (disabled JIT, relaxed latency) and may need per-game overrides for heavier titles.
 
 ## File Structure
 
@@ -65,36 +60,7 @@ config/
 └── Snes9x.opt
 ```
 
-**16 files** — 8 `.cfg` (frontend overrides) + 7 `.opt` (core options) + `config/.gitkeep`.
-
-For RetroArch auto-loading on Apple TV, place them under `config/<core_name>/` on the device:
-
-```
-config/
-├── Beetle PCE Fast/
-│   ├── Beetle PCE Fast.cfg
-│   └── Beetle PCE Fast.opt
-├── FinalBurn Neo/
-│   └── FinalBurn Neo.cfg
-├── Genesis Plus GX/
-│   ├── Genesis Plus GX.cfg
-│   └── Genesis Plus GX.opt
-├── Mesen/
-│   ├── Mesen.cfg
-│   └── Mesen.opt
-├── mGBA/
-│   ├── mGBA.cfg
-│   └── mGBA.opt
-├── Mupen64Plus-Next/
-│   ├── Mupen64Plus-Next.cfg
-│   └── Mupen64Plus-Next.opt
-├── PCSX-ReARMed/
-│   ├── PCSX-ReARMed.cfg
-│   └── PCSX-ReARMed.opt
-└── Snes9x/
-    ├── Snes9x.cfg
-    └── Snes9x.opt
-```
+For on-device placement, see `retroarch-appletv4k/README.md` §4 Filesystem layout.
 
 README.md is the authoritative reference for archive layout and on-device per-core placement. Global frontend defaults come from the companion retroarch-appletv4k repository. The `.cfg` and `.opt` files intentionally omit layout/path notes.
 
@@ -128,20 +94,7 @@ Keys used across `.cfg` files and their purpose.
 
 ## CRT Shaders
 
-Each shipped core has a CRT shader assigned based on available GPU headroom on the passively-cooled A15. Only scanline-only shaders are used to avoid conflicts with the global `video_scale_integer = true` setting. Geometry shaders (crt-geom, crt-hyllian) require `video_scale_integer = false` per-core and are not assigned by default.
-
-| Tier | Shader | GPU Cost | Cores |
-|------|--------|----------|-------|
-| 1 (Flawless) | `crt-easymode.slangp` | Low | Beetle PCE Fast, FinalBurn Neo, Genesis Plus GX, Mesen, mGBA, Snes9x |
-| 2 (Good) | `zfast_crt.slangp` | Minimal | Mupen64Plus-Next, PCSX-ReARMed |
-
-Shader presets are no longer assigned per core in this pack — RetroArch's defaults apply (no shader unless one is loaded globally or via Quick Menu → Shaders → Load Preset → Save Core Preset). To restore CRT shaders, apply them manually per core after first launch.
-
-### Mupen64Plus-Next notes
-
-- `mupen64plus-rdp-plugin = "angrylion"` keeps Nintendo 64 on the software renderer.
-- `mupen64plus-rsp-plugin = "cxd4"` matches the software-rendered Angrylion setup.
-- `mupen64plus-ThreadedRenderer = "False"` stays off because that core option applies to the hardware RDP path, not Angrylion.
+Global default `crt-easymode.slangp` is set in `retroarch-appletv4k/retroarch.cfg`. Tier 2 cores (Mupen64Plus-Next, PCSX-ReARMed) override to `zfast_crt.slangp` in their `.cfg` files to fit the interpreter + software-RDP GPU budget. See `retroarch-appletv4k/README.md` §8 for shader tuning guidance.
 
 ## Installation
 
@@ -153,42 +106,7 @@ The override hierarchy applies automatically — no manual loading required. Aft
 
 ## Overclocking
 
-Overclock keys are intentionally not set in any core-level `.opt` file. They are per-game-only because incorrect overclocking breaks timing-sensitive titles. Apply them via per-game `.opt` overrides.
-
-### Mesen (NES CPU)
-
-`mesen_overclock` reduces slowdown in CPU-bound NES titles. Use `Before NMI (Recommended)` insertion point — it is the safest and avoids breaking timing.
-
-`config/Mesen/Battletoads (USA).opt`:
-```
-mesen_overclock = "Medium"
-mesen_overclock_type = "Before NMI (Recommended)"
-```
-
-Known beneficiaries: Battletoads, Probotector / Contra Force, Recca. Valid `mesen_overclock` values: `None`, `Low`, `Medium`, `High`, `Very High`.
-
-### Snes9x (SNES main CPU)
-
-`snes9x_overclock_cycles` reduces SNES main-CPU slowdown. Valid values: `disabled`, `light`, `compatible`, `max`.
-
-`config/Snes9x/Gradius III (USA).opt`:
-```
-snes9x_overclock_cycles = "light"
-```
-
-### Snes9x (SuperFX)
-
-`snes9x_overclock` is the SuperFX coprocessor frequency multiplier. Valid values: `50%` through `500%` in 10% steps; default `100%`. Used for Star Fox, Yoshi's Island, Doom, Stunt Race FX.
-
-`config/Snes9x/Star Fox (USA).opt`:
-```
-snes9x_overclock = "200%"
-```
-
-`config/Snes9x/Star Fox (USA).cfg`:
-```
-run_ahead_frames = "1"
-```
+CPU overclocking (`mesen_overclock_rate`, `snes9x_overclock`, `pcsx_rearmed_psxclock`) is intentionally **not** set globally — values that help one game break another. Apply per-game via Quick Menu → Core Options, then Save Game Options.
 
 ## Per-Game Overrides
 
@@ -201,36 +119,6 @@ For titles that need individual tuning, create per-game files in the same `confi
 run_ahead_enabled = "true"
 run_ahead_frames = "1"
 ```
-
-**Example — lowering PSX clock for Vagrant Story:**
-
-`config/PCSX-ReARMed/Vagrant Story (USA).opt`:
-```
-pcsx_rearmed_psxclock = "50"
-```
-
-
-## Core Option Key Verification
-
-All core option keys in `.opt` files are verified against upstream sources. Every key listed below was grep-verified to exist in the linked source at release time.
-
-| Core | Upstream Source | Prefix |
-|------|-----------------|--------|
-| Beetle PCE Fast | `libretro/beetle-pce-fast-libretro/libretro_core_options.h` | `pce_fast_` |
-| FinalBurn Neo | No `.opt` file — defaults sufficient | `fbneo_` |
-| Genesis Plus GX | `libretro/Genesis-Plus-GX/libretro/libretro_core_options.h` | `genesis_plus_gx_` |
-| Mesen | `libretro/Mesen/Libretro/libretro_core_options.h` | `mesen_` |
-| mGBA | `libretro/mgba/src/platform/libretro/libretro_core_options.h` | `mgba_` |
-| Mupen64Plus-Next | `libretro/mupen64plus-libretro-nx/libretro/libretro_core_options.h` (CORE_NAME = `mupen64plus`, per `custom/mupen64plus-next_common.h`) | `mupen64plus-` |
-| PCSX-ReARMed | `libretro/pcsx_rearmed/frontend/libretro.c` + `libretro_core_options.h` | `pcsx_rearmed_` |
-| Snes9x | `libretro/snes9x/libretro/libretro_core_options.h` | `snes9x_` |
-
-**Keys that do NOT exist in upstream and are silently ignored** (removed in v1.9 — see CHANGELOG):
-- `genesis_plus_gx_bram` — real keys are split: `genesis_plus_gx_system_bram` and `genesis_plus_gx_cart_bram`
-- `pcsx_rearmed_duping_enable` — no such option; frame duping is automatic in PCSX-ReARMed
-- `pcsx_rearmed_async_cd` — no such option; CD async is now internal (`cdrom-async.h`). User-facing knob is `pcsx_rearmed_cd_readahead`
-
-Upstream issue references (verified 2026-04-06): libretro/RetroArch#14201, #18300, #16374.
 
 ## Related
 
