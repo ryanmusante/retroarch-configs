@@ -1,5 +1,25 @@
 2026-04-13  Ryan Musante
 
+- v1.37: `README.md` §3 File Separation table — 2 Contents cells micro-trimmed. `.cfg` row: "RetroArch frontend settings" → "Frontend settings" ("RetroArch" redundant in a RetroArch config context). `.opt` row: "Core-specific emulation options" → "Core emulation options" ("specific" implied). No semantic changes. Companion `retroarch-appletv4k` bumped to v2.75.
+
+2026-04-13  Ryan Musante
+
+- v1.36: `README.md` §1 Supported Cores table — Mupen64Plus-Next Notes: sentence-separator period removed. "native 320×240. Per-core pins:" → "native 320×240; per-core pins:". Now consistent with all other Notes cells across both tables, which use only semicolons as internal separators. No semantic changes. Companion `retroarch-appletv4k` bumped to v2.74.
+
+2026-04-13  Ryan Musante
+
+- v1.35: `README.md` §1 Supported Cores table — 2 Notes cells brought in line with adjacent rows. FinalBurn Neo: rewind parenthetical tightened from `(conflicts with Run Ahead, [#16374])` to `([#16374] Run Ahead conflict)`, matching the §4 Frontend Override Keys `rewind_enable` Purpose wording adopted in v1.34. Genesis Plus GX: added missing "at 4K" to integer overscale note — 5 of 6 other Tier 1 rows already carried the qualifier; Genesis was the lone exception. No semantic changes. Companion `retroarch-appletv4k` bumped to v2.72.
+
+2026-04-13  Ryan Musante
+
+- v1.34: `README.md` §4 Frontend Override Keys table — Notes column condensed (5 rows). Removed verbose preamble clauses while preserving all key names, issue numbers, and per-core distinctions: `run_ahead_frames` dropped "under single-instance run-ahead"; `video_threaded` collapsed source citation to short form; `audio_latency` tightened companion-version reference; `video_frame_delay_auto` removed redundant "matches global" clause body; `rewind_enable` restructured as issue-reference list. No semantic changes. Companion `retroarch-appletv4k` bumped to v2.71.
+
+2026-04-13  Ryan Musante
+
+- v1.33: `README.md` §8 Overclocking — rewrite to fix misleading grouping. Prior text listed `pcsx_rearmed_psxclock` alongside `mesen_overclock_rate` / `snes9x_overclock` as "not set globally", implying all three are absent from shipped files. `pcsx_rearmed_psxclock = "100"` has shipped in `PCSX-ReARMed.opt` since v1.26 as a native-clock anchor; only the underclock values (75, 50) are not set. Section now distinguishes the two cases: (1) `mesen_overclock_rate` + `snes9x_overclock` absent from all shipped files — apply per-game for slowdown-prone titles; (2) `pcsx_rearmed_psxclock` set per-core at native `"100"` — underclock per-game (75, 50) for demanding 3D titles (Tony Hawk, Spyro 2/3, Tekken 3). Companion `retroarch-appletv4k` bumped to v2.70.
+
+2026-04-13  Ryan Musante
+
 - v1.32: `README.md` §1 Supported Cores table — `.cfg Keys` column corrected for 7 of 8 cores. v1.30 added `video_frame_delay_auto = "true"` to all 6 Tier 1 `.cfg` files and `video_frame_delay_auto = "false"` + `rewind_enable = "false"` to `Mupen64Plus-Next.cfg`; FinalBurn Neo also gained `rewind_enable = "false"`. The column was never updated after those additions. Corrected counts: Beetle PCE Fast 3 → 4; FinalBurn Neo 3 → 5; Genesis Plus GX 3 → 4; Mesen 3 → 4; mGBA 3 → 4; Snes9x 3 → 4; Mupen64Plus-Next 2 → 4. PCSX-ReARMed remains 3 (unchanged, correct).
 - v1.32: `README.md` §1 Beetle PCE Fast Notes — "Integer overscale for 240p at 4K" corrected to "Integer overscale for 256×240 (+ 512-wide hi-res) at 4K". "240p" was imprecise shorthand; PC Engine normal res is 256×240, hi-res is 512×224/240. Corrected to match the `.cfg` comment exactly. Companion `retroarch-appletv4k` bumped to v2.69.
 

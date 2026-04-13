@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.32-blue)
+![version](https://img.shields.io/badge/version-1.37-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -31,12 +31,12 @@ Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
 | Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 2 | crt-easymode (global) | Integer overscale for 256×240 (+ 512-wide hi-res) at 4K; Run Ahead per-core (1 frame; CDROM seek determinism) |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 5 | — | crt-easymode (global) | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` per-core (conflicts with Run Ahead, [#16374](https://github.com/libretro/RetroArch/issues/16374)) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode (global) | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer overscale for 224p; per-game BRAM isolation for Sega CD; Run Ahead per-core |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 5 | — | crt-easymode (global) | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict) |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode (global) | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer overscale for 224p at 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core |
 | Mesen | NES | 1 (Flawless) | 4 | 2 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead per-core |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; `interframe_blending=mix` (thermal/fillrate relief); Run Ahead per-core |
 | Snes9x | SNES | 1 (Flawless) | 4 | 1 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 4 | 7 | zfast_crt (override) | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240. Per-core pins: `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto=false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable=false` ([#18300](https://github.com/libretro/RetroArch/issues/18300)). Run Ahead off |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 4 | 7 | zfast_crt (override) | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; per-core pins: `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto=false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable=false` ([#18300](https://github.com/libretro/RetroArch/issues/18300)). Run Ahead off |
 | PCSX-ReARMed | PlayStation 1 | 2 (Good) | 3 | 4 | zfast_crt (override) | No JIT; `psxclock=100` (per-game underclock for 3D); async GPU; `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency=48`; Run Ahead off |
 
 ## 2. File Structure
@@ -70,8 +70,8 @@ RetroArch loads overrides and core options from separate files with distinct pur
 
 | File | Path | Contents | Set via |
 |------|------|----------|---------|
-| `<core>.cfg` | Archive: `config/`  ·  Device: `config/<core_name>/` | RetroArch frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | Archive: `config/`  ·  Device: `config/<core_name>/` | Core-specific emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
+| `<core>.cfg` | Archive: `config/`  ·  Device: `config/<core_name>/` | Frontend settings (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
+| `<core>.opt` | Archive: `config/`  ·  Device: `config/<core_name>/` | Core emulation options (renderer, CPU mode, accuracy) | Quick Menu → Options |
 
 Mixing the two in a single file causes silent failures — RetroArch ignores core option keys in `.cfg` files and vice versa.
 
@@ -82,13 +82,13 @@ Keys actually set in one or more shipped `.cfg` files.
 | Key | Values Used | Purpose |
 |-----|-------------|---------|
 | `run_ahead_enabled` | `true` | Tier 1 per-core (global is `false`); Tier 2 inherits global |
-| `run_ahead_frames` | `1`, `2` | Tier 1 = 2, except **Beetle PCE Fast = 1** (CDROM seek determinism under single-instance run-ahead) |
-| `video_threaded` | `false` | Tier 2 pin `false` as [#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor. Upstream `gfx/video_driver.c` gates under `#if defined(__MACH__) && defined(__APPLE__)` — forensic anchor, not a divergence |
-| `audio_latency` | `48` | PCSX-ReARMed pins 48 ms; matches global as of companion v2.66 (lowered from 64). Mupen64Plus-Next inherits global 48 ms |
+| `run_ahead_frames` | `1`, `2` | Tier 1 = 2; Beetle PCE Fast = 1 (CDROM seek determinism) |
+| `video_threaded` | `false` | Tier 2 forensic anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)); upstream `gfx/video_driver.c` force-disables for all Apple platforms |
+| `audio_latency` | `48` | PCSX-ReARMed pin; matches global v2.66 (down from 64 ms); Mupen inherits global |
 | `video_shader` | `shaders_slang/crt/zfast_crt.slangp` | Tier 2 override of global `crt-easymode.slangp` for interpreter + sw-RDP GPU budget |
 | `video_scale_integer_scaling` | `1` | Tier 1 integer overscale for 224p–304p at 4K (NES, SNES, Genesis, PCE, GBA, FBN) |
-| `video_frame_delay_auto` | `true`, `false` | Tier 1 = `true` (matches global as of v2.66). Tier 2 Mupen64Plus-Next = `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201) N64 incompat); PCSX inherits global `true` |
-| `rewind_enable` | `false` | FBN + Mupen64Plus-Next pin `false` per-core as forensic anchors ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict; [#18300](https://github.com/libretro/RetroArch/issues/18300) N64 freeze) |
+| `video_frame_delay_auto` | `true`, `false` | Tier 1 = `true` (global as of v2.66); Mupen = `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)); PCSX inherits |
+| `rewind_enable` | `false` | FBN + Mupen pins: [#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict; [#18300](https://github.com/libretro/RetroArch/issues/18300) N64 freeze |
 
 Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_secondary_instance`, `run_ahead_hide_warnings`.
 
@@ -145,7 +145,9 @@ If overrides are not installed, the global `run_ahead_enabled = "false"` in `ret
 
 ## 8. Overclocking
 
-CPU overclocking (`mesen_overclock_rate`, `snes9x_overclock`, `pcsx_rearmed_psxclock`) is intentionally **not** set globally — values that help one game break another. Apply per-game via Quick Menu → Core Options, then Save Game Options.
+CPU clock adjustment keys are not set to non-default values globally. `mesen_overclock_rate` and `snes9x_overclock` are absent from all shipped files — a value that fixes one title breaks another. Apply per-game via Quick Menu → Core Options, then Save Game Options.
+
+`pcsx_rearmed_psxclock` is the exception: `PCSX-ReARMed.opt` ships `"100"` as a native-clock anchor (not overclocking). Underclock values (75, 50) for demanding 3D titles (Tony Hawk, Spyro 2/3, Tekken 3) require per-game application.
 
 ## 9. Per-Game Overrides
 
