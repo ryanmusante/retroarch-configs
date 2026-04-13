@@ -1,5 +1,10 @@
 2026-04-13  Ryan Musante
 
+- v1.32: `README.md` §1 Supported Cores table — `.cfg Keys` column corrected for 7 of 8 cores. v1.30 added `video_frame_delay_auto = "true"` to all 6 Tier 1 `.cfg` files and `video_frame_delay_auto = "false"` + `rewind_enable = "false"` to `Mupen64Plus-Next.cfg`; FinalBurn Neo also gained `rewind_enable = "false"`. The column was never updated after those additions. Corrected counts: Beetle PCE Fast 3 → 4; FinalBurn Neo 3 → 5; Genesis Plus GX 3 → 4; Mesen 3 → 4; mGBA 3 → 4; Snes9x 3 → 4; Mupen64Plus-Next 2 → 4. PCSX-ReARMed remains 3 (unchanged, correct).
+- v1.32: `README.md` §1 Beetle PCE Fast Notes — "Integer overscale for 240p at 4K" corrected to "Integer overscale for 256×240 (+ 512-wide hi-res) at 4K". "240p" was imprecise shorthand; PC Engine normal res is 256×240, hi-res is 512×224/240. Corrected to match the `.cfg` comment exactly. Companion `retroarch-appletv4k` bumped to v2.69.
+
+2026-04-13  Ryan Musante
+
 - v1.31.2: `README.md` — Table of Contents §7 Manual Install now nests the `Apple TV / tvOS` H3 sub-section as an indented bullet, matching the full H3-nesting convention applied to companion `retroarch-appletv4k` v2.68. The only H3 in this README; remaining 11 H2 sections have no H3 children. Anchor verified. No content changes; navigation only. Companion `retroarch-appletv4k` bumped to v2.68.
 
 2026-04-13  Ryan Musante
