@@ -1,12 +1,12 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.29.1-blue)
+![version](https://img.shields.io/badge/version-1.30-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K. Companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
 
-Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded = "false"` which redundantly pins the global value as an explicit [#14978](https://github.com/libretro/RetroArch/issues/14978) crash-defense anchor. `.opt` files keep only non-default core settings.
+Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded = "false"` which redundantly pins the global value as an explicit [#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform threaded-video anchor. `.opt` files keep only non-default core settings.
 
 [changelog](CHANGELOG.md)
 
@@ -35,8 +35,8 @@ Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded 
 | Mesen | NES | 1 (Flawless) | 3 | 2 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 3 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; interframe_blending=mix (thermal/fillrate relief); Run Ahead enabled per-core |
 | Snes9x | SNES | 1 (Flawless) | 3 | 1 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead enabled per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 2 | 7 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion software RDP + CXD4 RSP; Player 1 Rumble Pak; native 320×240 framebuffer; video_threaded=false ([#14978](https://github.com/libretro/RetroArch/issues/14978) defense); Run Ahead disabled by default |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 3 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; video_threaded=false ([#14978](https://github.com/libretro/RetroArch/issues/14978) defense); audio_latency=48 (lighter than N64); Run Ahead disabled by default |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 2 | 7 | zfast_crt (override) | No JIT on tvOS; cached interpreter; Angrylion software RDP + CXD4 RSP; Player 1 Rumble Pak; native 320×240 framebuffer; video_threaded=false ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor); Run Ahead disabled by default |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 3 | 4 | zfast_crt (override) | No JIT on tvOS; psxclock 100 native (per-game underclock for demanding 3D titles); async GPU threading; video_threaded=false ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor); audio_latency=48 (matches global as of v2.66); Run Ahead disabled by default |
 
 ## 2. File Structure
 
@@ -82,12 +82,14 @@ Keys actually set in one or more shipped `.cfg` files.
 |-----|-------------|---------|
 | `run_ahead_enabled` | `true` | Tier 1 cores enable Run Ahead per-core (global baseline is `false`); Tier 2 cores leave it unset and inherit the global `false` |
 | `run_ahead_frames` | `1`, `2` | Tier 1 = 2 frames, except **Beetle PCE Fast = 1** (CDROM seek state is not fully deterministic under second-instance-disabled run-ahead, so 1 is the safe ceiling) |
-| `video_threaded` | `false` | Tier 2 (`Mupen64Plus-Next.cfg`, `PCSX-ReARMed.cfg`) redundantly pin `false` to match the global [#14978](https://github.com/libretro/RetroArch/issues/14978) Metal-crash defense. The effective value is `false` everywhere — this key is a forensic anchor, not a divergence |
-| `audio_latency` | `48` | Only `PCSX-ReARMed.cfg` overrides (48 ms, lighter than the N64 interpreter). `Mupen64Plus-Next.cfg` does **not** set this key and inherits the global `64` ms |
+| `video_threaded` | `false` | Tier 2 (`Mupen64Plus-Next.cfg`, `PCSX-ReARMed.cfg`) redundantly pin `false` to match the global [#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform threaded-video anchor. Upstream `gfx/video_driver.c` force-disables threaded video on all Apple platforms under `#if defined(__MACH__) && defined(__APPLE__)`; the effective value is `false` everywhere — this key is a forensic anchor, not a divergence |
+| `audio_latency` | `48` | `PCSX-ReARMed.cfg` pins 48 ms explicitly (matches global as of companion v2.66, which lowered the global baseline from 64 ms). `Mupen64Plus-Next.cfg` does **not** set this key and inherits the global `48` ms — raise per-core if the N64 interpreter exhibits audio crackling |
 | `video_shader` | `shaders_slang/crt/zfast_crt.slangp` | Tier 2 override of the global `crt-easymode.slangp` to fit the interpreter + software-RDP GPU budget |
 | `video_scale_integer_scaling` | `1` | Tier 1 integer overscale for 224p–304p content at 4K (NES, SNES, Genesis, PCE, GBA, FBN) |
+| `video_frame_delay_auto` | `true`, `false` | Tier 1 = `true` (explicit per-core opt-in matching global baseline as of companion v2.66). Tier 2 `Mupen64Plus-Next.cfg` = `false` as a guard — N64 core is incompatible with auto frame delay ([#14201](https://github.com/libretro/RetroArch/issues/14201)); do not re-enable per-game. PCSX-ReARMed inherits the global `true` |
+| `rewind_enable` | `false` | `FinalBurn Neo.cfg` and `Mupen64Plus-Next.cfg` redundantly pin `false` to match the global. FBN pins it because Run Ahead is enabled per-core and rewind conflicts with Run Ahead ([#16374](https://github.com/libretro/RetroArch/issues/16374)); Mupen64Plus-Next pins it because rewind freezes emulation on N64 ([#18300](https://github.com/libretro/RetroArch/issues/18300)). Forensic anchors, not divergences |
 
-Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `video_frame_delay_auto`, `audio_resampler_quality`, `run_ahead_secondary_instance`, `run_ahead_hide_warnings`.
+Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_secondary_instance`, `run_ahead_hide_warnings`.
 
 ## 5. CRT Shaders
 
