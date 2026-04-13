@@ -1,5 +1,9 @@
 2026-04-13  Ryan Musante
 
+- v1.31.2: `README.md` — Table of Contents §7 Manual Install now nests the `Apple TV / tvOS` H3 sub-section as an indented bullet, matching the full H3-nesting convention applied to companion `retroarch-appletv4k` v2.68. The only H3 in this README; remaining 11 H2 sections have no H3 children. Anchor verified. No content changes; navigation only. Companion `retroarch-appletv4k` bumped to v2.68.
+
+2026-04-13  Ryan Musante
+
 - v1.31.1: `config/PCSX-ReARMed.cfg` L3 — **drift fix**: stale comment `# 48ms; PS1 interpreter lighter than N64 (global=64)` rewritten to `# 48ms; matches global as of companion v2.66`. The "lighter than N64 (global=64)" rationale dated from v1.27 when the global baseline was 64 ms and PCSX intentionally differed; companion v2.66 lowered the global baseline 64 → 48 ms, so the per-core value no longer differs and the prior rationale became factually wrong. Key retained as-is — removal would fall under the v1.27 DEDUPE policy (Tier 2 keys that duplicate global are dropped) but is **deferred** pending explicit decision: spec v1.8 listed this key in Out of scope ("already `"48"` in file") before the v2.66 global flip was applied, so a DEDUPE pass against the new global state was never formally scoped. No `.cfg` value change in this release, comment only. Companion `retroarch-appletv4k` remains at v2.67.
 
 2026-04-13  Ryan Musante

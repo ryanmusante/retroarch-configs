@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.31.1-blue)
+![version](https://img.shields.io/badge/version-1.31.2-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -19,6 +19,7 @@ Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded 
 5. [CRT Shaders](#5-crt-shaders)
 6. [Installation](#6-installation)
 7. [Manual Install: Per-Core Override Path](#7-manual-install-per-core-override-path)
+   - [Apple TV / tvOS](#apple-tv--tvos)
 8. [Overclocking](#8-overclocking)
 9. [Per-Game Overrides](#9-per-game-overrides)
 10. [Related](#10-related)
