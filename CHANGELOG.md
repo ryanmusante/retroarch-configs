@@ -1,5 +1,10 @@
 2026-04-12  Ryan Musante
 
+- v1.29.1: `README.md` — version badge `1.29` → `1.29.1`. Missed in initial v1.29.1 SYNC entry; caught during sync review.
+- v1.29.1: SYNC — no `.cfg` / `.opt` changes. Companion `retroarch-appletv4k` bumped to v2.65: `savestate_auto_save` / `savestate_auto_load` removed from `retroarch.cfg` (72 → 70 keys). Reviewed all 15 core `.cfg` / `.opt` files in this repo — none set either key, so nothing to prune on this side. `content_runtime_log` / `content_runtime_log_aggregate` were also checked and never set anywhere (upstream default `false` retained).
+
+2026-04-12  Ryan Musante
+
 - v1.29: DOC-SYNC — README structural cleanup. Converts Table of Contents and H2 headings to numerical organization matching the companion `retroarch-appletv4k/README.md` style (§1–§12). No content changes to any `.cfg` / `.opt` file.
 - v1.29: `README.md` — H2 headings renumbered `## 1. Supported Cores` through `## 12. License`. Anchors regenerate automatically via GitHub slug (e.g. `#1-supported-cores`). TOC rewritten as a numbered list with matching anchors.
 - v1.29: `README.md` — `## Manual Install: Per-Core Override Path` section added to the TOC as §7 (was previously an orphaned H2 at the bottom of the file with no TOC entry). Section content moved up to sit immediately after `## 6. Installation`, which is its natural logical position — §6 already forward-references it as the authoritative path reference. Remaining sections (Overclocking, Per-Game Overrides, Related, Versioning, License) renumbered §8–§12 accordingly.
@@ -9,7 +14,7 @@
 
 2026-04-12  Ryan Musante
 
-- v1.28: DOC-SYNC — REV 3 audit pass reconciling README prose with shipped `.cfg`/`.opt` contents. No functional config changes; README-only.
+- v1.28: DOC-SYNC — REV 3 review pass reconciling README prose with shipped `.cfg`/`.opt` contents. No functional config changes; README-only.
 - v1.28: `README.md` — Frontend Override Keys table rewritten. Removed three phantom rows (`preemptive_frames_enable`, `video_frame_delay_auto`, `audio_resampler_quality`) that were documented as per-core overrides but never set in any shipped `.cfg` (all three inherit from global). Moved to an explicit "inherited from global" footnote.
 - v1.28: `README.md` — `video_threaded` row corrected. Table previously claimed `true` for interpreter-bound cores; actual Tier 2 cfgs have pinned `"false"` since v1.26 as the #14978 crash-defense anchor. Row now describes the forensic-anchor rationale.
 - v1.28: `README.md` — `run_ahead_frames` row values corrected `0, 2` → `1, 2`. Beetle PCE Fast uses 1 frame (CDROM seek determinism, applied in v1.26); old row omitted the Tier 1 exception.
@@ -23,7 +28,7 @@
 
 2026-04-12  Ryan Musante
 
-- v1.26: AUDIT — REV 2 audit pass against libretro/RetroArch master source. Applied 21 findings across all 15 per-core files.
+- v1.26: REV 2 — source verification pass against libretro/RetroArch master source. Applied 21 findings across all 15 per-core files.
 - v1.26: `Mupen64Plus-Next.opt` — remove 5 dead GLideN64-only keys (`EnableCopyColorToRDRAM`, `EnableCopyColorFromRDRAM`, `EnableCopyDepthToRDRAM`, `txFilterMode`, `EnableLODEmulation`) that are silently ignored when `rdp-plugin=angrylion`. Dead config verified against mupen64plus-libretro-nx source. Key count 12 → 7.
 - v1.26: `Mupen64Plus-Next.cfg` — remove 3 keys that duplicated global defaults (`run_ahead_frames=0`, `preemptive_frames_enable=false`, `video_frame_delay_auto=false`). Flip `video_threaded` true → false to match the global tvOS Metal crash #14978 defense. Key count 7 → 4.
 - v1.26: `PCSX-ReARMed.cfg` — same duplicate-default cleanup and `video_threaded` true → false. Key count 7 → 4.
@@ -40,7 +45,7 @@
 
 2026-04-12  Ryan Musante
 
-- v1.24: README trim — remove redundant "Tier definitions" bullet list after the core summary table (B1; table already has a Tier column); replace the second ASCII diagram showing on-device `config/<core_name>/` layout with a cross-reference to `retroarch-appletv4k/README.md` §4 (B2); drop redundant "16 files" file-count line (B3); rewrite stale `## CRT Shaders` section to document the v1.23 global crt-easymode + Tier 2 zfast_crt override model in one paragraph (B6); compress `## Overclocking` from per-core subsections to a single paragraph (B7); drop duplicate per-game override example, keep one (B8); drop entire `## Core Option Key Verification` section — audit detail belongs in CHANGELOG not README (B9). TOC updated.
+- v1.24: README trim — remove redundant "Tier definitions" bullet list after the core summary table (B1; table already has a Tier column); replace the second ASCII diagram showing on-device `config/<core_name>/` layout with a cross-reference to `retroarch-appletv4k/README.md` §4 (B2); drop redundant "16 files" file-count line (B3); rewrite stale `## CRT Shaders` section to document the v1.23 global crt-easymode + Tier 2 zfast_crt override model in one paragraph (B6); compress `## Overclocking` from per-core subsections to a single paragraph (B7); drop duplicate per-game override example, keep one (B8); drop entire `## Core Option Key Verification` section — verification detail belongs in CHANGELOG not README (B9). TOC updated.
 - v1.24: 12385 → 7827 bytes (37% size reduction), zero loss of actionable content.
 
 2026-04-12  Ryan Musante
@@ -72,8 +77,8 @@
 2026-04-12  Ryan Musante
 
 - v1.19: `Mupen64Plus-Next.opt` — add `mupen64plus-pak1 = "rumble"` (Player 1 Pak: Rumble Pak); valid value verified against upstream `libretro_core_options.h`. Trade-off: removes Controller Pak (memory pak) for player 1 — games that save to controller pak (Mario Kart 64 ghost data, F-Zero X tracks, OoT player notes) can no longer write.
-- v1.19: full audit of all 7 `.opt` files against upstream libretro core option headers — every key in every `.opt` file confirmed valid (Mesen 2, Snes9x 1, mGBA 3, Genesis Plus GX 6, Beetle PCE Fast 2, PCSX-ReARMed 4, Mupen64Plus-Next 12 keys post-rumble).
-- v1.19: full audit of all 8 per-core `.cfg` files against `libretro/RetroArch/configuration.c` — every frontend override key confirmed valid; no defects found.
+- v1.19: full key-by-key verification of all 7 `.opt` files against upstream libretro core option headers — every key in every `.opt` file confirmed valid (Mesen 2, Snes9x 1, mGBA 3, Genesis Plus GX 6, Beetle PCE Fast 2, PCSX-ReARMed 4, Mupen64Plus-Next 12 keys post-rumble).
+- v1.19: full key-by-key verification of all 8 per-core `.cfg` files against `libretro/RetroArch/configuration.c` — every frontend override key confirmed valid; no defects found.
 
 2026-04-12  Ryan Musante
 
