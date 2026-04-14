@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.39-blue)
+![version](https://img.shields.io/badge/version-1.40-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -51,14 +51,14 @@ config/
 ├── Genesis Plus GX.opt
 ├── Mesen.cfg
 ├── Mesen.opt
-├── mGBA.cfg
-├── mGBA.opt
 ├── Mupen64Plus-Next.cfg
 ├── Mupen64Plus-Next.opt
 ├── PCSX-ReARMed.cfg
 ├── PCSX-ReARMed.opt
 ├── Snes9x.cfg
-└── Snes9x.opt
+├── Snes9x.opt
+├── mGBA.cfg
+└── mGBA.opt
 ```
 
 The ZIP ships the files flat under `config/`. On-device placement into per-core directories (`config/<core_name>/`) is covered in [Manual Install: Per-Core Override Path](#7-manual-install-per-core-override-path) below — that section is the single source of truth for on-device layout. The `.cfg` and `.opt` files intentionally omit layout/path notes; global frontend defaults come from the companion `retroarch-appletv4k` repository.
