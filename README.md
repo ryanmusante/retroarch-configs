@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.38-blue)
+![version](https://img.shields.io/badge/version-1.39-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -31,7 +31,7 @@ Overrides keep only non-global frontend keys, except for Tier 2 `video_threaded 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | CRT Shader | Notes |
 |------|---------|------|-------------|-------------|------------|-------|
 | Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 3 | crt-easymode (global) | Integer overscale for 256×240 (+ 512-wide hi-res) at 4K; Run Ahead per-core (1 frame; CDROM seek determinism) |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 5 | 1 | crt-easymode (global) | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict) |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 5 | 0 | crt-easymode (global) | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict); `.opt` is a placeholder (no global keys; dipswitch/cheat per-game only) |
 | Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 6 | crt-easymode (global) | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer overscale for 224p at 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core |
 | Mesen | NES | 1 (Flawless) | 4 | 2 | crt-easymode (global) | Integer overscale for 224p at 4K; Run Ahead per-core |
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 3 | crt-easymode (global) | Integer overscale for GBA 240×160 at 4K; `interframe_blending=mix` (thermal/fillrate relief); Run Ahead per-core |
