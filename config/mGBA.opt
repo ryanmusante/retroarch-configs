@@ -3,3 +3,5 @@ mgba_color_correction = "Game Boy Advance"
 # mix (from mix_smart): GPU cost relief on A15 fillrate at 4K integer scale
 mgba_interframe_blending = "mix"
 mgba_audio_low_pass_filter = "enabled"
+# pairs with audio_low_pass_filter; default 60
+mgba_audio_low_pass_range = "60"

@@ -8,3 +8,5 @@ mupen64plus-43screensize = "320x240"
 # ThreadedRenderer is HW-RDP-only; false for Angrylion
 mupen64plus-ThreadedRenderer = "False"
 mupen64plus-FrameDuping = "True"
+# explicit; default "all threads" uses all 6 A15 cores (2P+4E); guards future thermal tuning
+mupen64plus-angrylion-multithread = "all threads"

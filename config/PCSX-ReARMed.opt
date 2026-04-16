@@ -4,3 +4,5 @@ pcsx_rearmed_drc = "disabled"
 pcsx_rearmed_frameskip_type = "disabled"
 pcsx_rearmed_gpu_thread_rendering = "async"
 pcsx_rearmed_psxclock = "100"
+# explicit guard; expensive upscale; no benefit on no-JIT A15
+pcsx_rearmed_neon_enhancement_enable = "disabled"
