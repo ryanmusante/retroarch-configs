@@ -1,10 +1,7 @@
-# MAME YM2612; 3-5x lighter than Nuked; A15 thermal-safe
 genesis_plus_gx_ym2612 = "mame (ym2612)"
 genesis_plus_gx_audio_filter = "low-pass"
 genesis_plus_gx_lowpass_range = "55"
 genesis_plus_gx_no_sprite_limit = "enabled"
-# Sega CD BRAM per-game; upstream splits system+cart keys
 genesis_plus_gx_system_bram = "per game"
 genesis_plus_gx_cart_bram = "per game"
-# single field; lighter than double field on A15; explicit drift guard
 genesis_plus_gx_render = "single field"

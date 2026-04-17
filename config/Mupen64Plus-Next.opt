@@ -1,12 +1,8 @@
-# Angrylion software RDP + cxd4 RSP (no JIT tvOS stack)
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
-# 320x240 native 4:3 framebuffer; no internal upscale
 mupen64plus-43screensize = "320x240"
-# ThreadedRenderer is HW-RDP-only; false for Angrylion
 mupen64plus-ThreadedRenderer = "False"
 mupen64plus-FrameDuping = "True"
-# explicit; default "all threads" uses all 6 A15 cores (2P+4E); guards future thermal tuning
 mupen64plus-angrylion-multithread = "all threads"

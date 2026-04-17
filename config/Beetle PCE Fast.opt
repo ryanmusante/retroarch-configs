@@ -1,5 +1,3 @@
-# cdimagecache loads full CD to RAM (200-700MB); disabled for 4GB tvOS
 pce_fast_cdimagecache = "disabled"
 pce_fast_nospritelimit = "enabled"
-# 2x CD speed; halves load times; per-game override to 1 for affected titles
 pce_fast_cdspeed = "2"
