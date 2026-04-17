@@ -1,6 +1,10 @@
+2026-04-16  Ryan Musante
+
+- v1.43: All 16 per-core `.cfg`/`.opt` files — strip all `#` comment and blank lines; total 112L → 65L. Keys, values, and key counts unchanged (54 keys across 16 files; per-core totals match v1.42 §1 table exactly: Beetle 5/3, FBN 6/0, Genesis 5/7, Mesen 5/2, mGBA 5/4, Snes9x 5/1, Mupen 4/8, PCSX 5/5). `README.md` §11 Versioning: CHANGELOG style description `kernel.org date<TAB>name` → `GNU ChangeLog style (YYYY-MM-DD<SP><SP>Author Name)` — actual file separator is double space. Version badge 1.42 → 1.43. Companion `retroarch-appletv4k` bumped to v2.81.
+
 2026-04-15  Ryan Musante
 
-- v1.42: Apple TV 4K optimization audit pass; 4 explicit `.opt` pins added for drift-guard consistency (all keys match prior upstream defaults — no behavior change). `config/Mupen64Plus-Next.opt` — add `mupen64plus-angrylion-multithread = "all threads"` (Angrylion uses all 6 A15 cores by default; explicit guards future thermal tuning). `config/PCSX-ReARMed.opt` — add `pcsx_rearmed_neon_enhancement_enable = "disabled"` (expensive upscale; no benefit on no-JIT A15; guards accidental flip). `config/mGBA.opt` — add `mgba_audio_low_pass_range = "60"` (pairs with `audio_low_pass_filter` already set). `config/Genesis Plus GX.opt` — add `genesis_plus_gx_render = "single field"` (lighter than double field on A15). `.opt` key counts: Genesis Plus GX 6 → 7, mGBA 3 → 4, Mupen64Plus-Next 7 → 8, PCSX-ReARMed 4 → 5.
+- v1.42: Apple TV 4K optimization pass; 4 explicit `.opt` pins added for drift-guard consistency (all keys match prior upstream defaults — no behavior change). `config/Mupen64Plus-Next.opt` — add `mupen64plus-angrylion-multithread = "all threads"` (Angrylion uses all 6 A15 cores by default; explicit guards future thermal tuning). `config/PCSX-ReARMed.opt` — add `pcsx_rearmed_neon_enhancement_enable = "disabled"` (expensive upscale; no benefit on no-JIT A15; guards accidental flip). `config/mGBA.opt` — add `mgba_audio_low_pass_range = "60"` (pairs with `audio_low_pass_filter` already set). `config/Genesis Plus GX.opt` — add `genesis_plus_gx_render = "single field"` (lighter than double field on A15). `.opt` key counts: Genesis Plus GX 6 → 7, mGBA 3 → 4, Mupen64Plus-Next 7 → 8, PCSX-ReARMed 4 → 5.
 - v1.42: `README.md` §1 Supported Cores table — `.opt` key counts updated for the 4 affected cores. Version badge 1.41 → 1.42. Companion `retroarch-appletv4k` bumped to v2.80 (SYNC bump; no `retroarch.cfg` changes).
 
 2026-04-15  Ryan Musante
@@ -18,11 +22,3 @@
 
 - v1.39: SYNC — no `.cfg` / `.opt` changes. CHANGELOG trimmed to the last 5 minor versions; older history removed. README version badge bumped 1.38 → 1.39. Companion `retroarch-appletv4k` bumped to v2.77 (section-header label prefixes stripped from `retroarch.cfg` comments).
 - v1.39: `README.md` §1 Supported Cores table — FinalBurn Neo `.opt` keys `1` → `0`. The v1.38 entry that claimed `—` → `1` was off-by-one: `config/FinalBurn Neo.opt` is a comment-only placeholder with no `key = "value"` lines (the dipswitch and cheat keys are per-game only). Notes cell extended to record the placeholder rationale inline.
-
-2026-04-13  Ryan Musante
-
-- v1.38: `config/FinalBurn Neo.opt` — add placeholder; single comment line `# fbneo-dipswitch-* and fbneo-cheat-* are per-game only; no global opt keys required`; reserves the file for future use. `.opt` file count 7 → 8.
-- v1.38: `config/Beetle PCE Fast.opt` — add `pce_fast_cdspeed = "2"`; halves TurboGrafx-CD load times; default upstream is `"1"` (1x); per-game override to `"1"` for any title affected. Key verified against `libretro/beetle-pce-fast-libretro/libretro_core_options.h`. `.opt` key count 2 → 3.
-- v1.38: `README.md` §1 Supported Cores table — Beetle PCE Fast `.opt` keys 2 → 3; FinalBurn Neo `.opt` keys `—` → 1.
-- v1.38: `README.md` §2 File Structure — add `FinalBurn Neo.opt` to flat-config listing; update shipped-file count 7 → 8 `.opt`.
-- v1.38: `README.md` §7 Manual Install — add `FinalBurn Neo.opt` to `FinalBurn Neo/` directory tree. Companion `retroarch-appletv4k` bumped to v2.76.

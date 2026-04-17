@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.42-blue)
+![version](https://img.shields.io/badge/version-1.43-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -169,7 +169,7 @@ run_ahead_frames = "1"
 
 ## 11. Versioning
 
-This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on incompatible structural changes (filesystem layout, breaking config schema, removed features). `MINOR` increments on every release — additive changes, key additions/removals, documentation syncs, and conservative defaults adjustments. Each release ships with a matching `CHANGELOG.md` entry in kernel.org `date<TAB>name` style.
+This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on incompatible structural changes (filesystem layout, breaking config schema, removed features). `MINOR` increments on every release — additive changes, key additions/removals, documentation syncs, and conservative defaults adjustments. Each release ships with a matching `CHANGELOG.md` entry in GNU ChangeLog style (`YYYY-MM-DD<SP><SP>Author Name`; date and author separated by two spaces).
 
 ## 12. License
 
