@@ -1,12 +1,12 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.43-blue)
+![version](https://img.shields.io/badge/version-1.46-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K. Companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
 
-Overrides keep only non-global frontend keys, except for explicit pins that guard against global drift: Tier 2 `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor), per-core `video_shader` paths (all 8 cores), and PCSX-ReARMed `run_ahead_enabled = "false"` (interpreter safety). `.opt` files keep only non-default core settings.
+Overrides keep only non-global frontend keys, except for explicit pins that guard against global drift: Tier 2 `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor) and PCSX-ReARMed `run_ahead_enabled = "false"` (interpreter safety). Shader assignment is global (set in companion `retroarch.cfg`); per-core `.cfg` files do not set `video_shader`. `.opt` files keep only non-default core settings.
 
 [changelog](CHANGELOG.md)
 
@@ -28,16 +28,16 @@ Overrides keep only non-global frontend keys, except for explicit pins that guar
 
 ## 1. Supported Cores
 
-| Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | Shader | Notes |
-|------|---------|------|-------------|-------------|--------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 5 | 3 | crt-easymode | Integer overscale for 256×240 (+ 512-wide hi-res) at 4K; Run Ahead per-core (1 frame; CDROM seek determinism) |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 6 | 0 | crt-easymode | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict); `.opt` is a placeholder (no global keys; dipswitch/cheat per-game only) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 5 | 7 | crt-easymode | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer overscale for 224p at 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core |
-| Mesen | NES | 1 (Flawless) | 5 | 2 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead per-core |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 5 | 4 | lcd-grid-v2 | GBA/GB/GBC were handheld LCDs; integer overscale for GBA 240×160 at 4K; `interframe_blending=mix` (thermal/fillrate relief); Run Ahead per-core |
-| Snes9x | SNES | 1 (Flawless) | 5 | 1 | crt-easymode | Integer overscale for 224p at 4K; Run Ahead per-core |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 4 | 8 | zfast_crt | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; per-core pins: `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto=false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable=false` ([#18300](https://github.com/libretro/RetroArch/issues/18300)). Run Ahead off |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 5 | 5 | zfast_crt | No JIT; `psxclock=100` (per-game underclock for 3D); async GPU; `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency=48`; `run_ahead_enabled=false` (explicit guard); integer overscale (variable width 256–640 may shift borders); Run Ahead off |
+| Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | Notes |
+|------|---------|------|-------------|-------------|-------|
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 4 | 3 | Integer overscale for 256×240 (+ 512-wide hi-res) at 4K; Run Ahead per-core (1 frame; CDROM seek determinism) |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 5 | 0 | Integer overscale for 224p–304p at 4K; Run Ahead per-core; rewind pinned `false` ([#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict); `.opt` is a placeholder (no global keys; dipswitch/cheat per-game only) |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 4 | 7 | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer overscale for 224p at 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core |
+| Mesen | NES | 1 (Flawless) | 4 | 2 | Integer overscale for 224p at 4K; Run Ahead per-core |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 4 | 4 | Integer overscale for GBA 240×160 at 4K; `interframe_blending=mix` (thermal/fillrate relief); Run Ahead per-core. GBA/GB/GBC were handheld LCDs — to apply `handheld/lcd-grid-v2.slangp` instead of the global CRT shader, use Quick Menu → Shaders → Save Core Preset (see companion §8) |
+| Snes9x | SNES | 1 (Flawless) | 4 | 1 | Integer overscale for 224p at 4K; Run Ahead per-core |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 3 | 8 | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; per-core pins: `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto=false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable=false` ([#18300](https://github.com/libretro/RetroArch/issues/18300)). Run Ahead off |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 4 | 5 | No JIT; `psxclock=100` (per-game underclock for 3D); async GPU; `video_threaded=false` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency=48`; `run_ahead_enabled=false` (explicit guard); integer overscale (variable width 256–640 may shift borders); Run Ahead off |
 
 ## 2. File Structure
 
@@ -63,7 +63,7 @@ config/
 
 The ZIP ships the files flat under `config/`. On-device placement into per-core directories (`config/<core_name>/`) is covered in [Manual Install: Per-Core Override Path](#7-manual-install-per-core-override-path) below — that section is the single source of truth for on-device layout. The `.cfg` and `.opt` files intentionally omit layout/path notes; global frontend defaults come from the companion `retroarch-appletv4k` repository.
 
-The shipped ZIP contains 8 `.cfg`, 8 `.opt`, and `config/.gitkeep`.
+The shipped ZIP contains 8 `.cfg` and 8 `.opt` files, flat under `config/`.
 
 ## 3. File Separation
 
@@ -86,16 +86,15 @@ Keys actually set in one or more shipped `.cfg` files.
 | `run_ahead_frames` | `1`, `2` | Tier 1 = 2; Beetle PCE Fast = 1 (CDROM seek determinism) |
 | `video_threaded` | `false` | Tier 2 forensic anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)); upstream `gfx/video_driver.c` force-disables for all Apple platforms |
 | `audio_latency` | `48` | PCSX-ReARMed pin; matches global v2.66 (down from 64 ms); Mupen inherits global |
-| `video_shader` | `../shaders/shaders_slang/crt/crt-easymode.slangp`, `../shaders/shaders_slang/crt/zfast_crt.slangp`, `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` | All 8 cores set explicit per-core shaders; prevents drift from global changes. Tier 1 CRT = crt-easymode; mGBA = lcd-grid-v2 (handheld LCD); Tier 2 = zfast_crt |
 | `video_scale_integer_scaling` | `1` | All Tier 1 + PCSX-ReARMed; integer overscale at 4K. PS1 variable width (256–640) may shift borders on mode switch |
 | `video_frame_delay_auto` | `true`, `false` | Tier 1 = `true` (global as of v2.66); Mupen = `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)); PCSX inherits |
 | `rewind_enable` | `false` | FBN + Mupen pins: [#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict; [#18300](https://github.com/libretro/RetroArch/issues/18300) N64 freeze |
 
-Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_secondary_instance`, `run_ahead_hide_warnings`.
+Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `video_shader`, `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_secondary_instance`, `run_ahead_hide_warnings`.
 
 ## 5. Shaders
 
-Global `retroarch.cfg` enables the shader pipeline (`video_shader_enable = "true"`) but sets no `video_shader` path. All 8 per-core `.cfg` files set explicit shader paths using `../shaders/shaders_slang/` relative references: Tier 1 CRT cores use `crt-easymode.slangp`, mGBA uses `handheld/lcd-grid-v2.slangp` (GBA/GB/GBC were handheld LCDs, not CRTs), and Tier 2 cores (Mupen64Plus-Next, PCSX-ReARMed) use `zfast_crt.slangp` to fit the interpreter GPU budget. See `retroarch-appletv4k/README.md` §8 for shader tuning guidance.
+Global `retroarch.cfg` sets both the shader pipeline gate (`video_shader_enable = "true"`) and a global preset (`video_shader = "../shaders/shaders_slang/crt/crt-aperture.slangp"`) as of companion v2.84. None of the 8 per-core `.cfg` files set `video_shader` — every core inherits the global `crt-aperture` preset. Per-game or per-core shader overrides use RetroArch's Save Core Preset / Save Game Preset UI (see `retroarch-appletv4k/README.md` §8), which writes dedicated `.slangp` files rather than `.cfg` entries. mGBA users who prefer the handheld-LCD aesthetic should apply `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` via Save Core Preset.
 
 ## 6. Installation
 
