@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.47-blue)
+![version](https://img.shields.io/badge/version-1.48-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -30,14 +30,14 @@ Overrides keep only non-global frontend keys, except for explicit pins that guar
 
 | Core | Systems | Tier | `.cfg` Keys | `.opt` Keys | Notes |
 |------|---------|------|-------------|-------------|-------|
-| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 6 | 3 | Integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for 256×240 (+ 512-wide hi-res) at 4K; Run Ahead per-core (1 frame; CDROM seek determinism); `run_ahead_secondary_instance = "false"` (static-build inert pin) |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 7 | 0 | Integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for 224p–304p at 4K; Run Ahead per-core with `run_ahead_secondary_instance = "true"` (two-instance mode required per core maintainer to avoid savestate audio buzz, [#16374](https://github.com/libretro/RetroArch/issues/16374)); rewind pinned `false`; `.opt` is a placeholder (no global keys; dipswitch/cheat per-game only) |
-| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 6 | 7 | MAME YM2612 (thermal-safe; switch to Nuked per-game); integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for 224p at 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core; `run_ahead_secondary_instance = "false"` (static-build inert pin) |
-| Mesen | NES | 1 (Flawless) | 6 | 2 | Integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for 224p at 4K; Run Ahead per-core; `run_ahead_secondary_instance = "false"` (static-build inert pin) |
-| mGBA | GB / GBC / GBA | 1 (Flawless) | 6 | 3 | Integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for GBA 240×160 at 4K; `interframe_blending = "mix_smart"` (blends only flicker-effect frames; preserves motion clarity in non-flickering titles); Run Ahead per-core; `run_ahead_secondary_instance = "false"` (static-build inert pin). GBA/GB/GBC were handheld LCDs — to apply `handheld/lcd-grid-v2.slangp` instead of the global CRT shader, use Quick Menu → Shaders → Save Core Preset (see companion §8) |
-| Snes9x | SNES | 1 (Flawless) | 6 | 1 | Integer scaling enabled (`video_scale_integer = "true"`) with overscale mode for 224p at 4K; Run Ahead per-core; `run_ahead_secondary_instance = "false"` (static-build inert pin) |
-| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 5 | 6 | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; `mupen64plus-angrylion-multithread = "2"` (A15 2 P-cores + 4 E-cores — core default "all threads" oversubscribes E-cores and harms frame pacing); per-core pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"` (HW-context GL state thrash on serialize/unserialize), `run_ahead_secondary_instance = "false"` |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 6 | No JIT; `psxclock = "100"` (per-game underclock for 3D); async GPU; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency = "48"`; `run_ahead_enabled = "false"` (explicit interpreter-safety guard); `run_ahead_secondary_instance = "false"`; `rewind_enable = "false"` (defensive per-core pin against global menu toggle); integer scaling enabled (`video_scale_integer = "true"`) with overscale mode (variable width 256–640 may shift borders); `pcsx_rearmed_cd_readahead = "333000"` (full-disk precache; ~750 MB RAM headroom required; eliminates CHD seek latency on flash storage); Run Ahead off |
+| Beetle PCE Fast | PC Engine / TurboGrafx-16 | 1 (Flawless) | 6 | 3 | Integer overscale 256×240 (+ 512-wide hi-res) @ 4K; Run Ahead 1 frame (CDROM seek determinism) |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 (Flawless) | 7 | 0 | Integer overscale 224p–304p @ 4K; `run_ahead_secondary_instance = "true"` per maintainer ([#16374](https://github.com/libretro/RetroArch/issues/16374) savestate audio buzz); `rewind_enable = "false"`; `.opt` placeholder (dipswitch/cheat per-game only) |
+| Genesis Plus GX | Genesis / Mega Drive / Sega CD / Master System | 1 (Flawless) | 6 | 7 | MAME YM2612 (thermal-safe; Nuked per-game); integer overscale 224p @ 4K; per-game BRAM isolation for Sega CD; Run Ahead per-core |
+| Mesen | NES | 1 (Flawless) | 6 | 2 | Integer overscale 224p @ 4K; Run Ahead per-core |
+| mGBA | GB / GBC / GBA | 1 (Flawless) | 6 | 3 | Integer overscale GBA 240×160 @ 4K; `interframe_blending = "mix_smart"` (blends flicker-effect frames only; preserves motion clarity in non-flickering titles); Run Ahead per-core. Handheld LCDs — apply `handheld/lcd-grid-v2.slangp` via Quick Menu → Shaders → Save Core Preset for LCD aesthetic (see companion §8) |
+| Snes9x | SNES | 1 (Flawless) | 6 | 1 | Integer overscale 224p @ 4K; Run Ahead per-core |
+| Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 5 | 6 | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; `mupen64plus-angrylion-multithread = "2"` (ATV4K binned A15 = 2P+3E; default "all threads" oversubscribes E-cores, harming frame pacing vs 2 P-core workers); per-core pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"` (HW-GL state thrash on serialize/unserialize) |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 6 | No JIT; `psxclock = "100"` (per-game underclock for 3D); async GPU; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency = "48"`; `run_ahead_enabled = "false"` (interpreter safety); `rewind_enable = "false"` (defensive pin); integer overscale (variable width 256–640 may shift borders); `pcsx_rearmed_cd_readahead = "333000"` (full-disk precache; ~750 MB RAM; eliminates CHD seek latency) |
 
 ## 2. File Structure
 
@@ -170,7 +170,7 @@ run_ahead_frames = "1"
 
 ## 11. Versioning
 
-This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on incompatible structural changes (filesystem layout, breaking config schema, removed features). `MINOR` increments on every release — additive changes, key additions/removals, documentation syncs, and conservative defaults adjustments. Each release ships with a matching `CHANGELOG.md` entry in GNU ChangeLog style (`YYYY-MM-DD<SP><SP>Author Name`; date and author separated by two spaces).
+This repository uses `vMAJOR.MINOR` (no patch component). `MAJOR` increments on incompatible structural changes (filesystem layout, breaking config schema, removed features). `MINOR` increments on every release — additive changes, key additions/removals, documentation syncs, and conservative defaults adjustments. Each release ships with a matching `CHANGELOG.md` entry in GNU ChangeLog style (`YYYY-MM-DD<SP><SP>Author Name`; date and author separated by two spaces). `CHANGELOG.md` retains the last 5 MINOR version entries; older entries are trimmed on each release.
 
 ## 12. License
 
