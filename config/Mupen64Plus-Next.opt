@@ -1,3 +1,4 @@
+# N64 core options: cached interpreter, CXD4 RSP + Angrylion RDP @ 320x240, multithread=2 (A15 P-cores)
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"

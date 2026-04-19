@@ -1,2 +1,3 @@
+# NES core options: no sprite limit, reduce DMC popping
 mesen_nospritelimit = "enabled"
 mesen_reduce_dmc_popping = "enabled"

@@ -1,3 +1,4 @@
+# PCE core options: CD image cache disabled, no sprite limit, CD speed 2x
 pce_fast_cdimagecache = "disabled"
 pce_fast_nospritelimit = "enabled"
 pce_fast_cdspeed = "2"

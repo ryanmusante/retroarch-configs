@@ -1,3 +1,4 @@
+# GBA core options: color correction, interframe blending mix_smart, audio low-pass filter
 mgba_color_correction = "Game Boy Advance"
 mgba_interframe_blending = "mix_smart"
 mgba_audio_low_pass_filter = "enabled"

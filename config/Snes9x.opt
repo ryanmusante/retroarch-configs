@@ -1,1 +1,2 @@
+# SNES core options: reduce sprite flicker
 snes9x_reduce_sprite_flicker = "enabled"
