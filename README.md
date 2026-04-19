@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.49-blue)
+![version](https://img.shields.io/badge/version-1.52-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -96,7 +96,7 @@ Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `
 
 ## 5. Shaders
 
-Global `retroarch.cfg` sets both the shader pipeline gate (`video_shader_enable = "true"`) and a global preset (`video_shader = "../shaders/shaders_slang/crt/crt-aperture.slangp"`) as of companion v2.84. None of the 8 per-core `.cfg` files set `video_shader` — every core inherits the global `crt-aperture` preset. Per-game or per-core shader overrides use RetroArch's Save Core Preset / Save Game Preset UI (see `retroarch-appletv4k/README.md` §8), which writes dedicated `.slangp` files rather than `.cfg` entries. mGBA users who prefer the handheld-LCD aesthetic should apply `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` via Save Core Preset.
+Global `retroarch.cfg` sets both the shader pipeline gate (`video_shader_enable = "true"`) and a global preset (`video_shader = "../shaders/shaders_slang/crt/crt-easymode.slangp"`) as of companion v2.88 (swapped from crt-aperture; crt-easymode is integer-scale safe with no shader geometry and produces a cleaner 4K phosphor mask). None of the 8 per-core `.cfg` files set `video_shader` — every core inherits the global `crt-easymode` preset. Per-game or per-core shader overrides use RetroArch's Save Core Preset / Save Game Preset UI (see `retroarch-appletv4k/README.md` §8), which writes dedicated `.slangp` files rather than `.cfg` entries. mGBA users who prefer the handheld-LCD aesthetic should apply `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` via Save Core Preset.
 
 ## 6. Installation
 
