@@ -1,12 +1,12 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.48-blue)
+![version](https://img.shields.io/badge/version-1.49-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K. Companion to [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k), which provides the global `retroarch.cfg`.
 
-Overrides keep only non-global frontend keys, except for explicit pins that guard against global drift: Tier 2 `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor), Tier 2 `run_ahead_enabled = "false"` (PCSX-ReARMed interpreter safety; Mupen64Plus-Next HW-GL context serialize/unserialize breakage), `run_ahead_secondary_instance` pinned across all 8 cores (7 static cores = `"false"`, FBN = `"true"` per core maintainer), and `video_scale_integer = "true"` enable flag paired with the existing `video_scale_integer_scaling` mode selector. Shader assignment is global (set in companion `retroarch.cfg`); per-core `.cfg` files do not set `video_shader`. `.opt` files keep only non-default core settings.
+Overrides keep only non-global frontend keys, except for explicit pins that guard against global drift: Tier 2 `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform anchor), Tier 2 `run_ahead_enabled = "false"` (PCSX-ReARMed interpreter safety; Mupen64Plus-Next HW-GL context serialize/unserialize breakage), `run_ahead_secondary_instance` pinned across all 8 cores (7 static cores = `"false"`, FBN = `"true"` per core maintainer), and `video_scale_integer = "true"` mirroring the global pin (drift-guard, not enable gate — global `retroarch.cfg` already sets `true`) paired with the per-core `video_scale_integer_scaling` mode selector. Shader assignment is global (set in companion `retroarch.cfg`); per-core `.cfg` files do not set `video_shader`. `.opt` files keep only non-default core settings.
 
 [changelog](CHANGELOG.md)
 
@@ -87,7 +87,7 @@ Keys actually set in one or more shipped `.cfg` files.
 | `run_ahead_secondary_instance` | `true`, `false` | All 7 static cores pinned `false` (static-build inert; prevents behavior change on dynamic rebuilds — runtime default is `true`); FBN pinned `true` per core maintainer ([#16374](https://github.com/libretro/RetroArch/issues/16374) savestate audio buzz) |
 | `video_threaded` | `false` | Tier 2 forensic anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)); upstream `gfx/video_driver.c` force-disables for all Apple platforms |
 | `audio_latency` | `48` | PCSX-ReARMed pin; matches global v2.66 (down from 64 ms); Mupen inherits global |
-| `video_scale_integer` | `true` | All Tier 1 + PCSX-ReARMed; enable flag for integer scaling (SETTING_BOOL, default false). Orthogonal to `video_scale_integer_scaling` mode selector — without this bool, integer scaling is OFF regardless of mode value |
+| `video_scale_integer` | `true` | All Tier 1 + PCSX-ReARMed; mirrors global `retroarch.cfg` pin as a drift-guard (not the enable gate — global already sets `true`). SETTING_BOOL, upstream default `false`; orthogonal to the `video_scale_integer_scaling` mode selector. Mupen64Plus-Next has no per-core pin and inherits global `true` (plain integer scale; no overscale mode) |
 | `video_scale_integer_scaling` | `1` | All Tier 1 + PCSX-ReARMed; integer overscale mode at 4K. PS1 variable width (256–640) may shift borders on mode switch |
 | `video_frame_delay_auto` | `true`, `false` | Tier 1 = `true` (global as of v2.66); Mupen = `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)); PCSX inherits |
 | `rewind_enable` | `false` | FBN + Mupen + PCSX-ReARMed pins: [#16374](https://github.com/libretro/RetroArch/issues/16374) Run Ahead conflict; [#18300](https://github.com/libretro/RetroArch/issues/18300) N64 freeze; PCSX defensive guard against global menu toggle (PS1 rewind memory cost causes stalls on no-JIT A15) |
