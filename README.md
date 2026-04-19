@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-1.52-blue)
+![version](https://img.shields.io/badge/version-1.54-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -37,7 +37,7 @@ Overrides keep only non-global frontend keys, except for explicit pins that guar
 | mGBA | GB / GBC / GBA | 1 (Flawless) | 6 | 3 | Integer overscale GBA 240×160 @ 4K; `interframe_blending = "mix_smart"` (blends flicker-effect frames only; preserves motion clarity in non-flickering titles); Run Ahead per-core. Handheld LCDs — apply `handheld/lcd-grid-v2.slangp` via Quick Menu → Shaders → Save Core Preset for LCD aesthetic (see companion §8) |
 | Snes9x | SNES | 1 (Flawless) | 6 | 1 | Integer overscale 224p @ 4K; Run Ahead per-core |
 | Mupen64Plus-Next | Nintendo 64 | 2 (Good) | 5 | 6 | No JIT; cached interpreter; Angrylion sw RDP + CXD4; native 320×240; `mupen64plus-angrylion-multithread = "2"` (ATV4K binned A15 = 2P+3E; default "all threads" oversubscribes E-cores, harming frame pacing vs 2 P-core workers); per-core pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"` (HW-GL state thrash on serialize/unserialize) |
-| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 6 | No JIT; `psxclock = "100"` (per-game underclock for 3D); async GPU; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency = "48"`; `run_ahead_enabled = "false"` (interpreter safety); `rewind_enable = "false"` (defensive pin); integer overscale (variable width 256–640 may shift borders); `pcsx_rearmed_cd_readahead = "333000"` (full-disk precache; ~750 MB RAM; eliminates CHD seek latency) |
+| PCSX-ReARMed | PlayStation 1 | 2 (Good) | 7 | 5 | No JIT; `psxclock = "100"` (per-game underclock for 3D); async GPU; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `audio_latency = "48"`; `run_ahead_enabled = "false"` (interpreter safety); `rewind_enable = "false"` (defensive pin); integer overscale (variable width 256–640 may shift borders); `pcsx_rearmed_cd_readahead = "333000"` (full-disk precache; ~780 MB RAM; eliminates CHD seek latency; **outside Core Options menu enum — never open Quick Menu → Options → Manage Core Options → Save for this core, or the pin is silently replaced with the nearest dropdown value**) |
 
 ## 2. File Structure
 
