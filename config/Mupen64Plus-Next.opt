@@ -1,7 +1,7 @@
-# N64 core options: cached interpreter, CXD4 RSP + Angrylion RDP @ 320x240, multithread=all threads (upstream default; max RDP parallelism)
+# N64 core options (v3.3 Angrylion-MT heterogeneous-ARM tune): plugin stack is platform-forced on tvOS App Store / Metal-only (rdp-plugin=angrylion is the only non-GL/non-Vulkan RDP option — GLideN64 needs an OpenGL HW render context the Metal driver does not provide and the tvOS build ships no gl/glcore/gl2 driver or ANGLE bridge; rsp-plugin=cxd4 is the only viable RSP under Angrylion — Parallel-RSP is dynarec and needs JIT which App Store disallows, HLE RSP will not initialize with Angrylion per libretro upstream; cpucore=cached_interpreter is the ceiling without JIT — dynamic_recompiler is a no-op under the App Store sandbox). v3.3: angrylion-multithread "all threads" -> "2" (HIGH; A15 Bionic is 2P+4E, "all threads" dispatches 6 RDP workers, E-core workers run at ~35-40% of P-core throughput, per-tile RDP work is slowest-thread-wins so tail latency is set by E-core finish time and presents as audio stutter + frame-time jitter; "2" pins RDP workers to P-cores for per-tile pacing consistency; fallbacks if too serial: "3" (v2.93 pre-"all-threads" default) then "4" (balance); DO NOT revert to "all threads" — upstream default targets desktop homogeneous cores and is inappropriate for heterogeneous ARM).
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-43screensize = "320x240"
-mupen64plus-angrylion-multithread = "all threads"
+mupen64plus-angrylion-multithread = "2"
