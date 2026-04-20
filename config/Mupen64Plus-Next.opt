@@ -1,7 +1,7 @@
-# N64 core options: cached interpreter, CXD4 RSP + Angrylion RDP @ 320x240, multithread=2 (A15 P-cores)
+# N64 core options: cached interpreter, CXD4 RSP + Angrylion RDP @ 320x240, multithread=all threads (upstream default; max RDP parallelism)
 mupen64plus-cpucore = "cached_interpreter"
 mupen64plus-pak1 = "rumble"
 mupen64plus-rsp-plugin = "cxd4"
 mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-43screensize = "320x240"
-mupen64plus-angrylion-multithread = "2"
+mupen64plus-angrylion-multithread = "all threads"
