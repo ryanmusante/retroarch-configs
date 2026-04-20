@@ -1,6 +1,6 @@
 # Genesis core options: MAME YM2612, audio filter off (CPU headroom), no sprite limit, per-game BRAM, single-field render
 genesis_plus_gx_ym2612 = "mame (ym2612)"
-genesis_plus_gx_audio_filter = "off"
+genesis_plus_gx_audio_filter = "disabled"
 genesis_plus_gx_no_sprite_limit = "enabled"
 genesis_plus_gx_system_bram = "per game"
 genesis_plus_gx_cart_bram = "per game"

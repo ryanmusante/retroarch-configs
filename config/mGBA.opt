@@ -1,4 +1,4 @@
-# GBA core options: color correction, no interframe blending (max perf), audio low-pass filter off
-mgba_color_correction = "Game Boy Advance"
+# GB/GBC/GBA core options: auto per-system color correction, no interframe blending (max perf), audio low-pass filter off
+mgba_color_correction = "Auto"
 mgba_interframe_blending = "disabled"
 mgba_audio_low_pass_filter = "disabled"
