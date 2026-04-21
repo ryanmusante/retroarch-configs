@@ -1,3 +1,64 @@
+2026-04-21  Ryan Musante
+
+- v3.6: 1 .cfg value change + 1 .cfg comment doc-sync.
+  Companion v3.6 ships 2 global cfg value changes; this sync
+  re-anchors Tier 2 audio latencies to the new global 48.
+
+  `Mupen64Plus-Next.cfg` (9 keys, unchanged count):
+  - `audio_latency` "96" → "64" (HIGH; paired with companion
+    `retroarch.cfg` v3.6 global change "32" → "48". New Tier 2
+    pin is +16 ms over global for E-core + GC + scheduler
+    variance on 2P+4E A15; v3.5 +64 margin was
+    overprovisioned against the aggressive global 32).
+  - Inline comment updated to reflect new absolute value and
+    +16 ms rationale.
+
+  `PCSX-ReARMed.cfg` (9 keys; value unchanged):
+  - `audio_latency = "48"` retained. Inline comment rewritten:
+    rationale is now "drift-guard mirror of v3.6 global 48"
+    instead of "tighter than global 64" (pre-v3.5). Pin
+    prevents silent drift if the global is later raised.
+
+  All 8 `.cfg` header "paired with retroarch-appletv4k v3.X"
+  stamps bumped v3.5 → v3.6.
+
+  Totals unchanged: cfg 55, opt 27.
+  .opt content byte-identical to v3.5.
+
+  README:
+  - §1 Mupen row: `audio_latency = "96"` → `"64"` (with v3.6
+    change note).
+  - §4 `audio_latency` row: values "48, 96" → "48, 64";
+    purpose split rewritten for new global context
+    (PCSX drift-guard mirror; Mupen +16 ms variance margin).
+  - Badge bumped 3.5 → 3.6.
+
+  Version badge 3.5 → 3.6. Companion bumped to v3.6
+  (`retroarch.cfg` `fastforward_ratio` "5.0" → "4.0" +
+  `audio_latency` "32" → "48"; 90 keys otherwise byte-identical).
+
+2026-04-21  Ryan Musante
+
+- v3.5: SYNC — companion ships global cfg latency + hardening refresh.
+  - All 8 `.cfg` header "paired with retroarch-appletv4k v3.X"
+    stamps bumped v3.4 → v3.5.
+  - README badge bumped 3.4 → 3.5.
+  - Totals unchanged: cfg 55, opt 27.
+  - .cfg / .opt content byte-identical to v3.4 (apart from the
+    single paired-with stamp line).
+  - Version badge 3.4 → 3.5. Companion bumped to v3.5
+    (`retroarch.cfg` 65 → 90 keys: 3 modifications
+    [`menu_pause_libretro` "true" → "false",
+    `pause_nonactive` "true" → "false",
+    `audio_latency` "64" → "32"] and 25 additions across
+    Menu/UI (6), Video (8), Input (2), Latency (1),
+    Security (2), and a new Null drivers section (6);
+    no impact to per-core overrides — `audio_latency`,
+    `menu_pause_libretro`, and `pause_nonactive` are not
+    pinned per-core, so Tier 1 cores inherit the new global
+    defaults while Tier 2 `audio_latency` pins PCSX=48,
+    Mupen=96 continue to override up).
+
 2026-04-20  Ryan Musante
 
 - v3.4: README drift fix; .cfg/.opt byte-identical to v3.3.
@@ -81,48 +142,3 @@
   - README §1 Genesis + mGBA rows: v3.2 markers appended.
   - Version badge 3.1 → 3.2. Companion bumped to v3.2 (no
     `retroarch.cfg` value changes; 2 stale README rows removed).
-
-2026-04-19  Ryan Musante
-
-- v3.1: 5 .opt files modified (net +0 keys).
-  - `Genesis Plus GX.opt`: `genesis_plus_gx_audio_filter`
-    "low-pass" → "off" (CPU headroom);
-    `genesis_plus_gx_lowpass_range` "55" key removed (inert).
-    Keys 7 → 6.
-  - `mGBA.opt`: `mgba_interframe_blending` "mix_smart" →
-    "disabled" (per-frame GPU blend cost removed; flicker on
-    Zelda MC, F-Zero GP Legend, MK SC);
-    `mgba_audio_low_pass_filter` "enabled" → "disabled"
-    (IIR cost removed). Keys unchanged at 3.
-  - `PCSX-ReARMed.opt`: `pcsx_rearmed_frameskip_type` "disabled"
-    → "auto_threshold"; new key
-    `pcsx_rearmed_frameskip_threshold = "33"` (33% audio-buffer;
-    guarantees real-time on Spyro 2/3, THPS, Tekken 3 at cost
-    of visible frame drops). Keys 5 → 6.
-  - `Beetle PCE Fast.opt`: `pce_fast_cdspeed` "2" → "4" (may
-    desync Ys IV, Dracula X — revert per-game). Keys at 3.
-  - `Mesen.opt`: `mesen_reduce_dmc_popping` "enabled" → "disabled"
-    (sub-1% CPU; pops on Skate or Die 2, Ninja Gaiden III).
-    Keys at 2.
-  - All .opt headers updated. opt unchanged at 27 (Genesis -1,
-    PCSX +1); cfg unchanged at 49.
-  - README §1: Beetle, Genesis, Mesen, mGBA, PCSX rows updated
-    with v3.1 markers.
-  - README §5 Shaders: rewritten for per-core Save Core Preset
-    workflow.
-  - Version badge 3.0 → 3.1. Companion bumped to v3.1
-    (3 `retroarch.cfg` value changes).
-
-2026-04-19  Ryan Musante
-
-- v3.0: MAJOR — version-sync release.
-  - Establishes lockstep versioning: both `retroarch-configs` and
-    `retroarch-appletv4k` share a single MAJOR.MINOR tag from
-    here forward.
-  - Pre-sync: configs v1.57, appletv4k v2.95.
-  - No .cfg/.opt content changes — 16 files byte-identical to
-    v1.57 shipping state.
-  - README §11 Versioning: rewritten to document lockstep
-    convention; matches companion §13 byte-for-byte.
-  - Totals unchanged: cfg 49, opt 27.
-  - Version badge 1.57 → 3.0. Companion bumped to v3.0.
