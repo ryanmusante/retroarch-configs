@@ -1,4 +1,12 @@
-# PCE core options: CD image cache enabled (full precache to RAM; eliminates seek latency), no sprite limit, CD speed 4x
+# Beetle PCE Fast — PCE / TG-16 core options
+# Full CD precache to RAM · no sprite limit · 4x CD streaming
+# 3 keys
+
+# === CD ===
+# cdimagecache=enabled — full image precache; eliminates seek latency
+# cdspeed=4 — may desync Ys IV / Dracula X; revert to "2" per-game
 pce_fast_cdimagecache = "enabled"
-pce_fast_nospritelimit = "enabled"
 pce_fast_cdspeed = "4"
+
+# === Rendering ===
+pce_fast_nospritelimit = "enabled"
