@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-3.6-blue)
+![version](https://img.shields.io/badge/version-3.7-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -36,7 +36,7 @@ Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K.
 | Mesen | NES | 1 | 6 | 2 | Integer overscale 224p; `mesen_nospritelimit = "enabled"`; `mesen_reduce_dmc_popping = "disabled"` (pops possible on Skate or Die 2, Ninja Gaiden III — restore per-game); Run Ahead |
 | mGBA | GB / GBC / GBA | 1 | 6 | 3 | Integer overscale GBA 240×160; `mgba_interframe_blending = "disabled"` (flicker on Zelda MC, F-Zero GP Legend, MK SC); `mgba_audio_low_pass_filter = "disabled"`; `mgba_color_correction = "Auto"` (v3.2 enum fix — now actually applies); Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
 | Snes9x | SNES | 1 | 6 | 1 | Integer overscale 224p; `snes9x_reduce_sprite_flicker = "enabled"`; Run Ahead |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 9 | 6 | No JIT; `mupen64plus-cpucore = "cached_interpreter"`; `mupen64plus-rdp-plugin = "angrylion"` + `mupen64plus-rsp-plugin = "cxd4"` — **platform-forced on Metal build** (GLideN64 needs GL, Parallel-RDP needs Vulkan, dynarec needs JIT). `mupen64plus-43screensize = "320x240"`; `mupen64plus-pak1 = "rumble"`. `mupen64plus-angrylion-multithread = "2"` (v3.3 P-core pin; A15 is 2P+4E; fallbacks `"3"`, `"4"`). Pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"`, `audio_latency = "64"` (v3.6; was `"96"` in v3.5 when global was `"32"`), `video_max_swapchain_images = "3"`, `audio_sync = "false"`, `autosave_interval = "0"` |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 9 | 6 | No JIT; `mupen64plus-cpucore = "cached_interpreter"`; `mupen64plus-rdp-plugin = "angrylion"` + `mupen64plus-rsp-plugin = "cxd4"` — **platform-forced on Metal build** (GLideN64 needs GL, Parallel-RDP needs Vulkan, dynarec needs JIT). `mupen64plus-43screensize = "320x240"`; `mupen64plus-pak1 = "rumble"`. `mupen64plus-angrylion-multithread = "2"` (v3.3 P-core pin; A15 is 2P+3E (binned, 1 E-core fused off); fallbacks `"3"`, `"4"`). Pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"`, `audio_latency = "64"` (v3.6; was `"96"` in v3.5 when global was `"32"`), `video_max_swapchain_images = "3"`, `audio_sync = "false"`, `autosave_interval = "0"` |
 | PCSX-ReARMed | PlayStation 1 | 2 | 9 | 6 | No JIT (`pcsx_rearmed_drc = "disabled"`); `pcsx_rearmed_psxclock = "100"`; `pcsx_rearmed_gpu_thread_rendering = "async"`; `audio_latency = "48"`; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `run_ahead_enabled = "false"`; `rewind_enable = "false"`; integer overscale (variable 256–640). `pcsx_rearmed_frameskip_type = "auto_threshold"` + `pcsx_rearmed_frameskip_threshold = "33"` (Spyro 2/3, THPS, Tekken 3). `pcsx_rearmed_cd_readahead = "333000"` (~780 MB precache — **never Save from Core Options menu; silently clamped**). v3.3 adds: `video_max_swapchain_images = "3"`, `autosave_interval = "0"` (prevents memcard-write stall) |
 
 ## 2. File Structure
@@ -88,7 +88,7 @@ Keys actually set in one or more shipped `.cfg` files.
 | `run_ahead_frames` | `2` | All 6 Tier 1 cores at 2-frame parity |
 | `run_ahead_secondary_instance` | `true`, `false` | 7 static cores `false` (drift-guard); FBN `true` ([#16374](https://github.com/libretro/RetroArch/issues/16374)) |
 | `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform force-disable) |
-| `audio_latency` | `48`, `64` | PCSX-ReARMed `48` (v3.6 drift-guard mirror of global 48; pre-v3.5 was tighter-than-global 64); Mupen `64` (v3.6; +16 ms over global for E-core + GC + scheduler variance on 2P+4E A15; was `96` in v3.5 paired with global 32) |
+| `audio_latency` | `48`, `64` | PCSX-ReARMed `48` (v3.6 drift-guard mirror of global 48; pre-v3.5 was tighter-than-global 64); Mupen `64` (v3.6; +16 ms over global for E-core + GC + scheduler variance on 2P+3E A15; was `96` in v3.5 paired with global 32) |
 | `video_max_swapchain_images` | `3` | v3.3 Tier 2 pins (Mupen + PCSX); triple-buffer absorbs frame-time variance on no-JIT interpreter stack |
 | `audio_sync` | `false` | v3.3 Mupen pin only; video-driven pacing drops frames cleanly vs pitch rubber-band. PCSX stays global `true` (paired with core-level `frameskip_type = "auto_threshold"`) |
 | `autosave_interval` | `0` | v3.3 Tier 2 pins (Mupen + PCSX); prevents purgeable-cache stall from SRAM/memcard write every 2.5 min |

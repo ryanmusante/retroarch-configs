@@ -1,3 +1,38 @@
+2026-04-22  Ryan Musante
+
+- v3.7: 4 documentation-only factual corrections; 0 .cfg / .opt
+  key value changes. Totals unchanged: cfg 55, opt 27.
+
+  README:
+  - §1 Mupen row: "A15 is 2P+4E; fallbacks" → "A15 is 2P+3E
+    (binned, 1 E-core fused off); fallbacks". Apple TV 4K 3rd
+    Gen ships a binned A15 with one efficiency core fused off,
+    a distinct variant from the iPhone 13/14 A15 despite
+    sharing the marketing name.
+  - §4 `audio_latency` row: "scheduler variance on 2P+4E A15"
+    → "scheduler variance on 2P+3E A15".
+
+  `Mupen64Plus-Next.cfg` (9 keys; all values unchanged):
+  - Line 15 inline comment: "(2P+4E A15)" → "(2P+3E binned A15)".
+
+  `Mupen64Plus-Next.opt` (6 keys; all values unchanged):
+  - Line 16 inline comment: "(2P+4E)" → "(2P+3E binned)".
+
+  `CHANGELOG.md`:
+  - Prior v3.3 / v3.5 / v3.6 entries corrected in-place at
+    4 locations where they stated 2P+4E. The v3.3 `.opt` note
+    also corrects the derivative claim that "all threads"
+    dispatches 6 RDP workers — on 2P+3E it dispatches 5.
+
+  All 8 `.cfg` / `.opt` key=value lines byte-identical to v3.6.
+
+  Version badge 3.6 → 3.7. Companion bumped to v3.7 (README
+  §6/§9/§10 doc-only edits for 2P+4E → 2P+3E correction plus
+  #16685 Known Issue addition).
+
+  Sources: https://en.wikipedia.org/wiki/Apple_A15;
+  https://www.macrumors.com/2022/11/14/new-apple-tv-5-core-cpu/
+
 2026-04-21  Ryan Musante
 
 - v3.6: 1 .cfg value change + 1 .cfg comment doc-sync.
@@ -8,7 +43,7 @@
   - `audio_latency` "96" → "64" (HIGH; paired with companion
     `retroarch.cfg` v3.6 global change "32" → "48". New Tier 2
     pin is +16 ms over global for E-core + GC + scheduler
-    variance on 2P+4E A15; v3.5 +64 margin was
+    variance on 2P+3E A15; v3.5 +64 margin was
     overprovisioned against the aggressive global 32).
   - Inline comment updated to reflect new absolute value and
     +16 ms rationale.
@@ -77,11 +112,11 @@
 
 - v3.3: 2 .cfg files modified (+6 keys), 1 .opt value change.
   Restores Mupen v1.56 stutter pins + adds Tier 2 parity on PCSX
-  + tunes Angrylion multithread for A15's 2P+4E cluster.
+  + tunes Angrylion multithread for A15's 2P+3E cluster.
 
   `Mupen64Plus-Next.cfg` (5 → 9 keys):
   - `audio_latency = "96"` (HIGH; +32 ms over global 64 for E-core
-    stragglers + GC + scheduler variance on 2P+4E A15).
+    stragglers + GC + scheduler variance on 2P+3E A15).
   - `video_max_swapchain_images = "3"` (HIGH; absorbs frame-time
     variance on CPU-bound Tier 2 core; Metal triple-buffer no
     pacing penalty).
@@ -95,7 +130,7 @@
 
   `Mupen64Plus-Next.opt` (1 value):
   - `mupen64plus-angrylion-multithread` "all threads" → "2"
-    (HIGH; A15 2P+4E; "all threads" dispatches 6 RDP workers,
+    (HIGH; A15 2P+3E; "all threads" dispatches 5 RDP workers,
     E-core tail latency drives audio stutter; "2" pins to P-cores;
     fallbacks "3", "4"; do not revert to "all threads" on
     heterogeneous ARM).
@@ -121,24 +156,3 @@
     parity correction).
   - Version badge 3.2 → 3.3. Companion bumped to v3.3
     (`fastforward_ratio` 0.0 → 5.0; cfg 65 keys unchanged).
-
-2026-04-19  Ryan Musante
-
-- v3.2: 2 .opt enum-mismatch correctness fixes.
-  - `mGBA.opt`: `mgba_color_correction` "Game Boy Advance" → "Auto"
-    (HIGH; prior value was the display label, not the internal
-    enum OFF/GBA/GBC/Auto. RetroArch matched on internal value
-    via `string_is_equal`, so the label silently failed match and
-    fell back to OFF — color correction has been effectively
-    disabled since introduction. Auto chosen over GBA because
-    the core handles GB/GBC/GBA per §1 — Auto applies per-system
-    correction. Real behavior change.).
-  - `mGBA.opt` header updated.
-  - `Genesis Plus GX.opt`: `genesis_plus_gx_audio_filter` "off" →
-    "disabled" (MED; "off" was outside enum disabled/low-pass/EQ
-    and silently fell back to default disabled — same effect.
-    Correctness only.).
-  - opt unchanged at 27, cfg unchanged at 49.
-  - README §1 Genesis + mGBA rows: v3.2 markers appended.
-  - Version badge 3.1 → 3.2. Companion bumped to v3.2 (no
-    `retroarch.cfg` value changes; 2 stale README rows removed).
