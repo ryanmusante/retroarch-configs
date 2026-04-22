@@ -13,7 +13,7 @@ mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 
 # === Video ===
-# angrylion-multithread="2" pins RDP workers to A15 P-cores (2P+4E).
+# angrylion-multithread="2" pins RDP workers to A15 P-cores (2P+3E binned).
 # Fallbacks if too serial: "3" (v2.93 default), then "4". Do NOT revert
 # to "all threads" — upstream default targets desktop homogeneous cores
 # and is inappropriate for heterogeneous ARM (E-core tail latency = stutter).
