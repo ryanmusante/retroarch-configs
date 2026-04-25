@@ -1,5 +1,28 @@
 2026-04-24  Ryan Musante
 
+- v3.18: paired doc-correctness sync; 0 key-value changes.
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.17 -> v3.18 (8 files; bodies byte-identical to v3.17).
+  * config/*.opt: unchanged (no version stamps; frontend-version-
+    independent per v3.12 design; 8 files).
+  * README.md: §4 Frontend Override Keys `autosave_interval` row
+    rationale "every 2.5 min" -> "every 5 min" -- mirrors companion
+    `retroarch.cfg` global which has shipped 300 s since v3.5 (claim
+    was stale against shipped value).
+  * README.md: badge 3.17 -> 3.18.
+  * CHANGELOG.md: trim v3.13 entry per 5-release retention; retained
+    entries are now v3.14-v3.18.
+  * Companion v3.18: retroarch.cfg byte-identical to v3.17 except
+    header stamp v3.17 -> v3.18 (77 keys unchanged); README §7
+    Hotkeys callout `autosave_interval` "150" -> "300", "2.5 min" ->
+    "5 min"; §7 Additional settings adds Menu row for
+    `menu_enable_widgets = "true"` (drift-guard on upstream default;
+    OSD widget gate for task notifications -- the last `retroarch.cfg`
+    key still undocumented in §7).
+  * cfg 30, opt 28, cfg+opt 58 -- unchanged.
+
+2026-04-24  Ryan Musante
+
 - v3.17: paired stamp bump; 0 key-value changes.
   * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
     stamps v3.16 -> v3.17 (8 files; bodies byte-identical to v3.16).
@@ -104,22 +127,4 @@
   * Companion v3.14: retroarch.cfg byte-identical to v3.13 except
     header stamp; 80 keys unchanged; README landing paragraph
     tightened for GitHub style.
-  * cfg 32, opt 28, cfg+opt 60 -- unchanged.
-
-2026-04-24  Ryan Musante
-
-- v3.13: doc-correctness pass + stamp bump; 0 key-value changes.
-  * config/*.cfg: bump stamps v3.12 -> v3.13 (8 files; bodies byte-
-    identical to v3.12).
-  * config/*.opt: unchanged (8 files).
-  * README.md: §4 Frontend Override Keys `audio_latency` row drops
-    ambiguous "pre-v3.5 was tighter-than-global 64" clause (pre-v3.5
-    global was also 64 per companion §7 history; cannot be tighter
-    than global when equal); badge 3.12 -> 3.13.
-  * CHANGELOG.md: v3.12 historical `fps_show` rationale patched
-    (text-only; preserves key-swap narrative and 80-key count).
-  * Companion v3.13: retroarch.cfg byte-identical to v3.12 except
-    header stamp; README §7 `fps_show` row rationale corrected;
-    §7 adds rows for `menu_show_sublabels` and `log_verbosity`
-    (pre-v3.5 shipped, previously undocumented).
   * cfg 32, opt 28, cfg+opt 60 -- unchanged.

@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-3.17-blue)
+![version](https://img.shields.io/badge/version-3.18-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -89,7 +89,7 @@ Keys actually set in one or more shipped `.cfg` files.
 | `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform force-disable) |
 | `audio_latency` | `48`, `64` | PCSX-ReARMed `48` (v3.6 drift-guard mirror of global 48); Mupen `64` (v3.10 revert; was `96` in v3.9, `64` v3.6–v3.8; +16 ms over global 48 is sufficient when paired with v3.9's `audio_sync = "true"` + `FrameDuping = "True"` stutter mitigations) |
 | `audio_sync` | `true` | Both Tier 2 cores inherit/mirror global `true` as of v3.9. Mupen flipped `false` → `true` in v3.9 (was `false` v3.3–v3.8 — the "drop frames cleanly" rationale traded audible audio gaps for pitch rubber-band, but DRC <0.5% pitch shift is imperceptible; audio gaps always are). PCSX stays true (paired with core-level `frameskip_type = "auto_threshold"` for audio buffer pressure handling) |
-| `autosave_interval` | `0` | v3.3 Tier 2 pins (Mupen + PCSX); prevents purgeable-cache stall from SRAM/memcard write every 2.5 min |
+| `autosave_interval` | `0` | v3.3 Tier 2 pins (Mupen + PCSX); prevents purgeable-cache stall from SRAM/memcard write every 5 min |
 | `video_scale_integer` | `true` | PCSX-ReARMed only (Tier 2 explicit drift-guard mirror of global); Tier 1 cores inherit global `"true"` (v3.11 removed pins — integer overscale behavior preserved by global fallback) |
 | `video_scale_integer_scaling` | `1` | All Tier 1 + PCSX; integer overscale mode at 4K. PS1 variable width may shift borders |
 | `video_frame_delay_auto` | `false` | Mupen `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201) N64 incompat); Tier 1 + PCSX inherit global `"true"` (v3.11 removed Tier 1 drift-guard pins; PCSX has always inherited) |
