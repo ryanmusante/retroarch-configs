@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-3.7-blue)
+![version](https://img.shields.io/badge/version-3.16-blue)
 ![cores](https://img.shields.io/badge/cores-8-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -8,7 +8,7 @@ Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K.
 
 `.cfg` files keep only non-global frontend keys plus explicit drift-guard pins (see §4). `.opt` files keep only non-default core settings. No `video_shader` is set anywhere — users assign presets via Quick Menu → Shaders → Save Core Preset (see §5).
 
-[changelog](CHANGELOG.md)
+See [CHANGELOG](CHANGELOG.md) for release history.
 
 ## Table of Contents
 
@@ -30,14 +30,14 @@ Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for Apple TV 4K.
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Notes |
 |------|---------|------|--------|--------|-------|
-| Beetle PCE Fast | PC Engine / TG-16 | 1 | 6 | 3 | Integer overscale 256×240 @ 4K; Run Ahead 2 (single instance; CD-safe per [libretro/beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127)); `pce_fast_cdimagecache = "enabled"`; `pce_fast_cdspeed = "4"` (may desync Ys IV / Dracula X — revert per-game); `pce_fast_nospritelimit = "enabled"` |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 7 | 0 | Integer overscale 224p–304p; Run Ahead 2 frames with `run_ahead_secondary_instance = "true"` ([#16374](https://github.com/libretro/RetroArch/issues/16374) — per core maintainer); `rewind_enable = "false"` ([#16374](https://github.com/libretro/RetroArch/issues/16374)); `.opt` placeholder (per-game only) |
-| Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 6 | 6 | `genesis_plus_gx_ym2612 = "mame (ym2612)"`; `genesis_plus_gx_audio_filter = "disabled"` (v3.1 off; v3.2 enum fix); `genesis_plus_gx_no_sprite_limit = "enabled"`; `genesis_plus_gx_render = "single field"`; `genesis_plus_gx_system_bram = "per game"` + `genesis_plus_gx_cart_bram = "per game"`; integer overscale 224p; Run Ahead |
-| Mesen | NES | 1 | 6 | 2 | Integer overscale 224p; `mesen_nospritelimit = "enabled"`; `mesen_reduce_dmc_popping = "disabled"` (pops possible on Skate or Die 2, Ninja Gaiden III — restore per-game); Run Ahead |
-| mGBA | GB / GBC / GBA | 1 | 6 | 3 | Integer overscale GBA 240×160; `mgba_interframe_blending = "disabled"` (flicker on Zelda MC, F-Zero GP Legend, MK SC); `mgba_audio_low_pass_filter = "disabled"`; `mgba_color_correction = "Auto"` (v3.2 enum fix — now actually applies); Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
-| Snes9x | SNES | 1 | 6 | 1 | Integer overscale 224p; `snes9x_reduce_sprite_flicker = "enabled"`; Run Ahead |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 9 | 6 | No JIT; `mupen64plus-cpucore = "cached_interpreter"`; `mupen64plus-rdp-plugin = "angrylion"` + `mupen64plus-rsp-plugin = "cxd4"` — **platform-forced on Metal build** (GLideN64 needs GL, Parallel-RDP needs Vulkan, dynarec needs JIT). `mupen64plus-43screensize = "320x240"`; `mupen64plus-pak1 = "rumble"`. `mupen64plus-angrylion-multithread = "2"` (v3.3 P-core pin; A15 is 2P+3E (binned, 1 E-core fused off); fallbacks `"3"`, `"4"`). Pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"`, `audio_latency = "64"` (v3.6; was `"96"` in v3.5 when global was `"32"`), `video_max_swapchain_images = "3"`, `audio_sync = "false"`, `autosave_interval = "0"` |
-| PCSX-ReARMed | PlayStation 1 | 2 | 9 | 6 | No JIT (`pcsx_rearmed_drc = "disabled"`); `pcsx_rearmed_psxclock = "100"`; `pcsx_rearmed_gpu_thread_rendering = "async"`; `audio_latency = "48"`; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `run_ahead_enabled = "false"`; `rewind_enable = "false"`; integer overscale (variable 256–640). `pcsx_rearmed_frameskip_type = "auto_threshold"` + `pcsx_rearmed_frameskip_threshold = "33"` (Spyro 2/3, THPS, Tekken 3). `pcsx_rearmed_cd_readahead = "333000"` (~780 MB precache — **never Save from Core Options menu; silently clamped**). v3.3 adds: `video_max_swapchain_images = "3"`, `autosave_interval = "0"` (prevents memcard-write stall) |
+| Beetle PCE Fast | PC Engine / TG-16 | 1 | 2 | 3 | Integer overscale 256×240 @ 4K; Run Ahead 2 (single instance; CD-safe per [libretro/beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127)); `pce_fast_cdimagecache = "enabled"`; `pce_fast_cdspeed = "4"` (may desync Ys IV / Dracula X — revert per-game); `pce_fast_nospritelimit = "enabled"` |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 4 | 0 | Integer overscale 224p–304p; Run Ahead 2 frames with `run_ahead_secondary_instance = "true"` ([#16374](https://github.com/libretro/RetroArch/issues/16374) — per core maintainer); `rewind_enable = "false"` ([#16374](https://github.com/libretro/RetroArch/issues/16374)); `.opt` placeholder (per-game only) |
+| Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 6 | `genesis_plus_gx_ym2612 = "mame (ym2612)"`; `genesis_plus_gx_audio_filter = "disabled"` (v3.1 off; v3.2 enum fix); `genesis_plus_gx_no_sprite_limit = "enabled"`; `genesis_plus_gx_render = "single field"`; `genesis_plus_gx_system_bram = "per game"` + `genesis_plus_gx_cart_bram = "per game"`; integer overscale 224p; Run Ahead |
+| Mesen | NES | 1 | 2 | 2 | Integer overscale 224p; `mesen_nospritelimit = "enabled"`; `mesen_reduce_dmc_popping = "disabled"` (pops possible on Skate or Die 2, Ninja Gaiden III — restore per-game); Run Ahead |
+| mGBA | GB / GBC / GBA | 1 | 2 | 3 | Integer overscale GBA 240×160; `mgba_interframe_blending = "OFF"` (v3.9 enum fix — prior releases used `"disabled"` which is the UI label, not a valid key; core fell through to default "OFF" silently. Same class of bug as the v3.2 `color_correction` fix. Flicker on Zelda MC, F-Zero GP Legend, MK SC); `mgba_audio_low_pass_filter = "disabled"`; `mgba_color_correction = "Auto"` (v3.2 enum fix — now actually applies); Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
+| Snes9x | SNES | 1 | 2 | 1 | Integer overscale 224p; `snes9x_reduce_sprite_flicker = "enabled"`; Run Ahead |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 7 | No JIT; `mupen64plus-cpucore = "cached_interpreter"`; `mupen64plus-rdp-plugin = "angrylion"` + `mupen64plus-rsp-plugin = "cxd4"` — **platform-forced on Metal build** (GLideN64 needs GL, Parallel-RDP needs Vulkan, dynarec needs JIT). `mupen64plus-43screensize = "320x240"`; `mupen64plus-pak1 = "rumble"`. `mupen64plus-angrylion-multithread = "2"` (v3.3 P-core pin; A15 is 2P+3E (binned, 1 E-core fused off); fallbacks `"3"`, `"4"`). v3.9 `mupen64plus-FrameDuping = "True"` (Switch-parity smoothing for low-end/no-JIT stacks; default `True` upstream on `HAVE_LIBNX`, `False` elsewhere — Apple TV A15 matches the Switch profile). Pins: `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)), `video_frame_delay_auto = "false"` ([#14201](https://github.com/libretro/RetroArch/issues/14201)), `rewind_enable = "false"` ([#18300](https://github.com/libretro/RetroArch/issues/18300)), `run_ahead_enabled = "false"`, `audio_latency = "64"` (v3.10; was `"96"` in v3.9 — reverted to v3.6–v3.8 value; +16 ms over global 48 is sufficient when paired with v3.9's `audio_sync = "true"` + `FrameDuping = "True"` mitigations), `audio_sync = "true"` (v3.9; was `"false"` in v3.3–v3.8 — DRC <0.5% pitch shift is imperceptible and prevents audible frame drops), `autosave_interval = "0"` |
+| PCSX-ReARMed | PlayStation 1 | 2 | 8 | 6 | No JIT (`pcsx_rearmed_drc = "disabled"`); `pcsx_rearmed_psxclock = "100"`; `pcsx_rearmed_gpu_thread_rendering = "enabled"` (v3.15 fix — was `"async"` in v3.3–v3.14 which is not a valid enum value per `pcsx_rearmed_opts.h` L334-348 ({auto, disabled, enabled}); silently fell back to default `"auto"`); `audio_latency = "48"`; `video_threaded = "false"` ([#14978](https://github.com/libretro/RetroArch/issues/14978)); `run_ahead_enabled = "false"`; `rewind_enable = "false"`; integer overscale (variable 256–640). `pcsx_rearmed_frameskip_type = "auto_threshold"` + `pcsx_rearmed_frameskip_threshold = "33"` (Spyro 2/3, THPS, Tekken 3). `pcsx_rearmed_cd_readahead = "333000"` (~780 MB precache; `V(333000)` is in the dropdown enum on non-3DS/non-Vita platforms per `pcsx_rearmed_opts.h` L186-189). v3.3 adds: `autosave_interval = "0"` (prevents memcard-write stall) |
 
 ## 2. File Structure
 
@@ -85,19 +85,17 @@ Keys actually set in one or more shipped `.cfg` files.
 | Key | Values | Purpose |
 |-----|--------|---------|
 | `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true`; Tier 2 (PCSX-ReARMed, Mupen64Plus-Next) explicit `false` (interpreter safety; HW-GL serialize breakage) |
-| `run_ahead_frames` | `2` | All 6 Tier 1 cores at 2-frame parity |
-| `run_ahead_secondary_instance` | `true`, `false` | 7 static cores `false` (drift-guard); FBN `true` ([#16374](https://github.com/libretro/RetroArch/issues/16374)) |
+| `run_ahead_secondary_instance` | `true`, `false` | FBN `true` ([#16374](https://github.com/libretro/RetroArch/issues/16374)); Tier 2 Mupen + PCSX explicit `false`; Tier 1 non-FBN cores inherit global `"false"` (v3.11 removed drift-guard pins from Beetle PCE, Genesis Plus GX, Mesen, Snes9x, mGBA) |
 | `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978) Apple-platform force-disable) |
-| `audio_latency` | `48`, `64` | PCSX-ReARMed `48` (v3.6 drift-guard mirror of global 48; pre-v3.5 was tighter-than-global 64); Mupen `64` (v3.6; +16 ms over global for E-core + GC + scheduler variance on 2P+3E A15; was `96` in v3.5 paired with global 32) |
-| `video_max_swapchain_images` | `3` | v3.3 Tier 2 pins (Mupen + PCSX); triple-buffer absorbs frame-time variance on no-JIT interpreter stack |
-| `audio_sync` | `false` | v3.3 Mupen pin only; video-driven pacing drops frames cleanly vs pitch rubber-band. PCSX stays global `true` (paired with core-level `frameskip_type = "auto_threshold"`) |
+| `audio_latency` | `48`, `64` | PCSX-ReARMed `48` (v3.6 drift-guard mirror of global 48); Mupen `64` (v3.10 revert; was `96` in v3.9, `64` v3.6–v3.8; +16 ms over global 48 is sufficient when paired with v3.9's `audio_sync = "true"` + `FrameDuping = "True"` stutter mitigations) |
+| `audio_sync` | `true` | Both Tier 2 cores inherit/mirror global `true` as of v3.9. Mupen flipped `false` → `true` in v3.9 (was `false` v3.3–v3.8 — the "drop frames cleanly" rationale traded audible audio gaps for pitch rubber-band, but DRC <0.5% pitch shift is imperceptible; audio gaps always are). PCSX stays true (paired with core-level `frameskip_type = "auto_threshold"` for audio buffer pressure handling) |
 | `autosave_interval` | `0` | v3.3 Tier 2 pins (Mupen + PCSX); prevents purgeable-cache stall from SRAM/memcard write every 2.5 min |
-| `video_scale_integer` | `true` | All Tier 1 + PCSX; drift-guard mirror of global pin |
+| `video_scale_integer` | `true` | PCSX-ReARMed only (Tier 2 explicit drift-guard mirror of global); Tier 1 cores inherit global `"true"` (v3.11 removed pins — integer overscale behavior preserved by global fallback) |
 | `video_scale_integer_scaling` | `1` | All Tier 1 + PCSX; integer overscale mode at 4K. PS1 variable width may shift borders |
-| `video_frame_delay_auto` | `true`, `false` | Tier 1 `true`; Mupen `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201)); PCSX inherits |
+| `video_frame_delay_auto` | `false` | Mupen `false` ([#14201](https://github.com/libretro/RetroArch/issues/14201) N64 incompat); Tier 1 + PCSX inherit global `"true"` (v3.11 removed Tier 1 drift-guard pins; PCSX has always inherited) |
 | `rewind_enable` | `false` | FBN ([#16374](https://github.com/libretro/RetroArch/issues/16374)) + Mupen ([#18300](https://github.com/libretro/RetroArch/issues/18300)) + PCSX (defensive; rewind memory cost on no-JIT A15) |
 
-Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_hide_warnings`. `video_shader` is not set either per-core or globally — users assign presets via RetroArch's Save Core Preset UI (see §5).
+Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `preemptive_frames_enable`, `audio_resampler_quality`, `run_ahead_hide_warnings`, `run_ahead_frames` (v3.11 — global `"2"` matches the Tier 1 intent; Tier 2 cores have `run_ahead_enabled = "false"` which makes the frame count moot). `video_shader` is not set either per-core or globally — users assign presets via RetroArch's Save Core Preset UI (see §5).
 
 ## 5. Shaders
 
@@ -115,12 +113,12 @@ RetroArch loads per-core overrides only from a specific directory under the Retr
 
 ### Apple TV / tvOS
 
-RetroArch config root on tvOS: `Documents/RetroArch/config/` inside the app's sandboxed container.
+RetroArch config root on tvOS: `config/` from the WebDAV / web-interface root (which maps to the app's `Documents/RetroArch/` sandbox container). Path references below are WebDAV-relative to match the transfer flow documented in [retroarch-appletv4k §4](https://github.com/ryanmusante/retroarch-appletv4k#4-file-transfers).
 
 For each core, create a directory named exactly after the core (spaces included) and place both the `.cfg` and `.opt` files inside:
 
 ```
-Documents/RetroArch/config/
+config/
 ├── Beetle PCE Fast/
 │   ├── Beetle PCE Fast.cfg
 │   └── Beetle PCE Fast.opt
