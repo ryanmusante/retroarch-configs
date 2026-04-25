@@ -1,9 +1,4 @@
-# Mupen64Plus-Next — N64 core options (v3.3 Angrylion-MT heterogeneous-ARM tune)
-# Platform-forced plugin stack on tvOS Metal-only:
-#   rdp-plugin=angrylion        — only non-GL/non-Vulkan RDP option
-#   rsp-plugin=cxd4             — only viable RSP under Angrylion (Parallel-RSP needs JIT)
-#   cpucore=cached_interpreter  — dynamic_recompiler is no-op under App Store sandbox
-# 6 keys
+# Mupen64Plus-Next.opt · N64 core options (v3.3 Angrylion-MT heterogeneous-ARM tune) · platform-forced plugin stack on tvOS Metal-only: rdp-plugin=angrylion (only non-GL/non-Vulkan RDP option) + rsp-plugin=cxd4 (only viable RSP under Angrylion; Parallel-RSP needs JIT) + cpucore=cached_interpreter (dynamic_recompiler is no-op under App Store sandbox) · 7 keys
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
@@ -13,12 +8,13 @@ mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 
 # === Video ===
-# angrylion-multithread="2" pins RDP workers to A15 P-cores (2P+3E binned).
-# Fallbacks if too serial: "3" (v2.93 default), then "4". Do NOT revert
-# to "all threads" — upstream default targets desktop homogeneous cores
-# and is inappropriate for heterogeneous ARM (E-core tail latency = stutter).
+# angrylion-multithread="2" pins RDP workers to A15 P-cores (2P+3E binned); fallbacks if too serial: "3" (v2.93 default) then "4"; do NOT revert to "all threads" — upstream default targets desktop homogeneous cores, inappropriate for heterogeneous ARM (E-core tail latency = stutter)
 mupen64plus-43screensize = "320x240"
 mupen64plus-angrylion-multithread = "2"
 
 # === Input (controller paks) ===
 mupen64plus-pak1 = "rumble"
+
+# === Framerate smoothing ===
+# FrameDuping=True mirrors Switch default (HAVE_LIBNX); smooths frame cadence on low-end/no-JIT stacks where interpreter+sw-RDP timing is variable; added v3.9 as part of Mupen audio-stutter mitigation pass (paired with audio_latency 64→96 and audio_sync false→true in companion .cfg)
+mupen64plus-FrameDuping = "True"

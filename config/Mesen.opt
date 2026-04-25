@@ -1,11 +1,8 @@
-# Mesen — NES core options
-# No sprite limit · DMC popping correction off (max CPU)
-# 2 keys
+# Mesen.opt · NES core options · no sprite limit + DMC popping correction off (max CPU) · 2 keys
 
 # === Rendering ===
 mesen_nospritelimit = "enabled"
 
 # === Audio ===
-# reduce_dmc_popping=disabled — v3.1; sub-1% CPU saving
-# Pops possible on DPCM-heavy titles (Skate or Die 2, Ninja Gaiden III) — restore per-game
+# reduce_dmc_popping=disabled (v3.1; sub-1% CPU saving; pops possible on DPCM-heavy titles like Skate or Die 2 / Ninja Gaiden III — restore per-game)
 mesen_reduce_dmc_popping = "disabled"
