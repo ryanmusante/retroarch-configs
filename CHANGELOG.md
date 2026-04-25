@@ -1,5 +1,25 @@
 2026-04-24  Ryan Musante
 
+- v3.17: paired stamp bump; 0 key-value changes.
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.16 -> v3.17 (8 files; bodies byte-identical to v3.16).
+  * config/*.opt: unchanged (no version stamps; frontend-version-
+    independent per v3.12 design; 8 files).
+  * README.md: badge 3.16 -> 3.17.
+  * CHANGELOG.md: trim v3.12 entry per 5-release retention; retained
+    entries are now v3.13-v3.17.
+  * Companion v3.17: README.md `#### Baseline (v3.16 · 77 keys)` H4
+    section removed (8 bullets covering Metal-path latency, command-
+    surface/HDR hardening, XMB animation kill, A15 appearance pins,
+    FPS+task notifications, 60 Hz SDR seed, shader pipeline, Run
+    Ahead) and trailing `See [CHANGELOG]` pointer; per-key
+    documentation retained in §7 Configuration. retroarch.cfg
+    byte-identical to v3.16 except header stamp + "paired with
+    retroarch-configs" v3.16 -> v3.17 (77 keys unchanged).
+  * cfg 30, opt 28, cfg+opt 58 -- unchanged.
+
+2026-04-24  Ryan Musante
+
 - v3.16: doc-correctness sync; 0 key-value changes.
   * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
     stamps v3.15 -> v3.16 (8 files; bodies byte-identical to v3.15).
@@ -102,26 +122,4 @@
     header stamp; README §7 `fps_show` row rationale corrected;
     §7 adds rows for `menu_show_sublabels` and `log_verbosity`
     (pre-v3.5 shipped, previously undocumented).
-  * cfg 32, opt 28, cfg+opt 60 -- unchanged.
-
-2026-04-24  Ryan Musante
-
-- v3.12: SYNC + comment-style unification pass; 0 key-value changes.
-  * config/*.cfg: bump "paired with retroarch-appletv4k" stamps
-    v3.11 -> v3.12 (8 files); collapse multi-line file-header comment
-    blocks to single-line form with `·` separators (same content, no
-    line-wrap).
-  * config/*.opt: collapse multi-line inline rationale blocks to
-    single-line form with `;` clause separators (8 files). `PCSX-
-    ReARMed.opt` WARNING block for `cd_readahead = "333000"` and
-    `Mupen64Plus-Next.opt` angrylion-multithread fallback-ladder
-    notes reduced to single-line; content preserved verbatim.
-  * config/*.{cfg,opt}: key-value content byte-identical to v3.11
-    across all 16 files.
-  * README.md: badge 3.11 -> 3.12.
-  * CHANGELOG.md: trim v3.7 entry per 5-release retention.
-  * Companion v3.12: retroarch.cfg net-zero key swap (add
-    `fps_show = "true"`, remove `netplay_start_as_spectator = "false"`);
-    Netplay section header drops "spectator" mention; 4-line file
-    header collapsed to single-line form.
   * cfg 32, opt 28, cfg+opt 60 -- unchanged.
