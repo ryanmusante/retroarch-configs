@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-3.23-blue)
+![version](https://img.shields.io/badge/version-3.24-blue)
 ![cores](https://img.shields.io/badge/cores-7-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -95,7 +95,7 @@ Keys intentionally *not* set per-core (inherited from global `retroarch.cfg`): `
 
 ## 5. Shaders
 
-Global `retroarch.cfg` leaves the shader pipeline gate on (`video_shader_enable = "true"`) but does **not** set a global `video_shader` preset — every core starts without a preset until one is assigned via RetroArch's Save Core Preset / Save Game Preset UI (see `retroarch-appletv4k/README.md` §8), which writes dedicated `.slangp` files rather than `.cfg` entries. None of the 8 per-core `.cfg` files set `video_shader` either. `crt-easymode.slangp` is documented in the companion as the recommended starting point (single-pass, integer-scale safe with no shader geometry, cleaner 4K phosphor mask than crt-aperture) but is not auto-loaded. mGBA users who prefer the handheld-LCD aesthetic should apply `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` via Save Core Preset.
+Global `retroarch.cfg` leaves the shader pipeline gate on (`video_shader_enable = "true"`) but does **not** set a global `video_shader` preset — every core starts without a preset until one is assigned via RetroArch's Save Core Preset / Save Game Preset UI (see `retroarch-appletv4k/README.md` §8), which writes dedicated `.slangp` files rather than `.cfg` entries. None of the 7 per-core `.cfg` files set `video_shader` either. `crt/zfast-crt.slangp` is documented in the companion as the recommended starting point (single-pass, integer-scale safe with no shader geometry, designed for low-end GPUs) but is not auto-loaded. mGBA users who prefer the handheld-LCD aesthetic should apply `handheld/lcd-grid-v2.slangp` via Save Core Preset.
 
 ## 6. Installation
 

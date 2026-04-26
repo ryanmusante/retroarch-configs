@@ -1,5 +1,54 @@
 2026-04-25  Ryan Musante
 
+- v3.24: paired README §5 shader-recommendation retarget; 0 file-content
+  changes.
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.23 -> v3.24 (7 files; bodies byte-identical to v3.23).
+  * config/*.opt: unchanged (no version stamps; frontend-version-
+    independent per v3.12 design; 7 files).
+  * README.md: §5 Shaders retargets recommended-starting-point
+    reference from `crt-easymode.slangp` to `crt/zfast-crt.slangp`
+    (single-pass, integer-scale safe with no shader geometry,
+    designed for low-end GPUs). Drops the prior "cleaner 4K phosphor
+    mask than crt-aperture" comparative clause (no longer applicable
+    -- crt-aperture not in current lineup). Path corrected from
+    `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` to
+    `handheld/lcd-grid-v2.slangp` (matches companion §8 reference
+    style and RetroArch UI navigation context). mGBA LCD recommendation
+    target unchanged.
+  * README.md: §5 fixes stale "8 per-core `.cfg` files" -> "7 per-core
+    `.cfg` files". v3.22 dropped PCSX-ReARMed core (cores 8 -> 7);
+    §1 supported cores table and §2 file structure tree were updated
+    in that pass but §5 prose was missed.
+  * README.md: badge 3.23 -> 3.24.
+  * CHANGELOG.md: strip audit reference from retained v3.21 entry
+    (parenthetical clause inside `Companion v3.21` menu_pause_libretro
+    bullet) per editorial directive. Substantive technical rationale
+    preserved verbatim.
+  * CHANGELOG.md: trim v3.19 entry per 5-release retention; retained
+    entries are now v3.20-v3.24.
+  * Companion v3.24: retroarch.cfg byte-identical to v3.23 except
+    header stamp (73 keys unchanged). README intro stale "77-key"
+    -> "73-key" fix (drift since v3.19; intro paragraph was missed
+    in each subsequent README pass). README §8 Recommended presets
+    table 3 -> 2 rows (`crt/zfast-crt.slangp` Minimal cost as sole
+    CRT recommendation + `handheld/lcd-grid-v2.slangp` Minimal cost
+    as sole mGBA-LCD recommendation; replaces `crt-easymode` /
+    `crt-aperture` / `crt-geom`). §8 parameter callout retargeted
+    with verified zfast-crt impl parameters (BLURSCALEX, LOWLUMSCAN,
+    HILUMSCAN, BRIGHTBOOST, MASK_DARK, MASK_FADE -- sourced from
+    `crt/shaders/zfast_crt/zfast_crt_impl.inc` on libretro/slang-shaders
+    master). §8 "Integer Scaling Conflict" callout dropped (no longer
+    relevant to single-pass / integer-scale-safe lineup; multi-pass
+    shaders covered by surviving "Avoid on Apple TV" line). §8
+    "Handheld note" + step 3 cross-reference + "Applying ... per-core"
+    sentence retargeted from `crt-easymode` to `zfast-crt`. CHANGELOG
+    audit-reference strip from retained v3.21 entry per matching
+    editorial directive.
+  * cfg 22, opt 25, cfg+opt 47 -- unchanged.
+
+2026-04-25  Ryan Musante
+
 - v3.23: paired README de-versioning pass; 0 file-content changes.
   * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
     stamps v3.22 -> v3.23 (7 surviving files; bodies byte-identical
@@ -102,11 +151,10 @@
   * README.md: badge 3.20 -> 3.21; §1 Mupen `.opt` count 7 -> 10
     with 4P rumble note.
   * Companion v3.21: retroarch.cfg `menu_pause_libretro = "false"`
-    -> `"true"` (reverts to upstream default; closes longest-standing
-    MED finding from v3.18 audit -- Run Ahead operates on gameplay
-    frames, FF is held hotkey, neither benefits from menu non-pause;
-    pausing reduces thermal load on passive A15 + clean audio +
-    deterministic save-state at paused frame). retroarch.cfg
+    -> `"true"` (reverts to upstream default; Run Ahead operates on
+    gameplay frames, FF is held hotkey, neither benefits from menu
+    non-pause; pausing reduces thermal load on passive A15 + clean
+    audio + deterministic save-state at paused frame). retroarch.cfg
     restores 3 of 4 v3.20-removed DiD pins (`network_cmd_enable`,
     `network_remote_enable`, `netplay_use_mitm_server`) as
     drift-guards on real UDP/relay attack surfaces; platform-absent
@@ -130,24 +178,5 @@
     surviving Security/Netplay block: 4 keys (2 active hardening
     flips + 2 functional pins). Driver=null block (6 keys) untouched
     -- those actively skip driver init paths.
-  * cfg 30, opt 28, cfg+opt 58 -- unchanged.
-
-2026-04-25  Ryan Musante
-
-- v3.19: paired stamp bump; 0 file-content changes (this side).
-  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.18 -> v3.19 (8 files; bodies byte-identical to v3.18).
-  * config/*.opt: unchanged (no version stamps; frontend-version-
-    independent per v3.12 design; 8 files).
-  * README.md: badge 3.18 -> 3.19.
-  * CHANGELOG.md: trim v3.14 entry per 5-release retention; retained
-    entries are now v3.15-v3.19.
-  * Companion v3.19: retroarch.cfg removes 3 redundant defense-in-depth
-    drift-guard pins (`stdin_cmd_enable`, `camera_allow`, `location_allow`
-    -- all upstream defaults already `false`, all paired with
-    platform-absent surfaces or `null` driver pins, all triple-redundant
-    on Apple TV 4K); 77 -> 74 keys; README §7 Security row "stdin
-    Command, Camera, Location" dropped entirely with v3.19 disclosure
-    note in the table preamble.
   * cfg 30, opt 28, cfg+opt 58 -- unchanged.
 
