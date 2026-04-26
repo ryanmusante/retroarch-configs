@@ -1,130 +1,153 @@
-2026-04-24  Ryan Musante
+2026-04-25  Ryan Musante
 
-- v3.18: paired doc-correctness sync; 0 key-value changes.
+- v3.23: paired README de-versioning pass; 0 file-content changes.
   * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.17 -> v3.18 (8 files; bodies byte-identical to v3.17).
+    stamps v3.22 -> v3.23 (7 surviving files; bodies byte-identical
+    to v3.22).
+  * config/Mupen64Plus-Next.cfg: header drops "(v3.3 stutter
+    mitigations)" inline historical annotation; key body
+    byte-identical.
+  * config/Mupen64Plus-Next.opt: header drops "(v3.3 Angrylion-MT
+    heterogeneous-ARM tune)" and "(v3.21 P2-P4 parity for Mario Kart
+    64, Mario Party 1-3, GoldenEye, Perfect Dark, ProAm 64)" inline
+    historical annotations; pak2/3/4 inline comment drops "v3.21:"
+    prefix; key body byte-identical.
+  * config/*.opt (other 6): unchanged.
+  * README.md: §1 supported cores table -- Genesis Plus GX row drops
+    "(v3.1 off; v3.2 enum fix)" annotation on `audio_filter`; mGBA
+    row drops "(v3.9 enum fix -- prior releases used 'disabled' which
+    is the UI label, not a valid key; core fell through to default
+    'OFF' silently. Same class of bug as the v3.2 `color_correction`
+    fix...)" and "(v3.2 enum fix -- now actually applies)" annotations;
+    Mupen row drops "v3.21" / "v3.3" / "v3.9" annotations.
+  * README.md: §4 Frontend Override Keys table de-versioned across
+    5 row Notes columns (`run_ahead_secondary_instance`,
+    `audio_latency`, `audio_sync`, `autosave_interval`,
+    `video_frame_delay_auto`) plus the closing inherited-keys
+    paragraph (drops "v3.11" on `run_ahead_frames`).
+  * README.md: §11 Versioning drops historical re-alignment example
+    "(e.g. v3.0 re-aligned the two repos after they had evolved
+    independently at v2.95 / v1.57)".
+  * README.md: badge 3.22 -> 3.23.
+  * CHANGELOG.md: trim v3.18 entry per 5-release retention; retained
+    entries are now v3.19-v3.23.
+  * Companion v3.23: retroarch.cfg byte-identical to v3.22 except
+    header stamp (73 keys unchanged). README §7 Additional settings
+    preamble + table de-versioned across 14 rows; §7 Video table
+    de-versioned across 5 rows; §9 Mupen Tier 2 row de-versioned;
+    §10 Known Issues #4 de-versioned; §13 Versioning drops historical
+    re-alignment example. Editorial rule established: README narrative
+    no longer carries per-version history; CHANGELOG is the sole
+    record of what changed when.
+  * cfg 22, opt 25, cfg+opt 47 -- unchanged.
+
+2026-04-25  Ryan Musante
+
+- v3.22: PlayStation 1 / PCSX-ReARMed core retired; cores 8 -> 7.
+  cfg+opt 61 -> 47.
+  * config/PCSX-ReARMed.cfg deleted (-8 keys).
+  * config/PCSX-ReARMed.opt deleted (-6 keys).
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.21 -> v3.22 (7 surviving files; bodies byte-identical
+    to v3.21).
+  * config/*.opt: unchanged (no version stamps; frontend-version-
+    independent per v3.12 design; 7 surviving files).
+  * README.md: cores badge 8 -> 7; version badge 3.21 -> 3.22.
+  * README.md: §1 supported cores table drops PCSX-ReARMed row;
+    Mupen64Plus-Next row already updated v3.21 for `pak1/2/3/4 =
+    "rumble"` 4P parity (opt count 7 -> 10 retained).
+  * README.md: §2 file structure tree drops PCSX-ReARMed.cfg/.opt
+    entries; ship-count line "8 `.cfg` and 8 `.opt`" -> "7 `.cfg`
+    and 7 `.opt`".
+  * README.md: §4 Frontend Override Keys table de-PCSX'd across
+    9 rows -- `run_ahead_enabled`, `run_ahead_secondary_instance`,
+    `audio_latency` (now Mupen-only `64`), `audio_sync` (now
+    Mupen-only mirror of global), `autosave_interval` (now Mupen-only
+    pin), `video_scale_integer_scaling` (drops "+ PCSX" and PS1
+    variable-width caveat), `video_frame_delay_auto` (drops
+    "+ PCSX inherits"), `rewind_enable` (drops PCSX from list).
+    `video_scale_integer` row dropped entirely -- was
+    PCSX-ReARMed-only drift-guard mirror; no surviving core needs it.
+  * README.md: §7 install tree drops PCSX-ReARMed/ directory block.
+  * README.md: §8 Overclocking drops the `pcsx_rearmed_psxclock`
+    "exception" paragraph entirely; remaining text covers
+    `mesen_overclock_rate` + `snes9x_overclock` per-game guidance.
+  * CHANGELOG.md: trim v3.16 + v3.17 entries; retained entries are
+    now v3.18-v3.22 (5-release retention).
+  * Companion v3.22: retroarch.cfg byte-identical to v3.21 except
+    header stamp (73 keys unchanged); README §1 BIOS list, §4
+    filesystem layout, §5 ROM/BIOS tables, §7 video/audio rows, §8
+    shader recommendations table (9 -> 3 primary CRT shaders), §9
+    Tier 2 supported systems table all de-PCSX'd; §8 Recommended
+    presets retains `crt-easymode` + `crt-aperture` + `crt-geom`
+    only.
+  * cfg 22, opt 25, cfg+opt 47.
+
+2026-04-25  Ryan Musante
+
+- v3.21: paired Mupen 4P rumble parity; opt 28 -> 31 (Mupen +3 keys).
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.20 -> v3.21 (8 files; bodies byte-identical to v3.20).
+  * config/Mupen64Plus-Next.opt: 7 -> 10 keys -- add
+    `mupen64plus-pak2 = "rumble"`, `mupen64plus-pak3 = "rumble"`,
+    `mupen64plus-pak4 = "rumble"` for 4P N64 rumble parity
+    (Mario Kart 64, Mario Party 1-3, GoldenEye, Perfect Dark,
+    ProAm 64). pak1-4 enum {rumble, memory, transfer, none} parsed
+    identically per `mupen64plus-libretro-nx libretro.c` L757-820
+    `update_controllers()` (rumble -> PLUGIN_RAW). Per-game overrides
+    retain pak swap (e.g. Pokémon Stadium needs transfer pak).
+    Header "7 keys" -> "10 keys" with v3.21 4P parity rationale.
+  * config/*.opt: 7 of 8 unchanged; only `Mupen64Plus-Next.opt`
+    above.
+  * README.md: badge 3.20 -> 3.21; §1 Mupen `.opt` count 7 -> 10
+    with 4P rumble note.
+  * Companion v3.21: retroarch.cfg `menu_pause_libretro = "false"`
+    -> `"true"` (reverts to upstream default; closes longest-standing
+    MED finding from v3.18 audit -- Run Ahead operates on gameplay
+    frames, FF is held hotkey, neither benefits from menu non-pause;
+    pausing reduces thermal load on passive A15 + clean audio +
+    deterministic save-state at paused frame). retroarch.cfg
+    restores 3 of 4 v3.20-removed DiD pins (`network_cmd_enable`,
+    `network_remote_enable`, `netplay_use_mitm_server`) as
+    drift-guards on real UDP/relay attack surfaces; platform-absent
+    surfaces from v3.19 (`stdin_cmd_enable`, `camera_allow`,
+    `location_allow`) and `discord_allow` from v3.20 stay removed.
+    70 -> 73 keys.
+  * cfg 30, opt 28 -> 31, cfg+opt 58 -> 61.
+
+2026-04-25  Ryan Musante
+
+- v3.20: paired stamp bump; 0 file-content changes (this side).
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.19 -> v3.20 (8 files; bodies byte-identical to v3.19).
   * config/*.opt: unchanged (no version stamps; frontend-version-
     independent per v3.12 design; 8 files).
-  * README.md: §4 Frontend Override Keys `autosave_interval` row
-    rationale "every 2.5 min" -> "every 5 min" -- mirrors companion
-    `retroarch.cfg` global which has shipped 300 s since v3.5 (claim
-    was stale against shipped value).
-  * README.md: badge 3.17 -> 3.18.
-  * CHANGELOG.md: trim v3.13 entry per 5-release retention; retained
-    entries are now v3.14-v3.18.
-  * Companion v3.18: retroarch.cfg byte-identical to v3.17 except
-    header stamp v3.17 -> v3.18 (77 keys unchanged); README §7
-    Hotkeys callout `autosave_interval` "150" -> "300", "2.5 min" ->
-    "5 min"; §7 Additional settings adds Menu row for
-    `menu_enable_widgets = "true"` (drift-guard on upstream default;
-    OSD widget gate for task notifications -- the last `retroarch.cfg`
-    key still undocumented in §7).
+  * README.md: badge 3.19 -> 3.20.
+  * Companion v3.20: retroarch.cfg drops 4 more DiD drift-guard pins
+    (`network_cmd_enable`, `network_remote_enable`,
+    `netplay_use_mitm_server`, `discord_allow`); 74 -> 70 keys
+    (cumulative -7 since v3.18). All 4 were upstream-default `false`;
+    surviving Security/Netplay block: 4 keys (2 active hardening
+    flips + 2 functional pins). Driver=null block (6 keys) untouched
+    -- those actively skip driver init paths.
   * cfg 30, opt 28, cfg+opt 58 -- unchanged.
 
-2026-04-24  Ryan Musante
+2026-04-25  Ryan Musante
 
-- v3.17: paired stamp bump; 0 key-value changes.
+- v3.19: paired stamp bump; 0 file-content changes (this side).
   * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.16 -> v3.17 (8 files; bodies byte-identical to v3.16).
+    stamps v3.18 -> v3.19 (8 files; bodies byte-identical to v3.18).
   * config/*.opt: unchanged (no version stamps; frontend-version-
     independent per v3.12 design; 8 files).
-  * README.md: badge 3.16 -> 3.17.
-  * CHANGELOG.md: trim v3.12 entry per 5-release retention; retained
-    entries are now v3.13-v3.17.
-  * Companion v3.17: README.md `#### Baseline (v3.16 · 77 keys)` H4
-    section removed (8 bullets covering Metal-path latency, command-
-    surface/HDR hardening, XMB animation kill, A15 appearance pins,
-    FPS+task notifications, 60 Hz SDR seed, shader pipeline, Run
-    Ahead) and trailing `See [CHANGELOG]` pointer; per-key
-    documentation retained in §7 Configuration. retroarch.cfg
-    byte-identical to v3.16 except header stamp + "paired with
-    retroarch-configs" v3.16 -> v3.17 (77 keys unchanged).
+  * README.md: badge 3.18 -> 3.19.
+  * CHANGELOG.md: trim v3.14 entry per 5-release retention; retained
+    entries are now v3.15-v3.19.
+  * Companion v3.19: retroarch.cfg removes 3 redundant defense-in-depth
+    drift-guard pins (`stdin_cmd_enable`, `camera_allow`, `location_allow`
+    -- all upstream defaults already `false`, all paired with
+    platform-absent surfaces or `null` driver pins, all triple-redundant
+    on Apple TV 4K); 77 -> 74 keys; README §7 Security row "stdin
+    Command, Camera, Location" dropped entirely with v3.19 disclosure
+    note in the table preamble.
   * cfg 30, opt 28, cfg+opt 58 -- unchanged.
 
-2026-04-24  Ryan Musante
-
-- v3.16: doc-correctness sync; 0 key-value changes.
-  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.15 -> v3.16 (8 files; bodies byte-identical to v3.15).
-  * config/*.opt: unchanged (no version stamps; frontend-version-
-    independent per v3.12 design; 8 files).
-  * README.md: §7 path frame aligned to WebDAV-relative `config/<core>/`
-    matching companion §4; tree drops `Documents/RetroArch/` prefix
-    (native sandbox path that would resolve to a wrong location if
-    followed literally via the WebDAV transfer flow); leading prose
-    notes the WebDAV-to-sandbox mapping with cross-link to
-    companion §4.
-  * README.md: badge 3.15 -> 3.16.
-  * CHANGELOG.md: trim v3.11 entry per 5-release retention; retained
-    entries are now v3.12-v3.16.
-  * Companion v3.16: retroarch.cfg byte-identical to v3.15 except
-    header stamp (77 keys unchanged); README §7 Audio `audio_sync`
-    row corrected (v3.9 Mupen flip to "true"; was stale "v3.3 pins
-    false"); §7 Hotkeys callout `savestate_auto_load` reworded as
-    upstream-default rather than configured pin; baseline header
-    label v3.15 -> v3.16.
-  * cfg 30, opt 28, cfg+opt 58 -- unchanged.
-
-2026-04-24  Ryan Musante
-
-- v3.15: upstream-correctness pass; 4 file-content fixes across 3 files.
-  cfg+opt 60 -> 58.
-  * config/Mupen64Plus-Next.cfg: remove `video_max_swapchain_images = "3"`;
-    section header "(driver, swapchain, frame delay)" -> "(driver, frame
-    delay)"; rationale comment drops swapchain clause; 9 -> 8 keys.
-    Metal driver hardcodes `MAX_INFLIGHT 1` (`gfx/common/metal/
-    metal_common.h` L30) and never reads `video_max_swapchain_images`;
-    setting was a no-op despite documented "frame-time variance
-    absorption" rationale.
-  * config/PCSX-ReARMed.cfg: remove `video_max_swapchain_images = "3"`
-    (same Metal-ignored reason); section header "(driver, integer
-    overscale, swapchain)" -> "(driver, integer overscale)"; rationale
-    comment drops swapchain clause; 9 -> 8 keys.
-  * config/PCSX-ReARMed.opt: `pcsx_rearmed_gpu_thread_rendering`
-    "async" -> "enabled". Per `pcsx_rearmed_opts.h` L334-348 the valid
-    enum is {auto, disabled, enabled}; "async" string does not appear
-    anywhere in the core source; v3.3-v3.14 setting silently fell back
-    to default "auto". "enabled" makes threaded GPU rendering explicit
-    (matches "async GPU" rationale in original v3.3 header comment).
-  * config/PCSX-ReARMed.opt: header drops `cd_readahead` WARNING
-    block. `V(333000)` is in the dropdown enum on non-3DS/non-Vita
-    platforms (which includes tvOS) per `pcsx_rearmed_opts.h` L186-189;
-    menu-save will not silently truncate. Header "async GPU" wording
-    also updated to "enabled GPU thread".
-  * config/*.cfg: bump "paired with retroarch-appletv4k" stamps
-    v3.14 -> v3.15 (8 files).
-  * config/*.opt: unchanged except `PCSX-ReARMed.opt` above (8 files).
-  * README.md: badge 3.14 -> 3.15; §1 Mupen `.cfg` count 9 -> 8 with
-    `video_max_swapchain_images` mention dropped; §1 PCSX `.cfg` count
-    9 -> 8 with `gpu_thread_rendering "async" -> "enabled"` v3.15 fix
-    note + cd_readahead WARNING dropped + `video_max_swapchain_images`
-    mention dropped; §4 Frontend Override Keys table drops
-    `video_max_swapchain_images` row entirely.
-  * CHANGELOG.md: trim v3.10 entry per 5-release retention; retained
-    entries are now v3.11-v3.15.
-  * Companion v3.15: retroarch.cfg 80 -> 77 keys (remove
-    `video_frame_rest` -- key removed in RA v1.20.0; remove
-    `video_hdr_contrast` -- key never existed in v1.22.0; remove
-    `video_max_swapchain_images` -- Metal driver ignores; flip 2 of 3
-    `menu_xmb_animation_*` "2" -> "0" per upstream enum correctness
-    -- only `move_up_down` exposes a "None" value; raise
-    `audio_resampler_quality` "1" -> "2" per `audio_resampler.h`
-    enum LOWEST -> LOWER).
-  * cfg 30, opt 28, cfg+opt 58.
-
-2026-04-24  Ryan Musante
-
-- v3.14: doc format pass; kernel.org-style CHANGELOG trim.
-  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.13 -> v3.14 (8 files; bodies byte-identical to v3.13).
-  * config/*.opt: unchanged (no version stamps; frontend-version-
-    independent per v3.12 design; 8 files).
-  * README.md: badge 3.13 -> 3.14.
-  * CHANGELOG.md: rewrite all retained entries in kernel.org style
-    (file-first bullets, imperative mood, trimmed prose).
-  * CHANGELOG.md: trim v3.9 entry per 5-release retention; retained
-    entries are now v3.10-v3.14.
-  * Companion v3.14: retroarch.cfg byte-identical to v3.13 except
-    header stamp; 80 keys unchanged; README landing paragraph
-    tightened for GitHub style.
-  * cfg 32, opt 28, cfg+opt 60 -- unchanged.
