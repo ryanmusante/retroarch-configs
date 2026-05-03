@@ -1,4 +1,4 @@
-# Mupen64Plus-Next.opt · N64 core options · platform-forced plugin stack on tvOS Metal-only: rdp-plugin=angrylion (only non-GL/non-Vulkan RDP option) + rsp-plugin=cxd4 (only viable RSP under Angrylion; Parallel-RSP needs JIT) + cpucore=cached_interpreter (dynamic_recompiler is no-op under App Store sandbox) · pak1-4=rumble · 10 keys
+# Mupen64Plus-Next.opt · N64 core options · platform-forced stack on tvOS Metal-only: angrylion + cxd4 + cached_interpreter · pak1-4=rumble · 9 keys
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
@@ -8,17 +8,16 @@ mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 
 # === Video ===
-# angrylion-multithread="2" pins RDP workers to A15 P-cores (2P+3E binned); fallbacks if too serial: "3" (v2.93 default) then "4"; do NOT revert to "all threads" — upstream default targets desktop homogeneous cores, inappropriate for heterogeneous ARM (E-core tail latency = stutter)
-mupen64plus-43screensize = "320x240"
+# angrylion-multithread="2" pins RDP to A15 P-cores (2P+3E binned); fallbacks "3" then "4"; never "all threads" (E-core tail latency = stutter)
 mupen64plus-angrylion-multithread = "2"
 
 # === Input (controller paks) ===
-# pak2/3/4 = "rumble" provides 4P N64 rumble parity. Default would be "memory" (mempak) which silently disables rumble for P2-P4 — affects Mario Kart 64, Mario Party 1-3, GoldenEye, Perfect Dark, ProAm 64. PLUGIN_RAW mapping per mupen64plus-libretro-nx libretro.c (rumble->PLUGIN_RAW, memory->PLUGIN_MEMPAK, transfer->PLUGIN_TRANSFER, none->PLUGIN_NONE). Per-game overrides retain ability to swap individual paks for memory/transfer when game requires (e.g. Pokémon Stadium needs transfer pak).
+# pak1-4="rumble" 4P rumble parity (Mario Kart 64, Mario Party 1-3, GoldenEye, Perfect Dark, ProAm 64); per-game override for memory/transfer pak (e.g. Pokémon Stadium)
 mupen64plus-pak1 = "rumble"
 mupen64plus-pak2 = "rumble"
 mupen64plus-pak3 = "rumble"
 mupen64plus-pak4 = "rumble"
 
 # === Framerate smoothing ===
-# FrameDuping=True mirrors Switch default (HAVE_LIBNX); smooths frame cadence on low-end/no-JIT stacks where interpreter+sw-RDP timing is variable; added v3.9 as part of Mupen audio-stutter mitigation pass (paired with audio_latency 64→96 and audio_sync false→true in companion .cfg)
+# FrameDuping="True" mirrors Switch HAVE_LIBNX default; smooths cadence on no-JIT sw-RDP timing variance
 mupen64plus-FrameDuping = "True"

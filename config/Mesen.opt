@@ -4,5 +4,5 @@
 mesen_nospritelimit = "enabled"
 
 # === Audio ===
-# reduce_dmc_popping=disabled (v3.1; sub-1% CPU saving; pops possible on DPCM-heavy titles like Skate or Die 2 / Ninja Gaiden III — restore per-game)
+# reduce_dmc_popping=disabled (sub-1% CPU saving; pops possible on DPCM-heavy titles like Skate or Die 2 / Ninja Gaiden III — restore per-game)
 mesen_reduce_dmc_popping = "disabled"

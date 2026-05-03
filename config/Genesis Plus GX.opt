@@ -1,13 +1,7 @@
-# Genesis Plus GX.opt · Genesis/MD/Sega CD/Master System core options · MAME YM2612 + audio filter off + no sprite limit + per-game BRAM + single-field · 6 keys
-
-# === Audio ===
-# audio_filter=disabled (v3.1 off for CPU headroom; v3.2 enum-string fix)
-genesis_plus_gx_ym2612 = "mame (ym2612)"
-genesis_plus_gx_audio_filter = "disabled"
+# Genesis Plus GX.opt · Genesis/MD/Sega CD/Master System core options · no sprite limit + per-game BRAM · 3 keys
 
 # === Rendering ===
 genesis_plus_gx_no_sprite_limit = "enabled"
-genesis_plus_gx_render = "single field"
 
 # === Saves (Sega CD BRAM) ===
 genesis_plus_gx_system_bram = "per game"

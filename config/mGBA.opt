@@ -1,10 +1,10 @@
 # mGBA.opt · GB/GBC/GBA core options · auto per-system color correction + no interframe blending + audio low-pass off · 3 keys
 
 # === Video ===
-# color_correction=Auto (v3.2 enum-string fix; per-system correction now actually applies); interframe_blending=OFF (v3.9 enum-string fix — was "disabled" v3.1-v3.8 which is UI label not valid key; core silently fell through to default OFF; intent unchanged: flicker on Zelda Minish Cap, F-Zero GP Legend, MK SC)
+# color_correction=Auto (per-system correction applies); interframe_blending=OFF (flicker on Zelda Minish Cap, F-Zero GP Legend, MK SC)
 mgba_color_correction = "Auto"
 mgba_interframe_blending = "OFF"
 
 # === Audio ===
-# audio_low_pass_filter=disabled (v3.1; brighter/harsher GBA audio)
+# audio_low_pass_filter=disabled (brighter/harsher GBA audio)
 mgba_audio_low_pass_filter = "disabled"
