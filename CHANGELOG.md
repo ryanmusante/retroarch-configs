@@ -1,3 +1,55 @@
+2026-05-02  Ryan Musante
+
+- v3.25: companion to retroarch-appletv4k v3.25 audit fix pass; trim 4
+  inert/drift-guard keys across 2 `.opt` files; 7 `.cfg` paired stamps.
+  * config/Genesis Plus GX.opt: 6 keys -> 3 keys. Removed:
+    `genesis_plus_gx_ym2612 = "mame (ym2612)"` (matches upstream default
+    at libretro/Genesis-Plus-GX `libretro_core_options.h:444`;
+    drift-guard pin); `genesis_plus_gx_audio_filter = "disabled"`
+    (matches upstream default at L475; misleading "off for CPU
+    headroom" annotation — no headroom gained vs default);
+    `genesis_plus_gx_render = "single field"` (matches upstream default
+    at L347; drift-guard pin). Retained: `no_sprite_limit` (real flip),
+    `system_bram` + `cart_bram` (real flips, per-game BRAM). Header
+    rewritten to reflect 3 remaining keys.
+  * config/Mupen64Plus-Next.opt: 10 keys -> 9 keys. Removed:
+    `mupen64plus-43screensize = "320x240"` — under HAVE_THR_AL
+    angrylion path, value is read at libretro/mupen64plus-libretro-nx
+    `libretro/libretro.c:1348` then immediately overwritten at
+    L1370-1371 by `if(current_rdp_type == RDP_PLUGIN_ANGRYLION)`
+    forced override to `retro_screen_width=640, retro_screen_height=480,
+    retro_screen_aspect=4.0/3.0, AspectRatio=1`. Functionally inert
+    under the platform-forced `rdp-plugin=angrylion` stack. Header
+    drops 43screensize reference; remaining 9 keys retain.
+  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
+    stamps v3.24 -> v3.25 (7 files; 6 bodies byte-identical to v3.24;
+    Mupen64Plus-Next.cfg additionally trims one verbose multi-clause
+    audio comment line to single-line per editorial directive).
+  * config/*.opt: 3 files (Mesen / Mupen / mGBA) trim verbose
+    multi-clause comments to single-line and drop legacy `(v3.X)`
+    historical annotations per established v3.23 editorial rule.
+    Beetle PCE Fast.opt / FinalBurn Neo.opt / Snes9x.opt unchanged
+    — already minimal at v3.24.
+  * README.md: §1 Supported Cores table — Genesis Plus GX `.opt` count
+    6 -> 3 (notes column rewritten; drift-guard rationales removed
+    where keys removed); Mupen64Plus-Next `.opt` count 10 -> 9 (notes
+    column drops `43screensize` reference).
+  * README.md: §2 File Structure tree unchanged (file paths same; only
+    contents trimmed).
+  * README.md: §4 Frontend Override Keys table unchanged (only `.cfg`
+    keys; `.opt` changes don't affect this section).
+  * README.md: badge 3.24 -> 3.25.
+  * CHANGELOG.md: trim v3.20 entry per 5-release retention; retained
+    entries are now v3.21-v3.25.
+  * Companion v3.25: retroarch.cfg `audio_resampler_quality "2" -> "3"`
+    (real flip from tvOS LOWER default to NORMAL; SINC vs linear; A15
+    sub-1% CPU); + `input_max_users = "4"` (multi-player phantom-slot
+    cap; #16685 cross-reference; 4P pak alignment); key count 73 -> 74.
+    README intro "73-key" -> "74-key"; §7 Audio resampler row rewritten;
+    §7 Input + new `input_max_users` row; badge 3.24 -> 3.25; CHANGELOG
+    trim v3.20 per matching 5-release retention.
+  * cfg 22, opt 25 -> 21, cfg+opt 47 -> 43.
+
 2026-04-25  Ryan Musante
 
 - v3.24: paired README §5 shader-recommendation retarget; 0 file-content
@@ -162,21 +214,4 @@
     `location_allow`) and `discord_allow` from v3.20 stay removed.
     70 -> 73 keys.
   * cfg 30, opt 28 -> 31, cfg+opt 58 -> 61.
-
-2026-04-25  Ryan Musante
-
-- v3.20: paired stamp bump; 0 file-content changes (this side).
-  * config/*.cfg: bump header stamps and "paired with retroarch-appletv4k"
-    stamps v3.19 -> v3.20 (8 files; bodies byte-identical to v3.19).
-  * config/*.opt: unchanged (no version stamps; frontend-version-
-    independent per v3.12 design; 8 files).
-  * README.md: badge 3.19 -> 3.20.
-  * Companion v3.20: retroarch.cfg drops 4 more DiD drift-guard pins
-    (`network_cmd_enable`, `network_remote_enable`,
-    `netplay_use_mitm_server`, `discord_allow`); 74 -> 70 keys
-    (cumulative -7 since v3.18). All 4 were upstream-default `false`;
-    surviving Security/Netplay block: 4 keys (2 active hardening
-    flips + 2 functional pins). Driver=null block (6 keys) untouched
-    -- those actively skip driver init paths.
-  * cfg 30, opt 28, cfg+opt 58 -- unchanged.
 
