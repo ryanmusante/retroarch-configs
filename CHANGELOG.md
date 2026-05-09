@@ -1,3 +1,19 @@
+# 3.27 - 2026-05-09
+
+- v3.27: README trim pass to vital information only; cfg + opt bodies byte-identical to v3.26 (paired stamps bumped).
+- README.md: §1 Supported Cores Notes column compressed across 7 rows. Mupen Notes ~150 words -> ~40 words: keeps tvOS Metal-only stack rationale, P-core multithread pin, FrameDuping, 4P rumble parity; drops the inline list of frontend pins (`video_threaded`, `video_frame_delay_auto`, `rewind_enable`, `run_ahead_enabled`, `audio_latency`, `audio_sync`, `autosave_interval`) — those duplicate §4 verbatim. Other 6 rows compressed to single-sentence Notes.
+- README.md: §4 Frontend Override Keys table Notes column simplified across 9 rows; trailing inherited-keys paragraph trimmed.
+- README.md: §5 Shaders compressed from ~5 sentences to 2 (drop UI gating restatement and per-core file enumeration; keep zfast-crt + lcd-grid recommendation).
+- README.md: §7 Manual Install: Per-Core Override Path collapsed. Prior 28-line full-tree example for all 7 cores -> single 4-line example tree for `Mesen/` plus a 1-line note enumerating the other 6 core directory names. Verify-loaded callout retained.
+- README.md: §11 Versioning paragraph compressed from ~120 words to ~50 (drops historical re-alignment context, retention restated tersely).
+- README.md: drops standalone "Apple TV / tvOS" subheader inside §7 (only one platform documented; subheader was filler).
+- README.md: badge 3.26 -> 3.27.
+- config/*.cfg: 7 files; bump header stamps and "paired with retroarch-appletv4k" stamps v3.26 -> v3.27. Bodies byte-identical to v3.26.
+- config/*.opt: 7 files; unchanged (no version stamps; frontend-version-independent per v3.12 design).
+- CHANGELOG.md: trim v3.22 entry per 5-release retention; retained entries are now v3.23-v3.27.
+- Companion v3.27: retroarch.cfg byte-identical to v3.26 except header stamp (74 keys unchanged). README trim pass — §3 Storage Persistence 3 subsections collapsed to 1 paragraph; §6 Controllers Compatibility 6 rows -> 4 (Recommended / Excellent / Avoid grouping); §7 Hotkeys recommended-bindings table 8 rows -> 5 (paired actions on single rows); §7 Additional settings 40-row table replaced by 1-paragraph hardening-summary + 7-row "may want to flip" table; §10 Known Issues 7 rows -> 3 (closed entries removed; #18300, #14201, #16598, #14978 dropped; only #18286, #18447, #16685 retained as Open). §11 Setup Checklist dropped entirely (~50 lines; redundant with §1-§9). Subsequent sections renumbered §12 -> §11, §13 -> §12, §14 -> §13. README badge 3.26 -> 3.27. CHANGELOG trim v3.22 per matching 5-release retention.
+- cfg 22, opt 19, cfg+opt 41 — unchanged.
+
 # 3.26 - 2026-05-09
 
 - mGBA.opt: 3 keys -> 1 key. Removed:
@@ -68,20 +84,3 @@
 - CHANGELOG.md: trim v3.18 entry per 5-release retention; retained entries are now v3.19-v3.23.
 - Companion v3.23: retroarch.cfg byte-identical to v3.22 except header stamp (73 keys unchanged). README §7 Additional settings preamble + table de-versioned across 14 rows; §7 Video table de-versioned across 5 rows; §9 Mupen Tier 2 row de-versioned; §10 Known Issues #4 de-versioned; §13 Versioning drops historical re-alignment example. Editorial rule established: README narrative no longer carries per-version history; CHANGELOG is the sole record of what changed when.
 - cfg 22, opt 25, cfg+opt 47 — unchanged.
-
-# 3.22 - 2026-04-25
-
-- v3.22: PlayStation 1 / PCSX-ReARMed core retired; cores 8 -> 7. cfg+opt 61 -> 47.
-- config/PCSX-ReARMed.cfg deleted (-8 keys).
-- config/PCSX-ReARMed.opt deleted (-6 keys).
-- config/*.cfg: bump header stamps and "paired with retroarch-appletv4k" stamps v3.21 -> v3.22 (7 surviving files; bodies byte-identical to v3.21).
-- config/*.opt: unchanged (no version stamps; frontend-version-independent per v3.12 design; 7 surviving files).
-- README.md: cores badge 8 -> 7; version badge 3.21 -> 3.22.
-- README.md: §1 supported cores table drops PCSX-ReARMed row; Mupen64Plus-Next row already updated v3.21 for `pak1/2/3/4 = "rumble"` 4P parity (opt count 7 -> 10 retained).
-- README.md: §2 file structure tree drops PCSX-ReARMed.cfg/.opt entries; ship-count line "8 `.cfg` and 8 `.opt`" -> "7 `.cfg` and 7 `.opt`".
-- README.md: §4 Frontend Override Keys table de-PCSX'd across 9 rows — `run_ahead_enabled`, `run_ahead_secondary_instance`, `audio_latency` (now Mupen-only `64`), `audio_sync` (now Mupen-only mirror of global), `autosave_interval` (now Mupen-only pin), `video_scale_integer_scaling` (drops "+ PCSX" and PS1 variable-width caveat), `video_frame_delay_auto` (drops "+ PCSX inherits"), `rewind_enable` (drops PCSX from list). `video_scale_integer` row dropped entirely — was PCSX-ReARMed-only drift-guard mirror; no surviving core needs it.
-- README.md: §7 install tree drops PCSX-ReARMed/ directory block.
-- README.md: §8 Overclocking drops the `pcsx_rearmed_psxclock` "exception" paragraph entirely; remaining text covers `mesen_overclock_rate` + `snes9x_overclock` per-game guidance.
-- CHANGELOG.md: trim v3.16 + v3.17 entries; retained entries are now v3.18-v3.22 (5-release retention).
-- Companion v3.22: retroarch.cfg byte-identical to v3.21 except header stamp (73 keys unchanged); README §1 BIOS list, §4 filesystem layout, §5 ROM/BIOS tables, §7 video/audio rows, §8 shader recommendations table (9 -> 3 primary CRT shaders), §9 Tier 2 supported systems table all de-PCSX'd; §8 Recommended presets retains `crt-easymode` + `crt-aperture` + `crt-geom` only.
-- cfg 22, opt 25, cfg+opt 47.
