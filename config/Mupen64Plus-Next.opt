@@ -1,4 +1,4 @@
-# Mupen64Plus-Next.opt · N64 core options · platform-forced stack on tvOS Metal-only: angrylion + cxd4 + cached_interpreter · pak1-4=rumble · 9 keys
+# Mupen64Plus-Next.opt · N64 core options · tvOS Metal-only stack: angrylion + cxd4 + cached_interpreter (DYNAREC undef → matches no-JIT default; drift-guard against DYNAREC builds) · pak1-4=rumble · 9 keys
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
