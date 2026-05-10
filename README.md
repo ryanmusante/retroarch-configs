@@ -1,6 +1,6 @@
 # retroarch-configs
 
-![version](https://img.shields.io/badge/version-3.27-blue)
+![version](https://img.shields.io/badge/version-3.28-blue)
 ![cores](https://img.shields.io/badge/cores-7-green)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -29,8 +29,8 @@ See [CHANGELOG](CHANGELOG.md) for release history.
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Notes |
 |------|---------|------|--------|--------|-------|
-| Beetle PCE Fast | PC Engine / TG-16 | 1 | 2 | 3 | CD precache + 4× streaming (revert per-game on Ys IV / Dracula X); no sprite limit; Run Ahead single-instance |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 4 | 0 | Run Ahead 2 + secondary instance (per FBN core maintainer); `rewind_enable = "false"` ([#16374](https://github.com/libretro/RetroArch/issues/16374)) |
+| Beetle PCE Fast | PC Engine / TG-16 | 1 | 2 | 3 | CD precache + 2× streaming (per upstream advisory + community-standard reference); no sprite limit; Run Ahead single-instance |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead 2 single-instance (per upstream FBN libretro README); `rewind_enable = "false"` ([#16374](https://github.com/libretro/RetroArch/issues/16374)) |
 | Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 3 | No sprite limit; per-game BRAM (system + cart); Run Ahead |
 | Mesen | NES | 1 | 2 | 2 | No sprite limit; DMC popping correction off (revert per-game); Run Ahead |
 | mGBA | GB / GBC / GBA | 1 | 2 | 1 | `mgba_color_correction = "Auto"` (per-system correction); Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
@@ -73,7 +73,7 @@ Mixing the two in one file causes silent failures — RetroArch ignores core opt
 | Key | Values | Purpose |
 |-----|--------|---------|
 | `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true`; Tier 2 (Mupen) explicit `false` (HW-GL serialize breakage) |
-| `run_ahead_secondary_instance` | `true`, `false` | FBN `true` (per FBN core maintainer); Tier 2 explicit `false`; non-FBN Tier 1 inherits global `false` |
+| `run_ahead_secondary_instance` | `true`, `false` | Tier 2 (Mupen) explicit `false`; all other cores inherit global `false` for single-instance runahead per upstream FBN libretro README |
 | `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)) |
 | `audio_latency` | `64` | Mupen +16 ms over global 48 (paired with `audio_sync` + FrameDuping) |
 | `audio_sync` | `true` | Tier 2 mirrors global; DRC pitch shift instead of frame drops |

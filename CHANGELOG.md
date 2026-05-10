@@ -1,3 +1,17 @@
+# 3.28 - 2026-05-10
+
+- v3.28: FinalBurn Neo.cfg drops `run_ahead_secondary_instance` pin; Beetle PCE Fast.opt rebases `pce_fast_cdspeed`; 7 `.cfg` + 7 `.opt` paired stamps to v3.28.
+- FinalBurn Neo.cfg: drop `run_ahead_secondary_instance = "true"` line. Per upstream FBN libretro README at libretro/FBNeo `src/burner/libretro/README.md`: "This core widely supports the RetroArch input latency reduction features, with runahead single instance and preemptive frames being the recommended methods. Proper support for runahead second instance is not guaranteed because it doesn't exist in standalone FBNeo unlike the other methods." Prior pin's "per FBN core maintainer" attribution conflicted with the upstream-published guidance. FBN now inherits global `run_ahead_secondary_instance = "false"` for single-instance runahead behavior matching the upstream-recommended method. cfg 4 keys -> 3 keys.
+- Beetle PCE Fast.opt: `pce_fast_cdspeed "4" -> "2"`. Per upstream beetle-pce-fast-libretro advisory at `libretro_core_options.h`: "Higher values enable faster loading times but can cause issues with a couple of games"; aligns with community-standard reference at wiki.rg35xx.com. Per-game override to "4" remains available where compatibility permits and faster CD streaming is preferred. Header inline comment updated to reflect "2x" streaming + "per-game override available where compatibility permits"; opt 3 keys unchanged.
+- All 7 `.cfg` paired stamps v3.27 -> v3.28; 6 `.cfg` bodies byte-identical to v3.27 (only FinalBurn Neo.cfg modified — drops one key).
+- All 7 `.opt` paired stamps v3.27 -> v3.28; 6 `.opt` bodies byte-identical to v3.27 (only Beetle PCE Fast.opt modified — one value change).
+- README.md: §1 FinalBurn Neo row Notes column updated. Drops "Run Ahead 2 + secondary instance (per FBN core maintainer)"; replaced with "Run Ahead 2 single-instance (per upstream FBN libretro README)". Keys count column 4 -> 3.
+- README.md: §1 Beetle PCE Fast row Notes column updated. "4× streaming (revert per-game on Ys IV / Dracula X)" -> "2× streaming (per upstream advisory + community-standard reference)".
+- README.md: §4 Frontend Override Keys table — `run_ahead_secondary_instance` row Purpose column updated. Prior "FBN `true` (per FBN core maintainer); Tier 2 explicit `false`; non-FBN Tier 1 inherits global `false`" replaced with "Tier 2 (Mupen) explicit `false`; all other cores inherit global `false` for single-instance runahead per upstream FBN libretro README".
+- README.md: badge 3.27 -> 3.28.
+- CHANGELOG.md: trim v3.23 entry per 5-release retention; retained entries are now v3.24-v3.28.
+- cfg 22 -> 21, opt 19, cfg+opt 41 -> 40.
+
 # 3.27 - 2026-05-09
 
 - v3.27: README trim pass to vital information only; cfg + opt bodies byte-identical to v3.26 (paired stamps bumped).
@@ -70,17 +84,3 @@
 - Companion v3.24: retroarch.cfg byte-identical to v3.23 except header stamp (73 keys unchanged). README intro stale "77-key" -> "73-key" fix (drift since v3.19; intro paragraph was missed in each subsequent README pass). README §8 Recommended presets table 3 -> 2 rows (`crt/zfast-crt.slangp` Minimal cost as sole CRT recommendation + `handheld/lcd-grid-v2.slangp` Minimal cost as sole mGBA-LCD recommendation; replaces `crt-easymode` / `crt-aperture` / `crt-geom`). §8 parameter callout retargeted with verified zfast-crt impl parameters (BLURSCALEX, LOWLUMSCAN, HILUMSCAN, BRIGHTBOOST, MASK_DARK, MASK_FADE — sourced from `crt/shaders/zfast_crt/zfast_crt_impl.inc` on libretro/slang-shaders master). §8 "Integer Scaling Conflict" callout dropped (no longer relevant to single-pass / integer-scale-safe lineup; multi-pass shaders covered by surviving "Avoid on Apple TV" line). §8 "Handheld note" + step 3 cross-reference + "Applying ... per-core" sentence retargeted from `crt-easymode` to `zfast-crt`.
 - cfg 22, opt 25, cfg+opt 47 — unchanged.
 
-# 3.23 - 2026-04-25
-
-- v3.23: paired README de-versioning pass; 0 file-content changes.
-- config/*.cfg: bump header stamps and "paired with retroarch-appletv4k" stamps v3.22 -> v3.23 (7 surviving files; bodies byte-identical to v3.22).
-- config/Mupen64Plus-Next.cfg: header drops "(v3.3 stutter mitigations)" inline historical annotation; key body byte-identical.
-- config/Mupen64Plus-Next.opt: header drops "(v3.3 Angrylion-MT heterogeneous-ARM tune)" and "(v3.21 P2-P4 parity for Mario Kart 64, Mario Party 1-3, GoldenEye, Perfect Dark, ProAm 64)" inline historical annotations; pak2/3/4 inline comment drops "v3.21:" prefix; key body byte-identical.
-- config/*.opt (other 6): unchanged.
-- README.md: §1 supported cores table — Genesis Plus GX row drops "(v3.1 off; v3.2 enum fix)" annotation on `audio_filter`; mGBA row drops "(v3.9 enum fix — prior releases used 'disabled' which is the UI label, not a valid key; core fell through to default 'OFF' silently. Same class of bug as the v3.2 `color_correction` fix...)" and "(v3.2 enum fix — now actually applies)" annotations; Mupen row drops "v3.21" / "v3.3" / "v3.9" annotations.
-- README.md: §4 Frontend Override Keys table de-versioned across 5 row Notes columns (`run_ahead_secondary_instance`, `audio_latency`, `audio_sync`, `autosave_interval`, `video_frame_delay_auto`) plus the closing inherited-keys paragraph (drops "v3.11" on `run_ahead_frames`).
-- README.md: §11 Versioning drops historical re-alignment example "(e.g. v3.0 re-aligned the two repos after they had evolved independently at v2.95 / v1.57)".
-- README.md: badge 3.22 -> 3.23.
-- CHANGELOG.md: trim v3.18 entry per 5-release retention; retained entries are now v3.19-v3.23.
-- Companion v3.23: retroarch.cfg byte-identical to v3.22 except header stamp (73 keys unchanged). README §7 Additional settings preamble + table de-versioned across 14 rows; §7 Video table de-versioned across 5 rows; §9 Mupen Tier 2 row de-versioned; §10 Known Issues #4 de-versioned; §13 Versioning drops historical re-alignment example. Editorial rule established: README narrative no longer carries per-version history; CHANGELOG is the sole record of what changed when.
-- cfg 22, opt 25, cfg+opt 47 — unchanged.
