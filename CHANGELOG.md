@@ -1,3 +1,20 @@
+# 4.0 - 2026-05-16
+
+- v4.0: MAJOR bump — README restructured to ry-install style (breaking anchor schema); 7 `.cfg` paired stamps v3.28 -> v4.0; 7 `.opt` byte-identical (frontend-version-independent per v3.12 design).
+- README.md: full restructure to ry-install template. Numbered sections dropped (`## 1. Supported Cores ... ## 12. License` -> unnumbered `## Supported Cores ... ## License`); all `§N` cross-references retired. Table of Contents renamed `## Table of Contents` -> `## Contents`; format switched from numbered list to bulleted list.
+- README.md: **BREAKING** anchor schema change — slugs drop the leading `N-` prefix (e.g. `#1-supported-cores` -> `#supported-cores`, `#4-frontend-override-keys` -> `#frontend-override-keys`, `#7-manual-install-per-core-override-path` -> `#layout`). External inbound links to old anchors will 404. Motivates MAJOR bump per versioning policy.
+- README.md: section consolidation — §2 File Structure + §6 Installation + §7 Manual Install: Per-Core Override Path collapsed into a single `## Layout` section; §3 File Separation absorbed into `## Configuration` as the lead table. Net section count 12 -> 9.
+- README.md: 3 reference subsections folded into `<details>` collapsibles — `Zip contents (flat)` (parented under Layout), `Frontend override keys` (under Configuration), `Shaders` (under Configuration). Default-collapsed; rendered surface area roughly halved.
+- README.md: GitHub admonitions replace prose-style warnings — Quick Start gains `> [!IMPORTANT]` (per-core-path miss = silent Tier 1 run-ahead disable, was a buried Verify-callout line in §7); Configuration gains `> [!WARNING]` (mixing `.cfg`/`.opt` = silent failure, was an unmarked paragraph under §3).
+- README.md: header gains `[![paired]](...)` cross-link badge to companion repo (third badge slot, between cores count and license).
+- README.md: License section adopts `MIT © 2026 Ryan Musante` attribution form (matches ry-install convention; supersedes the bare `[MIT](LICENSE)` link).
+- README.md: badge 3.28 -> 4.0; paired badge `retroarch--appletv4k v3.28` -> `v4.0`.
+- README.md: byte size 7792 -> 6916 (-11.2%); line count 142 -> 173 (+31 from `<details>` / admonition markup; body content tighter).
+- config/*.cfg: 7 files; bump header version stamps and "paired with retroarch-appletv4k" stamps v3.28 -> v4.0. Bodies byte-identical to v3.28 (verified line-2-onward diff = 0 for all 7).
+- config/*.opt: 7 files; unchanged. No version stamps (frontend-version-independent per v3.12 design — same rule as v3.27 entry); v3.28 changelog's reference to ".opt paired stamps" was loose wording — actual .opt headers carry no version field.
+- CHANGELOG.md: trim v3.24 entry per 5-release retention; retained entries are now v3.25-v3.28 + v4.0.
+- cfg 21, opt 19, cfg+opt 40 — unchanged.
+
 # 3.28 - 2026-05-10
 
 - v3.28: FinalBurn Neo.cfg drops `run_ahead_secondary_instance` pin; Beetle PCE Fast.opt rebases `pce_fast_cdspeed`; 7 `.cfg` + 7 `.opt` paired stamps to v3.28.
@@ -71,16 +88,3 @@
 - CHANGELOG.md: trim v3.20 entry per 5-release retention; retained entries are now v3.21-v3.25.
 - Companion v3.25: retroarch.cfg `audio_resampler_quality "2" -> "3"` (real flip from tvOS LOWER default to NORMAL; SINC vs linear; A15 sub-1% CPU); + `input_max_users = "4"` (multi-player phantom-slot cap; #16685 cross-reference; 4P pak alignment); key count 73 -> 74. README intro "73-key" -> "74-key"; §7 Audio resampler row rewritten; §7 Input + new `input_max_users` row; badge 3.24 -> 3.25; CHANGELOG trim v3.20 per matching 5-release retention.
 - cfg 22, opt 25 -> 21, cfg+opt 47 -> 43.
-
-# 3.24 - 2026-04-25
-
-- v3.24: paired README §5 shader-recommendation retarget; 0 file-content changes.
-- config/*.cfg: bump header stamps and "paired with retroarch-appletv4k" stamps v3.23 -> v3.24 (7 files; bodies byte-identical to v3.23).
-- config/*.opt: unchanged (no version stamps; frontend-version-independent per v3.12 design; 7 files).
-- README.md: §5 Shaders retargets recommended-starting-point reference from `crt-easymode.slangp` to `crt/zfast-crt.slangp` (single-pass, integer-scale safe with no shader geometry, designed for low-end GPUs). Drops the prior "cleaner 4K phosphor mask than crt-aperture" comparative clause (no longer applicable — crt-aperture not in current lineup). Path corrected from `../shaders/shaders_slang/handheld/lcd-grid-v2.slangp` to `handheld/lcd-grid-v2.slangp` (matches companion §8 reference style and RetroArch UI navigation context). mGBA LCD recommendation target unchanged.
-- README.md: §5 fixes stale "8 per-core `.cfg` files" -> "7 per-core `.cfg` files". v3.22 dropped PCSX-ReARMed core (cores 8 -> 7); §1 supported cores table and §2 file structure tree were updated in that pass but §5 prose was missed.
-- README.md: badge 3.23 -> 3.24.
-- CHANGELOG.md: trim v3.19 entry per 5-release retention; retained entries are now v3.20-v3.24.
-- Companion v3.24: retroarch.cfg byte-identical to v3.23 except header stamp (73 keys unchanged). README intro stale "77-key" -> "73-key" fix (drift since v3.19; intro paragraph was missed in each subsequent README pass). README §8 Recommended presets table 3 -> 2 rows (`crt/zfast-crt.slangp` Minimal cost as sole CRT recommendation + `handheld/lcd-grid-v2.slangp` Minimal cost as sole mGBA-LCD recommendation; replaces `crt-easymode` / `crt-aperture` / `crt-geom`). §8 parameter callout retargeted with verified zfast-crt impl parameters (BLURSCALEX, LOWLUMSCAN, HILUMSCAN, BRIGHTBOOST, MASK_DARK, MASK_FADE — sourced from `crt/shaders/zfast_crt/zfast_crt_impl.inc` on libretro/slang-shaders master). §8 "Integer Scaling Conflict" callout dropped (no longer relevant to single-pass / integer-scale-safe lineup; multi-pass shaders covered by surviving "Avoid on Apple TV" line). §8 "Handheld note" + step 3 cross-reference + "Applying ... per-core" sentence retargeted from `crt-easymode` to `zfast-crt`.
-- cfg 22, opt 25, cfg+opt 47 — unchanged.
-
