@@ -1,8 +1,7 @@
-# Beetle PCE Fast.opt · PCE/TG-16 core options · full CD precache to RAM + no sprite limit + 2x CD streaming · 3 keys
+# Beetle PCE Fast.opt · PCE/TG-16 core options · 2x CD streaming + no sprite limit · 2 keys · full CD-image RAM precache intentionally NOT global (memory-pressure risk on 4 GB fanless ATV4K 3rd Gen / binned A15; opt in per-game where load-stall relief outweighs the RAM cost)
 
 # === CD ===
-# cdimagecache=enabled (full image precache; eliminates seek latency); cdspeed=2 (community standard; "4" available per-game where compatibility permits)
-pce_fast_cdimagecache = "enabled"
+# cdspeed=2 (community standard; "4" available per-game where compatibility permits). cdimagecache left at upstream default "disabled": full-image precache eliminates seek latency but its multi-hundred-MB footprint is imprudent against the 4 GB shared-RAM target (tvOS + RetroArch contention -> background-jettison risk); enable per-game via pce_fast_cdimagecache="enabled"
 pce_fast_cdspeed = "2"
 
 # === Rendering ===
