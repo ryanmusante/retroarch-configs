@@ -1,8 +1,8 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-4.1-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-4.2-blue.svg)](CHANGELOG.md)
 [![cores](https://img.shields.io/badge/cores-7-green.svg)](#supported-cores)
-[![paired](https://img.shields.io/badge/paired-retroarch--appletv4k%20v4.1-orange.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
+[![paired](https://img.shields.io/badge/paired-retroarch--appletv4k%20v4.2-orange.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 ![license](https://img.shields.io/badge/license-MIT-green.svg)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -55,7 +55,8 @@ See [CHANGELOG](CHANGELOG.md) for release history.
 RetroArch loads per-core overrides from `config/<core_name>/` under
 the RetroArch config root — **not** from this repo's flat `config/`
 folder. On tvOS the config root is `Documents/RetroArch/`, exposed as
-`config/` from the web / WebDAV root.
+`/` by the web interface / WebDAV, so per-core directories live at
+`/config/<core_name>/`.
 
 For each shipped core, create a directory named exactly after the
 core (spaces included) and place both `.cfg` and `.opt` inside.
@@ -93,7 +94,7 @@ moved into per-core directories as shown above.
 | File | Contents | Set via |
 |------|----------|---------|
 | `<core>.cfg` | Frontend (video, audio, latency, input) | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | Core emulation (renderer, CPU mode, accuracy) | Quick Menu → Options |
+| `<core>.opt` | Core emulation (renderer, CPU mode, accuracy) | Quick Menu → Core Options |
 
 > [!WARNING]
 > Mixing the two in one file causes silent failures — RetroArch
@@ -104,10 +105,10 @@ moved into per-core directories as shown above.
 
 | Key | Values | Purpose |
 |-----|--------|---------|
-| `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true`; Tier 2 (Mupen) explicit `false` (HW-GL serialize breakage) |
+| `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true`; Tier 2 (Mupen) `false` — savestate cost per frame is unaffordable on the sw-RDP stack; opt in per-game (see [Per-Game Overrides](#per-game-overrides)) |
 | `run_ahead_secondary_instance` | `true`, `false` | Tier 2 (Mupen) explicit `false`; all other cores inherit global `false` for single-instance runahead |
 | `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)) |
-| `audio_latency` | `64` | Mupen +16 ms over global 48 (paired with `audio_sync` + FrameDuping) |
+| `audio_latency` | `64` | Mupen explicit pin; equals global `64` (companion v4.1) — held against global drift |
 | `audio_sync` | `true` | Tier 2 mirrors global; DRC pitch shift instead of frame drops |
 | `autosave_interval` | `0` | Tier 2 pin; prevents purgeable-cache stall from SRAM write |
 | `video_scale_integer_scaling` | `1` | All Tier 1; integer overscale at 4K |
@@ -116,8 +117,8 @@ moved into per-core directories as shown above.
 
 Keys not set per-core (inherited from global):
 `preemptive_frames_enable`, `audio_resampler_quality`,
-`run_ahead_hide_warnings`, `run_ahead_frames`. `video_shader` is unset
-everywhere; users assign per-core via Save Core Preset.
+`run_ahead_hide_warnings`, `run_ahead_frames`. No shader preset is set
+in any `.cfg`; presets are assigned per-core via Save Core Preset.
 
 </details>
 
