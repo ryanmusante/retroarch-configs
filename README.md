@@ -1,9 +1,6 @@
 # retroarch-configs
 
 [![version](https://img.shields.io/badge/version-4.2-blue.svg)](CHANGELOG.md)
-[![cores](https://img.shields.io/badge/cores-7-green.svg)](#supported-cores)
-[![paired](https://img.shields.io/badge/paired-retroarch--appletv4k%20v4.2-orange.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
-![license](https://img.shields.io/badge/license-MIT-green.svg)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
 > Apple TV 4K. Companion to retroarch-appletv4k, which provides the
