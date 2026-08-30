@@ -1,14 +1,18 @@
-# Mupen64Plus-Next.opt · N64 core options · tvOS Metal-only stack: angrylion + cxd4 + cached_interpreter (DYNAREC undef → matches no-JIT default; drift-guard against DYNAREC builds) · pak1-4=rumble · 9 keys
+# Mupen64Plus-Next.opt · N64 core options · tvOS software stack: angrylion + cxd4 + cached_interpreter (DYNAREC undef → matches no-JIT default; drift-guard against DYNAREC builds) · pak1-4=rumble · 9 keys
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
 
 # === Plugins (RDP / RSP) ===
+# ParaLLEl-RDP/RSP are compiled into the tvOS core (Makefile tvOS branch) but need Vulkan, which
+# RetroArch tvOS does not provide; GLideN64 needs a GL context, which video_driver=metal does not.
 mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 
 # === Video ===
-# angrylion-multithread="2" pins RDP to A15 P-cores (2P+3E binned); fallbacks "3" then "4"; never "all threads" (E-core tail latency = stutter)
+# angrylion-multithread="2" sets the RDP worker-thread COUNT, not CPU affinity — tvOS exposes no
+# P-core pinning. "2" budgets one worker per A15 performance core (5-core bin: 2P+3E); fallbacks
+# "3" then "4"; avoid "all threads" (E-core tail latency = stutter)
 mupen64plus-angrylion-multithread = "2"
 
 # === Input (controller paks) ===
