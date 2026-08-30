@@ -1,3 +1,22 @@
+# 4.3 - 2026-08-30
+
+- v4.3: documentation and comment correction release. No key added, removed, or revalued; cfg 21, opt 18, cfg+opt 39 unchanged. Released in lockstep with companion retroarch-appletv4k v4.3.
+- FinalBurn Neo.cfg / README.md: `rewind_enable = "false"` rationale corrected. Upstream FBNeo `src/burner/libretro/README.md` struck the #16374 note on 2026-05-12 ("this bug is seemingly fixed") and RetroArch #16374 is closed. The pin is value-identical to global `"false"`, so it is now documented as a drift-guard rather than a live workaround. Value unchanged.
+- README.md / Mupen64Plus-Next.cfg: closed-issue citations marked. #14978 (`video_threaded`) and #18300 (`rewind_enable`) are closed upstream and both pins equal the global value; both are now labelled drift-guards, matching the treatment given #14201 at v4.2. #14201 itself is relabelled a real override retained as a regression guard, since global is `"true"` and Mupen pins `"false"`. Values unchanged.
+- Mupen64Plus-Next.opt: `angrylion-multithread` comment corrected. The option sets the angrylion worker-thread count; it does not set CPU affinity, and tvOS exposes no P-core pinning to applications. Reframed as a worker budget sized to the 5-core A15 bin (2P+3E). Value `"2"` unchanged.
+- Mupen64Plus-Next.cfg / .opt / README.md: "Metal-only (no GL/Vulkan)" reworded to "software stack". The tvOS build of mupen64plus-next does compile ParaLLEl-RDP and ParaLLEl-RSP (`Makefile` tvOS branch sets `HAVE_PARALLEL_RDP`, `HAVE_PARALLEL_RSP`, `HAVE_THR_AL`, `LLE`), so both appear in the core-option lists. They are unusable at runtime: RetroArch tvOS ships no Vulkan driver, and GLideN64 needs a GL context that `video_driver = "metal"` does not provide. Prior wording implied the plugins were absent from the build.
+- README.md: Frontend override keys — the 21 per-core keys are now split into 14 real flips and 7 drift-guards set to the value they already inherit. Drift-guards: FBN `rewind_enable`; Mupen `video_threaded`, `audio_sync`, `audio_latency`, `run_ahead_enabled`, `run_ahead_secondary_instance`, `rewind_enable`.
+- README.md: Frontend override keys — `video_scale_integer_scaling` row states the enum. `"1"` is overscale against upstream default `"0"` (underscale), and the key is inert unless global `video_scale_integer = "true"`.
+- README.md: Overclocking — `snes9x_overclock_superfx` range corrected. The value list is discrete, not continuous: 50%-100% in 10% steps, then 150%-500% in 50% steps.
+- README.md: Configuration — note added that `.cfg` headers are version-stamped and `.opt` headers deliberately are not (frontend-version-independent per v3.12 design).
+- config/.gitkeep: removed. The directory has carried 14 tracked files since v3.x, so the placeholder is inert; Quick Start already states 14 files.
+- README.md: the v4.0-v4.2 entries record a `paired` cross-link badge bump. No paired badge is present in the file — the header carries a single version badge. Recorded here rather than by editing the historical entries.
+- config/*.cfg: 7 files; header and paired stamps v4.2 -> v4.3. Bodies byte-identical to v4.2 except comment text in FinalBurn Neo.cfg and Mupen64Plus-Next.cfg.
+- config/*.opt: no version stamps; comment-only edits to Mupen64Plus-Next.opt, other 6 byte-identical to v4.2.
+- README.md: version badge 4.2 -> 4.3.
+- Companion v4.3: retroarch.cfg byte-identical to v4.2 except header stamp (74 keys unchanged).
+- CHANGELOG.md: trim v3.27 entry per 5-release retention; retained entries are now v3.28 + v4.0-v4.3.
+
 # 4.2 - 2026-07-26
 
 - v4.2: documentation-only release. No key added, removed, or revalued; cfg 21, opt 18, cfg+opt 39 unchanged.
@@ -52,18 +71,3 @@
 - README.md: badge 3.27 -> 3.28.
 - CHANGELOG.md: trim v3.23 entry per 5-release retention.
 - cfg 22 -> 21, opt 19, cfg+opt 41 -> 40.
-
-# 3.27 - 2026-05-09
-
-- v3.27: README trim pass to vital information only; cfg and opt bodies byte-identical to v3.26.
-- README.md: Supported Cores Notes compressed across 7 rows. Mupen Notes ~150 -> ~40 words, keeping the tvOS Metal-only stack rationale, P-core multithread pin, FrameDuping, and 4P rumble parity; the inline frontend-pin list duplicated the keys table and is dropped.
-- README.md: Frontend Override Keys Notes simplified across 9 rows; trailing inherited-keys paragraph trimmed.
-- README.md: Shaders compressed to 2 sentences, keeping the zfast-crt and lcd-grid recommendations.
-- README.md: Manual Install collapsed — 28-line full tree for 7 cores -> a 4-line `Mesen/` example plus a 1-line note naming the other 6 directories.
-- README.md: Versioning compressed ~120 -> ~50 words; standalone "Apple TV / tvOS" subheader dropped.
-- README.md: badge 3.26 -> 3.27.
-- config/*.cfg: 7 files; header and paired stamps v3.26 -> v3.27. Bodies byte-identical to v3.26.
-- config/*.opt: 7 files unchanged.
-- Companion v3.27: retroarch.cfg byte-identical to v3.26 except header stamp (74 keys unchanged), plus a README trim pass — Storage Persistence collapsed to 1 paragraph; Controllers 6 rows -> 4; Hotkeys 8 rows -> 5; Additional settings 40-row table -> summary paragraph + 7-row table; Known Issues 7 rows -> 3; Setup Checklist dropped.
-- CHANGELOG.md: trim v3.22 entry per 5-release retention.
-- cfg 22, opt 19, cfg+opt 41 — unchanged.

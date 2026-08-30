@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-4.2-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-4.3-blue.svg)](CHANGELOG.md)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
 > Apple TV 4K. Companion to retroarch-appletv4k, which provides the
@@ -40,12 +40,12 @@ See [CHANGELOG](CHANGELOG.md) for release history.
 | Core | Systems | Tier | `.cfg` | `.opt` | Notes |
 |------|---------|------|--------|--------|-------|
 | Beetle PCE Fast | PC Engine / TG-16 | 1 | 2 | 2 | 2× CD streaming; no sprite limit; Run Ahead single-instance. Full CD-image RAM precache is per-game opt-in (imprudent as a global default on the 4 GB target) |
-| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead 2 single-instance; `rewind_enable = "false"` ([#16374](https://github.com/libretro/RetroArch/issues/16374)) |
+| FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead 2 single-instance; `rewind_enable = "false"` drift-guard, equals global ([#16374](https://github.com/libretro/RetroArch/issues/16374) closed; upstream FBNeo README marks it fixed 2026-05-12) |
 | Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 3 | No sprite limit; per-game BRAM (system + cart); Run Ahead |
 | Mesen | NES | 1 | 2 | 2 | No sprite limit; DMC popping correction off (revert per-game); Run Ahead |
 | mGBA | GB / GBC / GBA | 1 | 2 | 1 | `mgba_color_correction = "Auto"`; Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
 | Snes9x | SNES | 1 | 2 | 1 | Reduce sprite flicker; Run Ahead |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | tvOS Metal-only stack: angrylion sw-RDP + cxd4 RSP (no GL/Vulkan/JIT). `angrylion-multithread = "2"` (P-core pin, A15 2P+3E); `FrameDuping = "True"`; `pak1-4 = "rumble"`. Frontend pins per [Configuration](#configuration) |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | tvOS software stack: angrylion sw-RDP + cxd4 RSP, no JIT (ParaLLEl-RDP/RSP compile in but need Vulkan; GLideN64 needs a GL context, which `video_driver = "metal"` does not provide). `angrylion-multithread = "2"` (worker-thread count for the 5-core A15 bin, 2P+3E — not an affinity setting); `FrameDuping = "True"`; `pak1-4 = "rumble"`. Frontend pins per [Configuration](#configuration) |
 
 ## Layout
 
@@ -97,20 +97,31 @@ moved into per-core directories as shown above.
 > Mixing the two in one file causes silent failures — RetroArch
 > ignores core option keys in `.cfg` and vice versa.
 
+`.cfg` headers carry a version stamp; `.opt` headers deliberately do
+not. Core options are frontend-version-independent, so `.opt` files
+are not restamped on a release that changes no core option.
+
 <details>
 <summary><b>Frontend override keys</b></summary>
 
 | Key | Values | Purpose |
 |-----|--------|---------|
-| `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true`; Tier 2 (Mupen) `false` — savestate cost per frame is unaffordable on the sw-RDP stack; opt in per-game (see [Per-Game Overrides](#per-game-overrides)) |
+| `run_ahead_enabled` | `true`, `false` | Tier 1 per-core `true` (real flip); Tier 2 (Mupen) `false`, equals global — savestate cost per frame is unaffordable on the sw-RDP stack; opt in per-game (see [Per-Game Overrides](#per-game-overrides)) |
 | `run_ahead_secondary_instance` | `true`, `false` | Tier 2 (Mupen) explicit `false`; all other cores inherit global `false` for single-instance runahead |
-| `video_threaded` | `false` | Tier 2 anchor ([#14978](https://github.com/libretro/RetroArch/issues/14978)) |
+| `video_threaded` | `false` | Tier 2 drift-guard, equals global ([#14978](https://github.com/libretro/RetroArch/issues/14978) closed) |
 | `audio_latency` | `64` | Mupen explicit pin; equals global `64` (companion v4.1) — held against global drift |
-| `audio_sync` | `true` | Tier 2 mirrors global; DRC pitch shift instead of frame drops |
-| `autosave_interval` | `0` | Tier 2 pin; prevents purgeable-cache stall from SRAM write |
-| `video_scale_integer_scaling` | `1` | All Tier 1; integer overscale at 4K |
-| `video_frame_delay_auto` | `false` | Mupen ([#14201](https://github.com/libretro/RetroArch/issues/14201)) |
-| `rewind_enable` | `false` | FBN ([#16374](https://github.com/libretro/RetroArch/issues/16374)) + Mupen ([#18300](https://github.com/libretro/RetroArch/issues/18300)) |
+| `audio_sync` | `true` | Tier 2 drift-guard, equals global; DRC pitch shift instead of frame drops |
+| `autosave_interval` | `0` | Tier 2 real override (global `300`); prevents purgeable-cache stall from SRAM write |
+| `video_scale_integer_scaling` | `1` | All Tier 1 real flip; `1` = overscale (upstream default `0` = underscale). Requires global `video_scale_integer = "true"` |
+| `video_frame_delay_auto` | `false` | Mupen real override ([#14201](https://github.com/libretro/RetroArch/issues/14201) closed — regression guard) |
+| `rewind_enable` | `false` | FBN + Mupen drift-guards, equal global (both [#16374](https://github.com/libretro/RetroArch/issues/16374) and [#18300](https://github.com/libretro/RetroArch/issues/18300) closed) |
+
+Of the 21 per-core keys, 14 are real flips against the global value and
+7 are drift-guards set to the value they already inherit — FBN
+`rewind_enable`, and Mupen `video_threaded`, `audio_sync`,
+`audio_latency`, `run_ahead_enabled`, `run_ahead_secondary_instance`,
+`rewind_enable`. Drift-guards exist so a future change to the global
+`retroarch.cfg` cannot silently move a pinned core.
 
 Keys not set per-core (inherited from global):
 `preemptive_frames_enable`, `audio_resampler_quality`,
@@ -140,7 +151,7 @@ Save Game Options.
 | Core | Key | Values | Default |
 |------|-----|--------|---------|
 | Mesen | `mesen_overclock` | `None`, `Low`, `Medium`, `High`, `Very High` | `None` |
-| Snes9x | `snes9x_overclock_superfx` | `50%`–`500%` | `100%` |
+| Snes9x | `snes9x_overclock_superfx` | `50%`–`100%` in 10% steps, `150%`–`500%` in 50% steps | `100%` |
 | Snes9x | `snes9x_overclock_cycles` | `disabled`, `light`, `compatible`, `max` | `disabled` |
 
 ## Per-Game Overrides
