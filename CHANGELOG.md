@@ -1,3 +1,32 @@
+# 4.5 - 2026-09-05
+
+  - v4.5: README release. No key added, removed, or revalued; cfg 21, opt 18,
+    cfg+opt 39 unchanged. Lockstep with companion retroarch-appletv4k v4.5.
+  - README.md: every table now sits in a default-collapsed `<details>` block.
+    New: Core table, File roles, Overclock keys; kept: Zip contents (flat),
+    Frontend override keys. Prose, Quick Start steps, admonitions and the two
+    code examples stay open. 5 blocks total (was 3).
+  - README.md: Shaders `<details>` block removed - it duplicated the companion
+    Shaders section. One sentence in Frontend override keys now links
+    retroarch-appletv4k#shaders instead.
+  - README.md: Supported Cores gains the companion's one-line Tier definition.
+    Mupen Notes trimmed (the MoltenVK and 2P+3E detail stays in
+    Mupen64Plus-Next.opt); FinalBurn Neo Notes drops the 2026-05-12 FBNeo
+    README date (kept in FinalBurn Neo.cfg and the v4.3 entry). Facts
+    unchanged.
+  - README.md: lockstep stated once, in Versioning; intro and Related drop
+    their restatements. "See CHANGELOG for release history" dropped - the
+    version badge already links it.
+  - README.md: version badge 4.4 -> 4.5.
+  - config/*.cfg: 7 files; header and paired stamps v4.4 -> v4.5. Bodies
+    byte-identical to v4.4.
+  - config/*.opt: 7 files byte-identical to v4.4 (no version stamps).
+  - Companion v4.5: retroarch.cfg header + paired stamps only; 74 keys
+    unchanged.
+  - CHANGELOG.md: trim v4.0 per 5-release retention; retained entries are
+    now v4.1-v4.5.
+
+
 # 4.4 - 2026-09-05
 
   - v4.4: audit release. No key added, removed, or revalued; cfg 21, opt 18,
@@ -160,34 +189,3 @@
     74 keys otherwise unchanged.
   - CHANGELOG.md: trim v3.25 entry per 5-release retention.
   - cfg 21, opt 19 -> 18, cfg+opt 40 -> 39.
-
-
-# 4.0 - 2026-05-16
-
-  - v4.0: MAJOR bump - README restructured to ry-install style (breaking
-    anchor schema); 7 `.cfg` paired stamps v3.28 -> v4.0; 7 `.opt`
-    byte-identical.
-  - README.md: **BREAKING** anchor schema change - slugs drop the leading `N-`
-    prefix (`#1-supported-cores` -> `#supported-cores`,
-    `#7-manual-install-per-core-override-path` -> `#layout`). Inbound links to
-    old anchors will 404.
-  - README.md: numbered sections and all `section N` cross-references retired;
-    `## Table of Contents` -> `## Contents`, numbered list -> bulleted.
-  - README.md: section consolidation - File Structure + Installation + Manual
-    Install collapsed into `## Layout`; File Separation absorbed into `##
-    Configuration`. Section count 12 -> 9.
-  - README.md: `Zip contents (flat)`, `Frontend override keys`, and `Shaders`
-    folded into default-collapsed `<details>` blocks.
-  - README.md: GitHub admonitions replace prose warnings - `> [!IMPORTANT]` in
-    Quick Start (per-core-path miss silently disables Tier 1 run-ahead); `>
-    [!WARNING]` in Configuration (mixing `.cfg` / `.opt` fails silently).
-  - README.md: header gains a `paired` cross-link badge to the companion repo;
-    License section adopts `MIT (c) 2026 Ryan Musante`.
-  - README.md: badge 3.28 -> 4.0; paired badge v3.28 -> v4.0. Byte size 7792
-    -> 6914 (-11.3%); line count 142 -> 173.
-  - config/*.cfg: 7 files; header and paired stamps v3.28 -> v4.0. Bodies
-    byte-identical to v3.28.
-  - config/*.opt: 7 files unchanged; no version stamps. The v3.28 reference to
-    ".opt paired stamps" was loose wording.
-  - CHANGELOG.md: trim v3.24 entry per 5-release retention.
-  - cfg 21, opt 19, cfg+opt 40 - unchanged.
