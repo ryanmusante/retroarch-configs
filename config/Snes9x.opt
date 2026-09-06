@@ -1,4 +1,4 @@
-# Snes9x.opt · SNES core options · reduce sprite flicker · 1 key
+# Snes9x.opt · SNES core options · 1 key
 
 # === Rendering ===
 snes9x_reduce_sprite_flicker = "enabled"

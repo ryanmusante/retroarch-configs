@@ -1,4 +1,4 @@
-# mGBA.opt · GB/GBC/GBA core options · auto per-system color correction · 1 key
+# mGBA.opt · GB/GBC/GBA core options · 1 key
 
 # === Video ===
 mgba_color_correction = "Auto"

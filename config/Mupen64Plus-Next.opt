@@ -1,28 +1,20 @@
-# Mupen64Plus-Next.opt · N64 core options · tvOS software stack: angrylion + cxd4 + cached_interpreter (DYNAREC undef → matches no-JIT default; drift-guard against DYNAREC builds) · pak1-4=rumble · 9 keys
+# Mupen64Plus-Next.opt · N64 core options · 9 keys · angrylion + cxd4 software stack; ParaLLEl-RDP/RSP and GLideN64 inactive under video_driver=metal
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
 
 # === Plugins (RDP / RSP) ===
-# ParaLLEl-RDP/RSP are compiled into the tvOS core (Makefile tvOS branch) and need the vulkan video
-# driver; GLideN64 needs a GL context. RetroArch tvOS ships both (Vulkan via MoltenVK is the upstream
-# Apple default), but the companion retroarch.cfg pins video_driver=metal, so neither plugin is active.
 mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 
 # === Video ===
-# angrylion-multithread="2" sets the RDP worker-thread COUNT, not CPU affinity — tvOS exposes no
-# P-core pinning. "2" budgets one worker per A15 performance core (5-core bin: 2P+3E); fallbacks
-# "3" then "4"; avoid "all threads" (E-core tail latency = stutter)
 mupen64plus-angrylion-multithread = "2"
 
 # === Input (controller paks) ===
-# pak1-4="rumble" 4P rumble parity (Mario Kart 64, Mario Party 1-3, GoldenEye, Perfect Dark, ProAm 64); per-game override for memory/transfer pak (e.g. Pokémon Stadium)
 mupen64plus-pak1 = "rumble"
 mupen64plus-pak2 = "rumble"
 mupen64plus-pak3 = "rumble"
 mupen64plus-pak4 = "rumble"
 
 # === Framerate smoothing ===
-# FrameDuping="True" mirrors Switch HAVE_LIBNX default; smooths cadence on no-JIT sw-RDP timing variance
 mupen64plus-FrameDuping = "True"

@@ -1,4 +1,4 @@
-# Genesis Plus GX.opt · Genesis/MD/Sega CD/Master System core options · no sprite limit + per-game BRAM · 3 keys
+# Genesis Plus GX.opt · Genesis/MD/Sega CD/Master System core options · 3 keys
 
 # === Rendering ===
 genesis_plus_gx_no_sprite_limit = "enabled"
