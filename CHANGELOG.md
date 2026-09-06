@@ -1,3 +1,50 @@
+# 5.4 - 2026-09-05
+
+  - v5.4: completeness release - additions only. No key added, removed, or
+    revalued; cfg 21, opt 18. Lockstep with companion retroarch-appletv4k
+    v5.4.
+  - README.md: Quick Start step 3 checks the loaded .opt values (Mupen RDP
+    Plugin = angrylion, CPU Core = Cached Interpreter); Cores intro links
+    retroarch-appletv4k#systems for folders, extensions and BIOS names;
+    Configuration notes per-core .opt loading relies on
+    `global_core_options = "false"` (RetroArch default, unset globally);
+    Per-Game Overrides gains the `config/<core>/<game>.opt` path and the
+    removal entries (Remove Game Options, Remove Core Overrides, Reset Core
+    Options). Badge 5.3 -> 5.4.
+  - Verified: game-specific options path = config/<library_name>/<content
+    basename>.opt (runloop.c @v1.22.2); DEFAULT_GLOBAL_CORE_OPTIONS false;
+    menu labels and Mupen option labels against msg_hash_us.h and
+    libretro_core_options.h.
+  - config/*.cfg: header + paired stamps v5.3 -> v5.4; bodies unchanged.
+  - config/*.opt: byte-identical to v5.3.
+  - Companion v5.4: retroarch.cfg header + paired stamps only; 74 keys
+    unchanged.
+  - CHANGELOG.md: trim v4.6 per 5-release retention; retained entries are
+    now v5.0-v5.4.
+
+
+# 5.3 - 2026-09-05
+
+  - v5.3: audit release against upstream core-option sources. No key added,
+    removed, or revalued; cfg 21, opt 18. Lockstep with companion
+    retroarch-appletv4k v5.3.
+  - README.md: Quick Start reduced to two steps (create the per-core
+    directory, upload the pair into it); Layout notes the root is purgeable
+    cache; override table - `video_scale_integer_scaling` default wording
+    (unset globally), #14201 marked closed. Badge 5.2 -> 5.3.
+  - Verified: every `.opt` key and value present in the upstream
+    libretro_core_options.h of its core; every `.cfg` key present in
+    RetroArch configuration.c @v1.22.2; cached_interpreter is the
+    non-DYNAREC default; beetle-pce-fast-libretro#127 open, RetroArch
+    #14201 closed.
+  - config/*.cfg: header + paired stamps v5.2 -> v5.3; bodies unchanged.
+  - config/*.opt: byte-identical to v5.2.
+  - Companion v5.3: retroarch.cfg header + paired stamps, upload path
+    /config/; 74 keys unchanged.
+  - CHANGELOG.md: trim v4.5 per 5-release retention; retained entries are
+    now v4.6-v5.3.
+
+
 # 5.2 - 2026-09-05
 
   - v5.2: final audit release. No key added, removed, or revalued; cfg 21,
@@ -65,22 +112,3 @@
   - CHANGELOG.md: retained entries v4.3-v4.6 condensed to changed keys, files,
     stamps and lockstep; rationale prose dropped, nothing renumbered or
     redated. Trim v4.2 per 5-release retention.
-
-
-# 4.6 - 2026-09-05
-
-  - README.md: all 5 `<details>` blocks gain `open`. Badge 4.5 -> 4.6.
-  - config/*.cfg: header + paired stamps v4.5 -> v4.6; bodies unchanged. Keys
-    unchanged: cfg 21, opt 18. Lockstep with retroarch-appletv4k v4.6.
-    CHANGELOG: trim v4.1.
-
-
-# 4.5 - 2026-09-05
-
-  - README.md: every table in a default-collapsed `<details>` block (3 -> 5);
-    Shaders block replaced by a link to retroarch-appletv4k#shaders; Tier
-    definition added; Mupen / FBN notes, lockstep restatements and the
-    CHANGELOG pointer trimmed. Badge 4.4 -> 4.5.
-  - config/*.cfg: header + paired stamps v4.4 -> v4.5; bodies unchanged. Keys
-    unchanged: cfg 21, opt 18. Lockstep with retroarch-appletv4k v4.5.
-    CHANGELOG: trim v4.0.

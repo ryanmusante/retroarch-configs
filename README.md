@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-5.2-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.4-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -10,9 +10,9 @@
 
 ## Quick Start
 
-1. Upload the 14 files in `config/` via the web interface or WebDAV.
-2. On the Apple TV, create `config/<core_name>/` per core and move each `.cfg` / `.opt` pair into it ([Layout](#layout)).
-3. Load content and check Quick Menu → Overrides → Active Override File.
+1. Create `config/<core_name>/` per core via the web interface or WebDAV and upload each `.cfg` / `.opt` pair into it ([Layout](#layout)).
+2. Load content and check Quick Menu → Overrides → Active Override File.
+3. Quick Menu → Core Options should show the `.opt` values (Mupen: RDP Plugin = angrylion, CPU Core = Cached Interpreter).
 
 > [!IMPORTANT]
 > Overrides outside the per-core path are ignored: the global
@@ -22,7 +22,8 @@
 
 Tier 1 = full speed with shaders; Tier 2 = most titles at full speed.
 Run Ahead uses the global `run_ahead_frames = "2"`, single instance.
-Counts are keys per file.
+Counts are keys per file. ROM folders, extensions and BIOS names:
+[retroarch-appletv4k#systems](https://github.com/ryanmusante/retroarch-appletv4k#systems).
 
 <details open>
 <summary><b>Core table</b></summary>
@@ -42,9 +43,10 @@ Counts are keys per file.
 ## Layout
 
 RetroArch reads per-core overrides from `config/<core_name>/` under its
-config root, which the tvOS web interface / WebDAV expose as `/`. The
-zip ships the files flat under `config/`; on the device each pair lives
-in a directory named exactly after the core, spaces included:
+root directory, which the tvOS web interface / WebDAV expose as `/` —
+purgeable cache, so keep this zip as the backup. The zip ships the files
+flat under `config/`; on the device each pair lives in a directory named
+exactly after the core, spaces included:
 
 ```
 config/Mesen/
@@ -73,7 +75,9 @@ are drift-guards pinned to the value they already inherit, so a change
 to the global `retroarch.cfg` cannot silently move a pinned core.
 Inherited from the global file, not overridden: `preemptive_frames_enable`,
 `audio_resampler_quality`, `run_ahead_hide_warnings`, `run_ahead_frames`.
-No `.cfg` sets a shader preset — see
+Per-core `.opt` loading relies on `global_core_options = "false"`
+(RetroArch default; unset in the global file). No `.cfg` sets a shader
+preset — see
 [retroarch-appletv4k#shaders](https://github.com/ryanmusante/retroarch-appletv4k#shaders).
 
 <details open>
@@ -81,12 +85,12 @@ No `.cfg` sets a shader preset — see
 
 | Key | Value | Cores | Type |
 |-----|-------|-------|------|
-| `video_scale_integer_scaling` | `1` | Tier 1 | Flip — overscale (global `0`, underscale); needs global `video_scale_integer = "true"` |
+| `video_scale_integer_scaling` | `1` | Tier 1 | Flip — overscale (default `0` underscale; unset globally); needs global `video_scale_integer = "true"` |
 | `run_ahead_enabled` | `true` | Tier 1 | Flip |
 | `run_ahead_enabled` | `false` | Mupen | Drift-guard — per-frame savestate cost too high on the sw-RDP stack; opt in per-game |
 | `run_ahead_secondary_instance` | `false` | Mupen | Drift-guard |
 | `video_threaded` | `false` | Mupen | Drift-guard |
-| `video_frame_delay_auto` | `false` | Mupen | Flip (global `true`) — regression guard for [#14201](https://github.com/libretro/RetroArch/issues/14201) |
+| `video_frame_delay_auto` | `false` | Mupen | Flip (global `true`) — regression guard for [#14201](https://github.com/libretro/RetroArch/issues/14201) (closed) |
 | `audio_sync` | `true` | Mupen | Drift-guard |
 | `audio_latency` | `64` | Mupen | Drift-guard |
 | `autosave_interval` | `0` | Mupen | Flip (global `300`) — avoids the purgeable-cache stall on SRAM write |
@@ -122,6 +126,12 @@ Per-game `.cfg` files live beside the core files, e.g.
 run_ahead_enabled = "true"
 run_ahead_frames = "1"
 ```
+
+Per-game core options land beside them as `config/<core>/<game>.opt`
+(Manage Core Options → Save Game Options; Remove Game Options deletes
+the file). Quick Menu → Overrides → Remove Core Overrides deletes
+`<core>.cfg`; Manage Core Options → Reset Core Options returns the
+core's options to defaults.
 
 ## Versioning
 
