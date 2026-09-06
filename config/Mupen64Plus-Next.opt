@@ -4,8 +4,9 @@
 mupen64plus-cpucore = "cached_interpreter"
 
 # === Plugins (RDP / RSP) ===
-# ParaLLEl-RDP/RSP are compiled into the tvOS core (Makefile tvOS branch) but need Vulkan, which
-# RetroArch tvOS does not provide; GLideN64 needs a GL context, which video_driver=metal does not.
+# ParaLLEl-RDP/RSP are compiled into the tvOS core (Makefile tvOS branch) and need the vulkan video
+# driver; GLideN64 needs a GL context. RetroArch tvOS ships both (Vulkan via MoltenVK is the upstream
+# Apple default), but the companion retroarch.cfg pins video_driver=metal, so neither plugin is active.
 mupen64plus-rdp-plugin = "angrylion"
 mupen64plus-rsp-plugin = "cxd4"
 

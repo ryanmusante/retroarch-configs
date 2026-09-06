@@ -1,4 +1,4 @@
-# Mesen.opt · NES core options · no sprite limit + DMC popping correction off (max CPU) · 2 keys
+# Mesen.opt · NES core options · no sprite limit + DMC popping correction off (CPU headroom) · 2 keys
 
 # === Rendering ===
 mesen_nospritelimit = "enabled"
