@@ -1,10 +1,13 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-4.3-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-4.4-blue.svg)](CHANGELOG.md)
+[![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
-> Apple TV 4K. Companion to retroarch-appletv4k, which provides the
-> global `retroarch.cfg`.
+> Apple TV 4K. Companion to
+> [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k),
+> which provides the global `retroarch.cfg` and the setup guide; both
+> repos release in lockstep (see [Related](#related)).
 
 **Target:** RetroArch v1.22.x on tvOS 26 / Apple TV 4K 3rd Gen. See [Supported Cores](#supported-cores).
 
@@ -26,7 +29,7 @@
 
 1. Upload all 14 files from `config/` via the web interface or WebDAV.
 2. On-device, create `config/<core_name>/` directories and move each `.cfg` / `.opt` pair into its core directory (see [Layout](#layout)).
-3. Load content. Verify via Quick Menu → Overrides.
+3. Load content. Verify via Quick Menu → Overrides (Active Override File).
 
 > [!IMPORTANT]
 > If overrides are not at the per-core path, the global
@@ -45,7 +48,7 @@ See [CHANGELOG](CHANGELOG.md) for release history.
 | Mesen | NES | 1 | 2 | 2 | No sprite limit; DMC popping correction off (revert per-game); Run Ahead |
 | mGBA | GB / GBC / GBA | 1 | 2 | 1 | `mgba_color_correction = "Auto"`; Run Ahead. LCD look via `handheld/lcd-grid-v2.slangp` per-core |
 | Snes9x | SNES | 1 | 2 | 1 | Reduce sprite flicker; Run Ahead |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | tvOS software stack: angrylion sw-RDP + cxd4 RSP, no JIT (ParaLLEl-RDP/RSP compile in but need Vulkan; GLideN64 needs a GL context, which `video_driver = "metal"` does not provide). `angrylion-multithread = "2"` (worker-thread count for the 5-core A15 bin, 2P+3E — not an affinity setting); `FrameDuping = "True"`; `pak1-4 = "rumble"`. Frontend pins per [Configuration](#configuration) |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | tvOS software stack: angrylion sw-RDP + cxd4 RSP, no JIT. ParaLLEl-RDP/RSP compile in but need the `vulkan` video driver and GLideN64 a GL context; RetroArch tvOS ships both (Vulkan via MoltenVK is the upstream Apple default), but the companion pins `video_driver = "metal"`, so neither plugin is active. `mupen64plus-angrylion-multithread = "2"` (worker-thread count for the 5-core A15 bin, 2P+3E — not an affinity setting); `mupen64plus-FrameDuping = "True"`; `mupen64plus-pak1`–`pak4 = "rumble"`. Frontend pins per [Configuration](#configuration) |
 
 ## Layout
 
@@ -126,7 +129,8 @@ Of the 21 per-core keys, 14 are real flips against the global value and
 Keys not set per-core (inherited from global):
 `preemptive_frames_enable`, `audio_resampler_quality`,
 `run_ahead_hide_warnings`, `run_ahead_frames`. No shader preset is set
-in any `.cfg`; presets are assigned per-core via Save Core Preset.
+in any `.cfg`; presets are assigned per-core via Quick Menu → Shaders →
+Manage Presets → Save Core Preset.
 
 </details>
 
@@ -138,15 +142,15 @@ Global `retroarch.cfg` enables the shader pipeline
 `.cfg` files set one either. `crt/zfast-crt.slangp` is the
 recommended starting point (single-pass, integer-scale safe). mGBA
 users wanting LCD look should apply `handheld/lcd-grid-v2.slangp` via
-Save Core Preset.
+Quick Menu → Shaders → Manage Presets → Save Core Preset.
 
 </details>
 
 ## Overclocking
 
 CPU clock keys are not set globally — a value that fixes one title
-breaks another. Apply per-game via Quick Menu → Core Options, then
-Save Game Options.
+breaks another. Apply per-game via Quick Menu → Core Options → Manage
+Core Options → Save Game Options.
 
 | Core | Key | Values | Default |
 |------|-----|--------|---------|
@@ -168,14 +172,14 @@ run_ahead_frames = "1"
 
 ## Related
 
-- [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k) — Global `retroarch.cfg` and Apple TV 4K setup guide
+- [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k) — Global `retroarch.cfg` (74 keys) and the Apple TV 4K setup guide; the per-core files here override it and release in lockstep with it
 
 ## Versioning
 
 `vMAJOR.MINOR` (no patch), in lockstep with `retroarch-appletv4k` —
 both repos share one tag per release. `MAJOR` on incompatible
 structural changes; `MINOR` on every release. `CHANGELOG.md` is
-kernel.org style and retains the last 5 MINOR entries.
+kernel.org style and retains the last 5 releases.
 
 ## License
 
