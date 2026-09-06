@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-4.5-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-4.6-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -39,7 +39,7 @@
 
 Tier 1 = full speed with shaders; Tier 2 = most titles at full speed.
 
-<details>
+<details open>
 <summary><b>Core table</b></summary>
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Notes |
@@ -74,7 +74,7 @@ config/Mesen/
 Repeat for `Beetle PCE Fast`, `FinalBurn Neo`, `Genesis Plus GX`,
 `Mupen64Plus-Next`, `Snes9x`, `mGBA`.
 
-<details>
+<details open>
 <summary><b>Zip contents (flat)</b></summary>
 
 ```
@@ -95,7 +95,7 @@ moved into per-core directories as shown above.
 
 ## Configuration
 
-<details>
+<details open>
 <summary><b>File roles</b></summary>
 
 | File | Contents | Set via |
@@ -113,7 +113,7 @@ moved into per-core directories as shown above.
 options are frontend-version-independent, so `.opt` files are not
 restamped on a release that changes no core option.
 
-<details>
+<details open>
 <summary><b>Frontend override keys</b></summary>
 
 | Key | Values | Purpose |
@@ -150,7 +150,7 @@ CPU clock keys are not set globally — a value that fixes one title
 breaks another. Apply per-game via Quick Menu → Core Options → Manage
 Core Options → Save Game Options.
 
-<details>
+<details open>
 <summary><b>Overclock keys</b></summary>
 
 | Core | Key | Values | Default |

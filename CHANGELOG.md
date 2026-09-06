@@ -1,3 +1,20 @@
+# 4.6 - 2026-09-05
+
+  - v4.6: README release. No key added, removed, or revalued; cfg 21, opt 18,
+    cfg+opt 39 unchanged. Lockstep with companion retroarch-appletv4k v4.6.
+  - README.md: all 5 `<details>` blocks now carry the `open` attribute -
+    expanded by default, still collapsible. Block set and contents unchanged
+    from v4.5.
+  - README.md: version badge 4.5 -> 4.6.
+  - config/*.cfg: 7 files; header and paired stamps v4.5 -> v4.6. Bodies
+    byte-identical to v4.5.
+  - config/*.opt: 7 files byte-identical to v4.5 (no version stamps).
+  - Companion v4.6: retroarch.cfg header + paired stamps only; 74 keys
+    unchanged.
+  - CHANGELOG.md: trim v4.1 per 5-release retention; retained entries are
+    now v4.2-v4.6.
+
+
 # 4.5 - 2026-09-05
 
   - v4.5: README release. No key added, removed, or revalued; cfg 21, opt 18,
@@ -164,28 +181,3 @@
     (74 keys unchanged).
   - CHANGELOG.md: trim v3.26 entry per 5-release retention; retained entries
     are now v3.27-v3.28 + v4.0-v4.2.
-
-
-# 4.1 - 2026-07-05
-
-  - v4.1: Beetle PCE Fast.opt drops `pce_fast_cdimagecache = "enabled"`,
-    reverting to upstream default `"disabled"`. opt 3 keys -> 2 keys.
-  - Rationale: full CD-image RAM precache is imprudent as a global default on
-    the 4 GB shared-RAM, fanless Apple TV 4K 3rd Gen (binned A15, 2P+3E). A
-    multi-hundred-MB footprint contends with tvOS and risks memory-pressure
-    stalls. Seek-latency relief retained as a per-game opt-in, consistent with
-    the per-game policy for hardware-dependent keys.
-  - Beetle PCE Fast.opt: header rewritten for 2 keys and per-game precache
-    guidance. `cdspeed = "2"` and `nospritelimit = "enabled"` unchanged (real
-    flips from defaults `"1"` / `"disabled"`).
-  - README.md: Supported Cores - Beetle PCE Fast `.opt` count 3 -> 2; Notes
-    drop "CD precache", add the per-game precache rationale.
-  - README.md: version badge 4.0 -> 4.1; paired badge `retroarch--appletv4k
-    v4.0` -> `v4.1`.
-  - config/*.cfg: 7 files; header and paired stamps v4.0 -> v4.1. Bodies
-    byte-identical to v4.0.
-  - Companion v4.1: retroarch.cfg `audio_latency "48" -> "64"`, matching
-    upstream `config.def.h` DEFAULT_OUT_LATENCY 64 on the non-Android branch;
-    74 keys otherwise unchanged.
-  - CHANGELOG.md: trim v3.25 entry per 5-release retention.
-  - cfg 21, opt 19 -> 18, cfg+opt 40 -> 39.
