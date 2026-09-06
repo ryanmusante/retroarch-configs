@@ -1,3 +1,51 @@
+# 5.2 - 2026-09-05
+
+  - v5.2: final audit release. No key added, removed, or revalued; cfg 21,
+    opt 18. Lockstep with companion retroarch-appletv4k v5.2.
+  - README.md: File roles - `.opt` path restored to the v4.x wording, Quick
+    Menu -> Core Options (per-game: Manage Core Options -> Save Game
+    Options); the v5.0 "Saved via ... Manage Core Options" cell implied a
+    save entry that does not exist.
+  - README.md: Configuration regains the inherited-keys line
+    (`preemptive_frames_enable`, `audio_resampler_quality`,
+    `run_ahead_hide_warnings`, `run_ahead_frames`).
+  - README.md: Core table - Beetle systems gain "(+ CD)"; Mesen regains the
+    DMC rationale (sub-1% CPU saving, DPCM-heavy titles); Mupen FrameDuping
+    regains its purpose (frame cadence). Badge 5.1 -> 5.2.
+  - Verified: header key counts of all 14 config files, Core table `.cfg` /
+    `.opt` counts and core names match the files; every cited key / value
+    matches config/* or the companion retroarch.cfg.
+  - config/*.cfg: header + paired stamps v5.1 -> v5.2; bodies unchanged.
+  - config/*.opt: byte-identical to v5.1.
+  - Companion v5.2: retroarch.cfg header + paired stamps only; 74 keys
+    unchanged.
+  - CHANGELOG.md: trim v4.4 per 5-release retention; retained entries are
+    now v4.5-v5.2.
+
+
+# 5.1 - 2026-09-05
+
+  - v5.1: audit release - restores v5.0 removals judged vital. No key added,
+    removed, or revalued; cfg 21, opt 18. Lockstep with companion
+    retroarch-appletv4k v5.1.
+  - README.md: Core table - Beetle PCE Fast row regains the single-instance
+    run-ahead hazard (beetle-pce-fast-libretro#127 open) and
+    `pce_fast_cdspeed` with the per-game `4`; Mupen row regains
+    `cached_interpreter` as a drift-guard and the angrylion thread fallbacks
+    (`3`-`4`, never all threads).
+  - README.md: Overclocking regains the typical per-game values
+    (`mesen_overclock` for Battletoads / Recca; `snes9x_overclock_superfx`
+    `200%` for Star Fox, Yoshi's Island, Doom, Stunt Race FX).
+  - README.md: every cited key / value verified against config/*.cfg,
+    config/*.opt and the companion retroarch.cfg. Badge 5.0 -> 5.1.
+  - config/*.cfg: header + paired stamps v5.0 -> v5.1; bodies unchanged.
+  - config/*.opt: byte-identical to v5.0.
+  - Companion v5.1: retroarch.cfg header + paired stamps only; 74 keys
+    unchanged.
+  - CHANGELOG.md: trim v4.3 per 5-release retention; retained entries are
+    now v4.4-v5.1.
+
+
 # 5.0 - 2026-09-05
 
   - v5.0: MAJOR - README trimmed to vital information; sections removed, so
@@ -36,34 +84,3 @@
   - config/*.cfg: header + paired stamps v4.4 -> v4.5; bodies unchanged. Keys
     unchanged: cfg 21, opt 18. Lockstep with retroarch-appletv4k v4.5.
     CHANGELOG: trim v4.0.
-
-
-# 4.4 - 2026-09-05
-
-  - Mupen64Plus-Next.opt / README.md: the v4.3 "tvOS does not provide Vulkan"
-    claim corrected - RetroArch tvOS ships MoltenVK Vulkan; ParaLLEl-RDP/RSP
-    and GLideN64 stay inactive only because the companion pins
-    `video_driver = "metal"`.
-  - Comment-only edits: Beetle PCE Fast.cfg (#127 guard named),
-    Mupen64Plus-Next.cfg, FinalBurn Neo.opt, Mesen.opt. README menu paths
-    follow the v1.22.2 tree. config/.gitkeep removed (v4.3 recorded the
-    removal; the file had stayed tracked).
-  - config/*.cfg: header + paired stamps v4.3 -> v4.4. Badge 4.3 -> 4.4. Keys
-    unchanged: cfg 21, opt 18. Lockstep with retroarch-appletv4k v4.4.
-    CHANGELOG: kernel.org reflow; trim v3.28.
-
-
-# 4.3 - 2026-08-30
-
-  - FinalBurn Neo.cfg / README.md: `rewind_enable = "false"` reclassified as a
-    drift-guard (#16374 closed). Value unchanged.
-  - Mupen64Plus-Next.cfg / README.md: `video_threaded` (#14978) and
-    `rewind_enable` (#18300) labelled drift-guards; `video_frame_delay_auto`
-    a real override kept as #14201 regression guard. Values unchanged.
-  - Mupen64Plus-Next.opt: `angrylion-multithread` documented as worker-thread
-    count, not CPU affinity; "Metal-only" -> "software stack".
-  - README.md: 21 per-core keys = 14 real flips + 7 drift-guards;
-    `video_scale_integer_scaling` enum stated; `snes9x_overclock_superfx`
-    range corrected (50%-100% by 10%, 150%-500% by 50%). Badge 4.2 -> 4.3.
-  - config/*.cfg: header + paired stamps v4.2 -> v4.3. Keys unchanged: cfg
-    21, opt 18. Lockstep with retroarch-appletv4k v4.3. CHANGELOG: trim v3.27.

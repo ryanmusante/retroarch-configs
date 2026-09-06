@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-5.0-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.2-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -29,13 +29,13 @@ Counts are keys per file.
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Sets |
 |------|---------|------|--------|--------|------|
-| Beetle PCE Fast | PC Engine / TG-16 | 1 | 2 | 2 | Run Ahead; integer overscale; 2× CD speed; no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
+| Beetle PCE Fast | PC Engine / TG-16 (+ CD) | 1 | 2 | 2 | Run Ahead — keep it single-instance, the second-instance mode hangs CD images ([beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127), open); integer overscale; `pce_fast_cdspeed = "2"` (`4` per-game where compatible); no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
 | FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead; integer overscale; rewind off (drift-guard). Dipswitches and cheats are per-game only |
 | Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 3 | Run Ahead; integer overscale; no sprite limit; per-game BRAM (system + cart) |
-| Mesen | NES | 1 | 2 | 2 | Run Ahead; integer overscale; no sprite limit; DMC popping correction off (restore per-game) |
+| Mesen | NES | 1 | 2 | 2 | Run Ahead; integer overscale; no sprite limit; DMC popping correction off (sub-1% CPU saving; restore per-game on DPCM-heavy titles) |
 | mGBA | GB / GBC / GBA | 1 | 2 | 1 | Run Ahead; integer overscale; `mgba_color_correction = "Auto"` |
 | Snes9x | SNES | 1 | 2 | 1 | Run Ahead; integer overscale; reduce sprite flicker |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | angrylion RDP + cxd4 RSP + cached interpreter (no JIT); ParaLLEl-RDP/RSP and GLideN64 are inactive under the companion's `video_driver = "metal"`. angrylion threads `2`; FrameDuping; pak1–4 rumble (memory / transfer pak per-game). Frontend pins in [Configuration](#configuration) |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | angrylion RDP + cxd4 RSP; `cached_interpreter` (drift-guard — the no-JIT build's default); ParaLLEl-RDP/RSP and GLideN64 are inactive under the companion's `video_driver = "metal"`. angrylion threads `2` (one per A15 P-core; `3`–`4` as fallbacks, never all threads); FrameDuping (smooths frame cadence); pak1–4 rumble (memory / transfer pak per-game). Frontend pins in [Configuration](#configuration) |
 
 </details>
 
@@ -57,10 +57,10 @@ config/Mesen/
 <details open>
 <summary><b>File roles</b></summary>
 
-| File | Holds | Saved via |
-|------|-------|-----------|
+| File | Holds | Set via |
+|------|-------|---------|
 | `<core>.cfg` | Frontend overrides (video, audio, latency, input); version-stamped | Quick Menu → Overrides → Save Core Overrides |
-| `<core>.opt` | Core options (renderer, CPU mode, accuracy); no version stamp | Quick Menu → Core Options → Manage Core Options |
+| `<core>.opt` | Core options (renderer, CPU mode, accuracy); no version stamp | Quick Menu → Core Options (per-game: Manage Core Options → Save Game Options) |
 
 </details>
 
@@ -70,8 +70,10 @@ config/Mesen/
 
 Of the 21 `.cfg` keys, 14 are real flips against the global value and 7
 are drift-guards pinned to the value they already inherit, so a change
-to the global `retroarch.cfg` cannot silently move a pinned core. No
-`.cfg` sets a shader preset — see
+to the global `retroarch.cfg` cannot silently move a pinned core.
+Inherited from the global file, not overridden: `preemptive_frames_enable`,
+`audio_resampler_quality`, `run_ahead_hide_warnings`, `run_ahead_frames`.
+No `.cfg` sets a shader preset — see
 [retroarch-appletv4k#shaders](https://github.com/ryanmusante/retroarch-appletv4k#shaders).
 
 <details open>
@@ -96,7 +98,9 @@ to the global `retroarch.cfg` cannot silently move a pinned core. No
 
 Not set globally — a clock that fixes one title breaks another. Set per
 game: Quick Menu → Core Options → Manage Core Options → Save Game
-Options.
+Options. Typical: `mesen_overclock` for Battletoads and Recca;
+`snes9x_overclock_superfx = "200%"` for SuperFX titles (Star Fox,
+Yoshi's Island, Doom, Stunt Race FX).
 
 <details open>
 <summary><b>Keys</b></summary>
