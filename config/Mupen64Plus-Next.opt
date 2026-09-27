@@ -1,4 +1,4 @@
-# Mupen64Plus-Next.opt · N64 core options · 9 keys · angrylion + cxd4 software stack; ParaLLEl-RDP/RSP and GLideN64 inactive under video_driver=metal
+# Mupen64Plus-Next.opt · N64 core options · 9 keys · angrylion + cxd4 software stack; GLideN64 / ParaLLEl-RDP force a GL / Vulkan driver over video_driver=metal, ParaLLEl-RSP needs JIT
 
 # === CPU ===
 mupen64plus-cpucore = "cached_interpreter"
