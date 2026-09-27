@@ -1,3 +1,54 @@
+# 5.6 - 2026-09-26
+
+  - v5.6: deep-scan release. No key added, removed, or revalued; cfg 21,
+    opt 18. Lockstep with companion retroarch-appletv4k v5.6.
+  - README.md: badge 5.5 -> 5.6; every claim re-verified, no content
+    change.
+  - Verified: supported extensions and firmware names of all 7 cores
+    against libretro-core-info; Reset Core Options sits under Manage Core
+    Options (menu_displaylist.c @v1.22.2); integer scaling 0 / 1 / 2 =
+    Underscale / Overscale / Smart; all README links resolve;
+    beetle-pce-fast-libretro#127 open.
+  - config/*.cfg: header + paired stamps v5.5 -> v5.6; bodies unchanged.
+  - config/*.opt: byte-identical to v5.5.
+  - Companion v5.6: retroarch.cfg header + paired stamps; 74 keys
+    unchanged; README foreground / VLAN server note, Tuning
+    vrr_runloop_enable wording, cache-purge timing, tvOS controller
+    limits, fbneo/neogeo.zip.
+  - CHANGELOG.md: trim v5.1 per 5-release retention; retained entries are
+    now v5.2-v5.6.
+
+
+# 5.5 - 2026-09-26
+
+  - v5.5: currency release against upstream core sources and tvOS 27. No
+    key added, removed, or revalued; cfg 21, opt 18. Lockstep with
+    companion retroarch-appletv4k v5.5.
+  - README.md: intro target tvOS 26 -> 27; Quick Start step 3 shows the
+    Mupen RDP Plugin value label Angrylion (as displayed, like Cached
+    Interpreter); Core table Mupen row - GLideN64 and ParaLLEl-RDP force a
+    GL / Vulkan driver in place of the companion's metal driver
+    (driver_switch_enable, default on) and ParaLLEl-RSP needs JIT,
+    replacing "inactive under metal"; Beetle row - the second-instance
+    mode hangs loading CD images. Badge 5.4 -> 5.5.
+  - config/Mupen64Plus-Next.opt: header note corrected likewise; key lines
+    byte-identical.
+  - config/.gitkeep: removed; config/ holds all 14 files.
+  - Verified: all 18 .opt keys and values in each core's upstream
+    libretro_core_options.h; 7 library_name strings match the directory
+    names; tvos-arm64 Mupen build has HAVE_THR_AL, LLE and no DYNAREC
+    (cached_interpreter default); HW-render driver forcing in
+    video_driver.c @v1.22.2; beetle-pce-fast-libretro#127 open, RetroArch
+    #14201 closed.
+  - config/*.cfg: header + paired stamps v5.4 -> v5.5; bodies unchanged.
+  - config/*.opt: other 6 byte-identical to v5.4.
+  - Companion v5.5: retroarch.cfg header + paired stamps, target tvOS 27;
+    74 keys unchanged; README lockout-recovery row, exact Online Updater
+    labels, 8BitDo mode D, Guest-Dr-Venom dropped.
+  - CHANGELOG.md: trim v5.0 per 5-release retention; retained entries are
+    now v5.1-v5.5.
+
+
 # 5.4 - 2026-09-05
 
   - v5.4: completeness release - additions only. No key added, removed, or
@@ -68,47 +119,3 @@
     unchanged.
   - CHANGELOG.md: trim v4.4 per 5-release retention; retained entries are
     now v4.5-v5.2.
-
-
-# 5.1 - 2026-09-05
-
-  - v5.1: audit release - restores v5.0 removals judged vital. No key added,
-    removed, or revalued; cfg 21, opt 18. Lockstep with companion
-    retroarch-appletv4k v5.1.
-  - README.md: Core table - Beetle PCE Fast row regains the single-instance
-    run-ahead hazard (beetle-pce-fast-libretro#127 open) and
-    `pce_fast_cdspeed` with the per-game `4`; Mupen row regains
-    `cached_interpreter` as a drift-guard and the angrylion thread fallbacks
-    (`3`-`4`, never all threads).
-  - README.md: Overclocking regains the typical per-game values
-    (`mesen_overclock` for Battletoads / Recca; `snes9x_overclock_superfx`
-    `200%` for Star Fox, Yoshi's Island, Doom, Stunt Race FX).
-  - README.md: every cited key / value verified against config/*.cfg,
-    config/*.opt and the companion retroarch.cfg. Badge 5.0 -> 5.1.
-  - config/*.cfg: header + paired stamps v5.0 -> v5.1; bodies unchanged.
-  - config/*.opt: byte-identical to v5.0.
-  - Companion v5.1: retroarch.cfg header + paired stamps only; 74 keys
-    unchanged.
-  - CHANGELOG.md: trim v4.3 per 5-release retention; retained entries are
-    now v4.4-v5.1.
-
-
-# 5.0 - 2026-09-05
-
-  - v5.0: MAJOR - README trimmed to vital information; sections removed, so
-    inbound anchors change. No key added, removed, or revalued; cfg 21, opt
-    18. Lockstep with companion retroarch-appletv4k v5.0.
-  - README.md: Contents, Related and the Zip contents block removed; Supported
-    Cores -> Cores. Core table, override-key table, Overclocking and the
-    Per-Game example condensed. Sections: Quick Start, Cores, Layout,
-    Configuration, Overclocking, Per-Game Overrides, Versioning, License.
-    Badge 4.6 -> 5.0.
-  - config/*.cfg: header reduced to name, version, tier, key count and
-    pairing; inline rationale comments removed (the README override-key table
-    holds the flip / drift-guard classification). Stamps v4.6 -> v5.0.
-    Section markers and key lines byte-identical.
-  - config/*.opt: header reduced likewise; inline comments removed. Section
-    markers and key lines byte-identical. No version stamps.
-  - CHANGELOG.md: retained entries v4.3-v4.6 condensed to changed keys, files,
-    stamps and lockstep; rationale prose dropped, nothing renumbered or
-    redated. Trim v4.2 per 5-release retention.

@@ -1,10 +1,10 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-5.4-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.6-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
-> Apple TV 4K 3rd Gen (tvOS 26, RetroArch v1.22.x). Companion to
+> Apple TV 4K 3rd Gen (tvOS 27, RetroArch v1.22.x). Companion to
 > [retroarch-appletv4k](https://github.com/ryanmusante/retroarch-appletv4k),
 > which ships the global `retroarch.cfg` and the setup guide.
 
@@ -12,7 +12,7 @@
 
 1. Create `config/<core_name>/` per core via the web interface or WebDAV and upload each `.cfg` / `.opt` pair into it ([Layout](#layout)).
 2. Load content and check Quick Menu → Overrides → Active Override File.
-3. Quick Menu → Core Options should show the `.opt` values (Mupen: RDP Plugin = angrylion, CPU Core = Cached Interpreter).
+3. Quick Menu → Core Options should show the `.opt` values (Mupen: RDP Plugin = Angrylion, CPU Core = Cached Interpreter).
 
 > [!IMPORTANT]
 > Overrides outside the per-core path are ignored: the global
@@ -30,13 +30,13 @@ Counts are keys per file. ROM folders, extensions and BIOS names:
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Sets |
 |------|---------|------|--------|--------|------|
-| Beetle PCE Fast | PC Engine / TG-16 (+ CD) | 1 | 2 | 2 | Run Ahead — keep it single-instance, the second-instance mode hangs CD images ([beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127), open); integer overscale; `pce_fast_cdspeed = "2"` (`4` per-game where compatible); no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
+| Beetle PCE Fast | PC Engine / TG-16 (+ CD) | 1 | 2 | 2 | Run Ahead — keep it single-instance, the second-instance mode hangs loading CD images ([beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127), open); integer overscale; `pce_fast_cdspeed = "2"` (`4` per-game where compatible); no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
 | FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead; integer overscale; rewind off (drift-guard). Dipswitches and cheats are per-game only |
 | Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 3 | Run Ahead; integer overscale; no sprite limit; per-game BRAM (system + cart) |
 | Mesen | NES | 1 | 2 | 2 | Run Ahead; integer overscale; no sprite limit; DMC popping correction off (sub-1% CPU saving; restore per-game on DPCM-heavy titles) |
 | mGBA | GB / GBC / GBA | 1 | 2 | 1 | Run Ahead; integer overscale; `mgba_color_correction = "Auto"` |
 | Snes9x | SNES | 1 | 2 | 1 | Run Ahead; integer overscale; reduce sprite flicker |
-| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | angrylion RDP + cxd4 RSP; `cached_interpreter` (drift-guard — the no-JIT build's default); ParaLLEl-RDP/RSP and GLideN64 are inactive under the companion's `video_driver = "metal"`. angrylion threads `2` (one per A15 P-core; `3`–`4` as fallbacks, never all threads); FrameDuping (smooths frame cadence); pak1–4 rumble (memory / transfer pak per-game). Frontend pins in [Configuration](#configuration) |
+| Mupen64Plus-Next | Nintendo 64 | 2 | 8 | 9 | angrylion RDP + cxd4 RSP; `cached_interpreter` (drift-guard — the no-JIT build's default); GLideN64 and ParaLLEl-RDP would force a GL / Vulkan driver in place of the companion's `video_driver = "metal"`, and ParaLLEl-RSP needs JIT. angrylion threads `2` (one per A15 P-core; `3`–`4` as fallbacks, never all threads); FrameDuping (smooths frame cadence); pak1–4 rumble (memory / transfer pak per-game). Frontend pins in [Configuration](#configuration) |
 
 </details>
 
