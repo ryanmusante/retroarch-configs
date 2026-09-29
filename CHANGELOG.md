@@ -1,3 +1,35 @@
+# 5.7 - 2026-09-28
+
+  - v5.7: audit release. No key added, removed, or revalued; cfg 21,
+    opt 18. Lockstep with companion retroarch-appletv4k v5.7.
+  - config/Mupen64Plus-Next.cfg: video_frame_delay_auto now precedes
+    video_threaded, the retroarch.cfg order; section marker follows.
+    Values unchanged.
+  - config/FinalBurn Neo.cfg, config/FinalBurn Neo.opt: header reads
+    Neo Geo/Arcade like the other multi-system headers; key lines
+    unchanged.
+  - config/.gitkeep: deleted; config/ holds the 14 files.
+  - README.md: Quick Start steps wrapped to the prose width. Badge 5.6 ->
+    5.7.
+  - Verified: 18 .opt keys and values against each core's
+    libretro_core_options.h; Mupen labels RDP Plugin = Angrylion, CPU
+    Core = Cached Interpreter; Overclocking values and defaults;
+    extensions and firmware against libretro-core-info; all 14 files load
+    through libretro-common config_file.c as the listed keys, and merged
+    over retroarch.cfg 14 keys flip and 7 keep the inherited value, as
+    the override table states; beetle-pce-fast-libretro#127 open,
+    RetroArch #14201 closed.
+  - config/*.cfg: header + paired stamps v5.6 -> v5.7; other bodies
+    unchanged.
+  - config/*.opt: 6 byte-identical to v5.6.
+  - Companion v5.7: retroarch.cfg header + paired stamps, header target
+    (tvOS 27, RetroArch v1.22.x); 74 keys unchanged; README Start
+    Directory label, segacd/ File Extensions, hotkey bind labels,
+    Troubleshooting links, security wording, App Store floor tvOS 11.
+  - CHANGELOG.md: trim v5.2 per 5-release retention; retained entries are
+    now v5.3-v5.7.
+
+
 # 5.6 - 2026-09-26
 
   - v5.6: deep-scan release. No key added, removed, or revalued; cfg 21,
@@ -94,28 +126,3 @@
     /config/; 74 keys unchanged.
   - CHANGELOG.md: trim v4.5 per 5-release retention; retained entries are
     now v4.6-v5.3.
-
-
-# 5.2 - 2026-09-05
-
-  - v5.2: final audit release. No key added, removed, or revalued; cfg 21,
-    opt 18. Lockstep with companion retroarch-appletv4k v5.2.
-  - README.md: File roles - `.opt` path restored to the v4.x wording, Quick
-    Menu -> Core Options (per-game: Manage Core Options -> Save Game
-    Options); the v5.0 "Saved via ... Manage Core Options" cell implied a
-    save entry that does not exist.
-  - README.md: Configuration regains the inherited-keys line
-    (`preemptive_frames_enable`, `audio_resampler_quality`,
-    `run_ahead_hide_warnings`, `run_ahead_frames`).
-  - README.md: Core table - Beetle systems gain "(+ CD)"; Mesen regains the
-    DMC rationale (sub-1% CPU saving, DPCM-heavy titles); Mupen FrameDuping
-    regains its purpose (frame cadence). Badge 5.1 -> 5.2.
-  - Verified: header key counts of all 14 config files, Core table `.cfg` /
-    `.opt` counts and core names match the files; every cited key / value
-    matches config/* or the companion retroarch.cfg.
-  - config/*.cfg: header + paired stamps v5.1 -> v5.2; bodies unchanged.
-  - config/*.opt: byte-identical to v5.1.
-  - Companion v5.2: retroarch.cfg header + paired stamps only; 74 keys
-    unchanged.
-  - CHANGELOG.md: trim v4.4 per 5-release retention; retained entries are
-    now v4.5-v5.2.

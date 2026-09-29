@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-5.6-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.7-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -10,9 +10,11 @@
 
 ## Quick Start
 
-1. Create `config/<core_name>/` per core via the web interface or WebDAV and upload each `.cfg` / `.opt` pair into it ([Layout](#layout)).
+1. Create `config/<core_name>/` per core via the web interface or WebDAV
+   and upload each `.cfg` / `.opt` pair into it ([Layout](#layout)).
 2. Load content and check Quick Menu → Overrides → Active Override File.
-3. Quick Menu → Core Options should show the `.opt` values (Mupen: RDP Plugin = Angrylion, CPU Core = Cached Interpreter).
+3. Quick Menu → Core Options should show the `.opt` values (Mupen: RDP
+   Plugin = Angrylion, CPU Core = Cached Interpreter).
 
 > [!IMPORTANT]
 > Overrides outside the per-core path are ignored: the global
