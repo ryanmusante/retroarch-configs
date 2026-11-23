@@ -1,3 +1,16 @@
+# 5.8 - 2026-10-29
+
+  - v5.8: pin run_ahead_secondary_instance off in Beetle PCE Fast.cfg; cfg
+    22 keys (8 drift-guards), opt 18.
+  - config/.gitkeep: remove it from git; v5.5 and v5.7 recorded the removal
+    but left the file tracked.
+  - README.md: core table, guard count and override table carry the PCE
+    guard; File roles lists saves, not input; badge 5.7 -> 5.8.
+  - config/*.cfg: header and paired stamps v5.7 -> v5.8.
+  - CHANGELOG.md: trim v5.3 per 5-release retention; keep v5.4-v5.8; put a
+    v5.4 path in backticks, where GitHub hid a placeholder.
+
+
 # 5.7 - 2026-09-28
 
   - v5.7: audit release. No key added, removed, or revalued; cfg 21,
@@ -94,8 +107,8 @@
     Per-Game Overrides gains the `config/<core>/<game>.opt` path and the
     removal entries (Remove Game Options, Remove Core Overrides, Reset Core
     Options). Badge 5.3 -> 5.4.
-  - Verified: game-specific options path = config/<library_name>/<content
-    basename>.opt (runloop.c @v1.22.2); DEFAULT_GLOBAL_CORE_OPTIONS false;
+  - Verified: game-specific options path = `config/<library_name>/<content
+    basename>.opt` (runloop.c @v1.22.2); DEFAULT_GLOBAL_CORE_OPTIONS false;
     menu labels and Mupen option labels against msg_hash_us.h and
     libretro_core_options.h.
   - config/*.cfg: header + paired stamps v5.3 -> v5.4; bodies unchanged.
@@ -104,25 +117,3 @@
     unchanged.
   - CHANGELOG.md: trim v4.6 per 5-release retention; retained entries are
     now v5.0-v5.4.
-
-
-# 5.3 - 2026-09-05
-
-  - v5.3: audit release against upstream core-option sources. No key added,
-    removed, or revalued; cfg 21, opt 18. Lockstep with companion
-    retroarch-appletv4k v5.3.
-  - README.md: Quick Start reduced to two steps (create the per-core
-    directory, upload the pair into it); Layout notes the root is purgeable
-    cache; override table - `video_scale_integer_scaling` default wording
-    (unset globally), #14201 marked closed. Badge 5.2 -> 5.3.
-  - Verified: every `.opt` key and value present in the upstream
-    libretro_core_options.h of its core; every `.cfg` key present in
-    RetroArch configuration.c @v1.22.2; cached_interpreter is the
-    non-DYNAREC default; beetle-pce-fast-libretro#127 open, RetroArch
-    #14201 closed.
-  - config/*.cfg: header + paired stamps v5.2 -> v5.3; bodies unchanged.
-  - config/*.opt: byte-identical to v5.2.
-  - Companion v5.3: retroarch.cfg header + paired stamps, upload path
-    /config/; 74 keys unchanged.
-  - CHANGELOG.md: trim v4.5 per 5-release retention; retained entries are
-    now v4.6-v5.3.

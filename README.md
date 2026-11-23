@@ -1,6 +1,6 @@
 # retroarch-configs
 
-[![version](https://img.shields.io/badge/version-5.7-blue.svg)](CHANGELOG.md)
+[![version](https://img.shields.io/badge/version-5.8-blue.svg)](CHANGELOG.md)
 [![companion](https://img.shields.io/badge/companion-retroarch--appletv4k-blue.svg)](https://github.com/ryanmusante/retroarch-appletv4k)
 
 > Per-core RetroArch overrides (`.cfg`) and core options (`.opt`) for
@@ -32,7 +32,7 @@ Counts are keys per file. ROM folders, extensions and BIOS names:
 
 | Core | Systems | Tier | `.cfg` | `.opt` | Sets |
 |------|---------|------|--------|--------|------|
-| Beetle PCE Fast | PC Engine / TG-16 (+ CD) | 1 | 2 | 2 | Run Ahead — keep it single-instance, the second-instance mode hangs loading CD images ([beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127), open); integer overscale; `pce_fast_cdspeed = "2"` (`4` per-game where compatible); no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
+| Beetle PCE Fast | PC Engine / TG-16 (+ CD) | 1 | 3 | 2 | Run Ahead, single-instance (drift-guard) — the second-instance mode hangs loading CD images ([beetle-pce-fast-libretro#127](https://github.com/libretro/beetle-pce-fast-libretro/issues/127), open); integer overscale; `pce_fast_cdspeed = "2"` (`4` per-game where compatible); no sprite limit. CD-image precache is per-game only (`pce_fast_cdimagecache`) |
 | FinalBurn Neo | Neo Geo / Arcade (CPS1/2/3) | 1 | 3 | 0 | Run Ahead; integer overscale; rewind off (drift-guard). Dipswitches and cheats are per-game only |
 | Genesis Plus GX | Genesis / MD / Sega CD / SMS | 1 | 2 | 3 | Run Ahead; integer overscale; no sprite limit; per-game BRAM (system + cart) |
 | Mesen | NES | 1 | 2 | 2 | Run Ahead; integer overscale; no sprite limit; DMC popping correction off (sub-1% CPU saving; restore per-game on DPCM-heavy titles) |
@@ -63,7 +63,7 @@ config/Mesen/
 
 | File | Holds | Set via |
 |------|-------|---------|
-| `<core>.cfg` | Frontend overrides (video, audio, latency, input); version-stamped | Quick Menu → Overrides → Save Core Overrides |
+| `<core>.cfg` | Frontend overrides (video, audio, latency, saves); version-stamped | Quick Menu → Overrides → Save Core Overrides |
 | `<core>.opt` | Core options (renderer, CPU mode, accuracy); no version stamp | Quick Menu → Core Options (per-game: Manage Core Options → Save Game Options) |
 
 </details>
@@ -72,7 +72,7 @@ config/Mesen/
 > RetroArch silently ignores core option keys in a `.cfg` and frontend
 > keys in an `.opt` — never mix them.
 
-Of the 21 `.cfg` keys, 14 are real flips against the global value and 7
+Of the 22 `.cfg` keys, 14 are real flips against the global value and 8
 are drift-guards pinned to the value they already inherit, so a change
 to the global `retroarch.cfg` cannot silently move a pinned core.
 Inherited from the global file, not overridden: `preemptive_frames_enable`,
@@ -90,7 +90,7 @@ preset — see
 | `video_scale_integer_scaling` | `1` | Tier 1 | Flip — overscale (default `0` underscale; unset globally); needs global `video_scale_integer = "true"` |
 | `run_ahead_enabled` | `true` | Tier 1 | Flip |
 | `run_ahead_enabled` | `false` | Mupen | Drift-guard — per-frame savestate cost too high on the sw-RDP stack; opt in per-game |
-| `run_ahead_secondary_instance` | `false` | Mupen | Drift-guard |
+| `run_ahead_secondary_instance` | `false` | PCE, Mupen | Drift-guard — PCE's second-instance mode hangs on CD images |
 | `video_threaded` | `false` | Mupen | Drift-guard |
 | `video_frame_delay_auto` | `false` | Mupen | Flip (global `true`) — regression guard for [#14201](https://github.com/libretro/RetroArch/issues/14201) (closed) |
 | `audio_sync` | `true` | Mupen | Drift-guard |
